@@ -35,30 +35,37 @@ void NewVocab::runFirstButton(){
         if(!regex_match(ui->lineEditNumberOfColumn->text().toStdString(), std::regex{"[+-]?[0-9]+"})){
             ui->labelError->setText("La valeur entrée pour le nombre\n de colonne n'est pas un entier !");
         }else{
-            nameVocab = ui->lineEditForName->text().toStdString();
-            clearLayout(ui->layoutForCreateNewVocab);
-            QVBoxLayout *newQVBoxLayout = new QVBoxLayout;
-            ui->centralwidget->setLayout(newQVBoxLayout);
-            QLabel *newlbl = new QLabel;
-            newlbl->setText("Nom des colonnes :");
-            newQVBoxLayout->addWidget(newlbl);
-            QHBoxLayout *hboxLayout = new QHBoxLayout;
-            hboxLayout->setSpacing(2);
-            newQVBoxLayout->addLayout(hboxLayout);
-            numberOfColumn = ui->lineEditNumberOfColumn->text().toInt();
-            this->setFixedWidth(250*numberOfColumn+40);
-            ui->centralwidget->setFixedWidth(250*numberOfColumn+40+5*numberOfColumn);
-            for(int i=0; i<numberOfColumn; i++){
-                QLineEdit *qlineEdit = new QLineEdit;
-                qlineEdit->setFixedWidth(250);
-                listLineEdit.push_back(qlineEdit);
-                hboxLayout->addWidget(qlineEdit);
+            if(ui->lineEditNumberOfColumn->text().toInt()<=1){
+                ui->labelError->setText("Valeur minimum requise est de 2.");
+            }else if(ui->lineEditNumberOfColumn->text().toInt()>4){
+                ui->labelError->setText("Valeur maximum permise est de 4");
             }
-            QPushButton *termineAddingNameForColumn = new QPushButton;
-            termineAddingNameForColumn->setText("Valider");
-            termineAddingNameForColumn->setFixedWidth(250);
-            newQVBoxLayout->addWidget(termineAddingNameForColumn);
-            connect(termineAddingNameForColumn, SIGNAL(clicked()), this, SLOT(valideNameColumn()));
+            else{
+                nameVocab = ui->lineEditForName->text().toStdString();
+                clearLayout(ui->layoutForCreateNewVocab);
+                QVBoxLayout *newQVBoxLayout = new QVBoxLayout;
+                ui->centralwidget->setLayout(newQVBoxLayout);
+                QLabel *newlbl = new QLabel;
+                newlbl->setText("Nom des colonnes :");
+                newQVBoxLayout->addWidget(newlbl);
+                QHBoxLayout *hboxLayout = new QHBoxLayout;
+                hboxLayout->setSpacing(2);
+                newQVBoxLayout->addLayout(hboxLayout);
+                numberOfColumn = ui->lineEditNumberOfColumn->text().toInt();
+                this->setFixedWidth(250*numberOfColumn+40);
+                ui->centralwidget->setFixedWidth(250*numberOfColumn+40+5*numberOfColumn);
+                for(int i=0; i<numberOfColumn; i++){
+                    QLineEdit *qlineEdit = new QLineEdit;
+                    qlineEdit->setFixedWidth(250);
+                    listLineEdit.push_back(qlineEdit);
+                    hboxLayout->addWidget(qlineEdit);
+                }
+                QPushButton *termineAddingNameForColumn = new QPushButton;
+                termineAddingNameForColumn->setText("Valider");
+                termineAddingNameForColumn->setFixedWidth(250);
+                newQVBoxLayout->addWidget(termineAddingNameForColumn);
+                connect(termineAddingNameForColumn, SIGNAL(clicked()), this, SLOT(valideNameColumn()));
+            }
         }
     }
 }

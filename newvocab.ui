@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>998</width>
+    <height>652</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,20 +19,20 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>251</width>
-      <height>141</height>
+      <width>991</width>
+      <height>631</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>251</width>
-       <height>135</height>
+       <width>311</width>
+       <height>191</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="layoutForCreateNewVocab">
@@ -63,6 +63,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QLabel" name="labelError">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </widget>
@@ -72,7 +79,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>998</width>
      <height>22</height>
     </rect>
    </property>

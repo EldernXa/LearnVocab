@@ -12,6 +12,7 @@ NewVocab::NewVocab(QWidget *parent) :
     this->resize(ui->widgetForCreateNewVocab->width()+40, ui->widgetForCreateNewVocab->height()+40);
     enableEvent();
     ui->labelError->setStyleSheet("QLabel {color:red;}");
+    errorLabelForNameColumn->setStyleSheet("QLabel {color:red;}");
 }
 
 void NewVocab::resizeEvent(QResizeEvent *qresizeEvent){
@@ -64,6 +65,7 @@ void NewVocab::runFirstButton(){
                 termineAddingNameForColumn->setText("Valider");
                 termineAddingNameForColumn->setFixedWidth(250);
                 newQVBoxLayout->addWidget(termineAddingNameForColumn);
+                newQVBoxLayout->addWidget(errorLabelForNameColumn);
                 connect(termineAddingNameForColumn, SIGNAL(clicked()), this, SLOT(valideNameColumn()));
             }
         }
@@ -71,7 +73,19 @@ void NewVocab::runFirstButton(){
 }
 
 void NewVocab::valideNameColumn(){
+    verifLineEdit();
     cout << "ok ok" << endl;
+}
+
+bool NewVocab::verifLineEdit(){
+    errorLabelForNameColumn->setText("");
+    for(QLineEdit* lineEdit:listLineEdit){
+        if(lineEdit->text() == ""){
+            errorLabelForNameColumn->setText("Un des champs n'est pas rempli.");
+        }
+    }
+
+    return true;
 }
 
 void NewVocab::clearLayout(QLayout *layout){

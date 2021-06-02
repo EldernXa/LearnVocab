@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QLineEdit>
+#include <QLabel>
 
 namespace Ui {
 class NewVocab;
@@ -31,10 +32,12 @@ protected:
 private:
     void enableEvent();
     void clearLayout(QLayout *layout);
+    bool verifLineEdit();
 
     std::vector<QLineEdit*> listLineEdit;
     int numberOfColumn;
     std::string nameVocab;
+    QLabel *errorLabelForNameColumn = new QLabel;
     Ui::NewVocab *ui;
 
 private slots:

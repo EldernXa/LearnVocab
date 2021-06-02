@@ -74,7 +74,14 @@ void NewVocab::runFirstButton(){
 
 void NewVocab::valideNameColumn(){
     verifLineEdit();
-    cout << "ok ok" << endl;
+    saveColumnName();
+}
+
+void NewVocab::saveColumnName(){
+    for(QLineEdit* lineEdit : listLineEdit){
+        listNameColumn.push_back(lineEdit->text().toStdString());
+        cout << lineEdit->text().toStdString() << endl;
+    }
 }
 
 bool NewVocab::verifLineEdit(){

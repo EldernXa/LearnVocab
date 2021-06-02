@@ -33,8 +33,10 @@ private:
     void enableEvent();
     void clearLayout(QLayout *layout);
     bool verifLineEdit();
+    void saveColumnName();
 
     std::vector<QLineEdit*> listLineEdit;
+    std::vector<std::string> listNameColumn;
     int numberOfColumn;
     std::string nameVocab;
     QLabel *errorLabelForNameColumn = new QLabel;

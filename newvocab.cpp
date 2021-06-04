@@ -73,14 +73,26 @@ void NewVocab::runFirstButton(){
 }
 
 void NewVocab::valideNameColumn(){
-    verifLineEdit();
-    saveColumnName();
+    fstream file;
+
+    file.open(nameVocab+".vocab", ios::out);
+    if(verifLineEdit()){
+        saveColumnName();
+        file << numberOfColumn << endl;
+        for(unsigned int i=0; i<listNameColumn.size();i++){
+            file << listNameColumn.at(i);
+            if(i<listNameColumn.size()-1){
+                file<<";";
+            }
+        }
+        file << endl;
+    }
+    file.close();
 }
 
 void NewVocab::saveColumnName(){
     for(QLineEdit* lineEdit : listLineEdit){
         listNameColumn.push_back(lineEdit->text().toStdString());
-        cout << lineEdit->text().toStdString() << endl;
     }
 }
 

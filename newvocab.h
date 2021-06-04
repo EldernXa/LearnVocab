@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <regex>
+#include <fstream>
 
 #include <QMainWindow>
 #include <QRect>

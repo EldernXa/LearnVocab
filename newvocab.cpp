@@ -3,6 +3,11 @@
 
 using namespace std;
 
+template<typename Base, typename T>
+inline bool instanceof(const T*) {
+   return is_base_of<Base, T>::value;
+}
+
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::NewVocab)
@@ -86,6 +91,23 @@ void NewVocab::valideNameColumn(){
             }
         }
         file << endl;
+        QWidget *newWidget = new QWidget;
+        QVBoxLayout *newQVBoxLayout = new QVBoxLayout;
+        newWidget->setLayout(newQVBoxLayout);
+        setCentralWidget(newWidget);
+        QHBoxLayout *displayColumn = new QHBoxLayout;
+        newQVBoxLayout->addLayout(displayColumn);
+        for(string s : listNameColumn){
+            QLabel *lblNameColumn = new QLabel;
+            lblNameColumn->setFixedWidth(250);
+            lblNameColumn->setText(QString::fromStdString(s));
+            displayColumn->addWidget(lblNameColumn);
+        }
+
+        QPushButton *validButton = new QPushButton;
+        validButton->setText("Ajouter le mot");
+        validButton->setFixedWidth(250);
+        newQVBoxLayout->addWidget(validButton);
     }
     file.close();
 }
@@ -108,9 +130,12 @@ bool NewVocab::verifLineEdit(){
 }
 
 void NewVocab::clearLayout(QLayout *layout){
+    for(int i=0; i<layout->count();i++){
+        delete layout->takeAt(i)->widget();
+    }
     QLayoutItem *item;
      while ((item = layout->takeAt(0))){
-         item->widget()->deleteLater();
+        item->widget()->deleteLater();
      }
 }
 

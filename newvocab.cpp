@@ -96,15 +96,28 @@ void NewVocab::valideNameColumn(){
         newWidget->setLayout(newQVBoxLayout);
         setCentralWidget(newWidget);
         QHBoxLayout *displayColumn = new QHBoxLayout;
-        QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(displayColumn);
+        QHBoxLayout *boxAllWord = new QHBoxLayout;
+        newQVBoxLayout->addLayout(boxAllWord);
+        QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(layoutForButtonAddWord);
-        QVBoxLayout *boxAllWord = new QVBoxLayout;
-        for(auto&& s : listNameColumn){
+        for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(250);
-            lblNameColumn->setText(QString::fromStdString(s));
+            lblNameColumn->setFixedHeight(40);
+            lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
             displayColumn->addWidget(lblNameColumn);
+
+            QVBoxLayout *hboxLayoutForListWord = new QVBoxLayout;
+            listVBoxLayoutForListWord.push_back(hboxLayoutForListWord);
+            QLineEdit *newLineEdit = new QLineEdit;
+            newLineEdit->setFixedWidth(250);
+            hboxLayoutForListWord->addWidget(newLineEdit);
+            listLineEditForWord.push_back(new std::vector<QLineEdit*>());
+            listLineEditForWord.at(i)->push_back(newLineEdit);
+
+            boxAllWord->addLayout(hboxLayoutForListWord);
+
             QPushButton *buttonAddWord = new QPushButton;
             buttonAddWord->setText("+");
             buttonAddWord->setFixedWidth(250);

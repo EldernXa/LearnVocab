@@ -14,6 +14,7 @@
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QLabel>
+#include <QDebug>
 
 namespace Ui {
 class NewVocab;
@@ -35,11 +36,13 @@ private:
     void clearLayout(QLayout *layout);
     bool verifLineEdit();
     void saveColumnName();
+    void addingWord(int num);
 
     std::vector<QLineEdit*> listLineEdit;
     std::vector<std::string> listNameColumn;
     std::vector<std::vector<QLineEdit *>*> listLineEditForWord;
     std::vector<QVBoxLayout *> listVBoxLayoutForListWord;
+    std::vector<QPushButton *> listQPushButton;
     int numberOfColumn;
     std::string nameVocab;
     QLabel *errorLabelForNameColumn = new QLabel;

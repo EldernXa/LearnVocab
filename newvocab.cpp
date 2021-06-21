@@ -106,7 +106,7 @@ void NewVocab::valideNameColumn(){
         for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(250);
-            lblNameColumn->setFixedHeight(40);
+            lblNameColumn->setFixedHeight(20);
             lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
             displayColumn->addWidget(lblNameColumn);
 
@@ -114,6 +114,7 @@ void NewVocab::valideNameColumn(){
             listVBoxLayoutForListWord.push_back(hboxLayoutForListWord);
             QLineEdit *newLineEdit = new QLineEdit;
             newLineEdit->setFixedWidth(250);
+            newLineEdit->setFixedHeight(20);
             hboxLayoutForListWord->addWidget(newLineEdit);
             listLineEditForWord.push_back(new std::vector<QLineEdit*>());
             listLineEditForWord.at(i)->push_back(newLineEdit);
@@ -133,6 +134,7 @@ void NewVocab::valideNameColumn(){
 
 
             connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
+            // TODO create function to remove a word.
         }
 
         QPushButton *validButton = new QPushButton;
@@ -144,7 +146,11 @@ void NewVocab::valideNameColumn(){
 }
 
 void NewVocab::addingWord(int num){
-    qDebug() << num;
+    QLineEdit *newLineEdit = new QLineEdit;
+    newLineEdit->setFixedWidth(250);
+    newLineEdit->setFixedHeight(20);
+    listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
+    listLineEditForWord.at(num)->push_back(newLineEdit);
 }
 
 void NewVocab::saveColumnName(){

@@ -44,7 +44,7 @@ void NewVocab::runFirstButton(){
             if(ui->lineEditNumberOfColumn->text().toInt()<=1){
                 ui->labelError->setText("Valeur minimum requise est de 2.");
             }else if(ui->lineEditNumberOfColumn->text().toInt()>4){
-                ui->labelError->setText("Valeur maximum permise est de 4");
+                ui->labelError->setText("Valeur maximum permise est de 4.");
             }
             else{
                 nameVocab = ui->lineEditForName->text().toStdString();
@@ -96,12 +96,19 @@ void NewVocab::valideNameColumn(){
         newWidget->setLayout(newQVBoxLayout);
         setCentralWidget(newWidget);
         QHBoxLayout *displayColumn = new QHBoxLayout;
+        QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(displayColumn);
-        for(string s : listNameColumn){
+        newQVBoxLayout->addLayout(layoutForButtonAddWord);
+        QVBoxLayout *boxAllWord = new QVBoxLayout;
+        for(auto&& s : listNameColumn){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(250);
             lblNameColumn->setText(QString::fromStdString(s));
             displayColumn->addWidget(lblNameColumn);
+            QPushButton *buttonAddWord = new QPushButton;
+            buttonAddWord->setText("+");
+            buttonAddWord->setFixedWidth(250);
+            layoutForButtonAddWord->addWidget(buttonAddWord);
         }
 
         QPushButton *validButton = new QPushButton;

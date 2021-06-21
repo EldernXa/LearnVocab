@@ -38,6 +38,7 @@ private:
 
     std::vector<QLineEdit*> listLineEdit;
     std::vector<std::string> listNameColumn;
+    std::vector<std::vector<QLineEdit *>> listLineEditForWord;
     int numberOfColumn;
     std::string nameVocab;
     QLabel *errorLabelForNameColumn = new QLabel;

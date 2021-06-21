@@ -101,6 +101,8 @@ void NewVocab::valideNameColumn(){
         newQVBoxLayout->addLayout(displayColumn);
         QHBoxLayout *boxAllWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(boxAllWord);
+        QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout;
+        newQVBoxLayout->addLayout(layoutForButtonRemoveWord);
         for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(250);
@@ -123,8 +125,14 @@ void NewVocab::valideNameColumn(){
             buttonAddWord->setFixedWidth(250);
             layoutForButtonAddWord->addWidget(buttonAddWord);
             listQPushButton.push_back(buttonAddWord);
+
+            QPushButton *buttonRemoveWord = new QPushButton;
+            buttonRemoveWord->setText("-");
+            buttonRemoveWord->setFixedWidth(250);
+            layoutForButtonRemoveWord->addWidget(buttonRemoveWord);
+
+
             connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
-            // TODO create function to add a word.
         }
 
         QPushButton *validButton = new QPushButton;

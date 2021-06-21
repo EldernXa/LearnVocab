@@ -109,6 +109,7 @@ void NewVocab::valideNameColumn(){
             buttonAddWord->setText("+");
             buttonAddWord->setFixedWidth(250);
             layoutForButtonAddWord->addWidget(buttonAddWord);
+            // TODO create function to add a word.
         }
 
         QPushButton *validButton = new QPushButton;

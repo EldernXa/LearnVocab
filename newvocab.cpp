@@ -132,7 +132,6 @@ void NewVocab::valideNameColumn(){
 
             connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
             connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
-            // TODO create function to remove a word.
         }
 
         QPushButton *validButton = new QPushButton;

@@ -16,9 +16,11 @@ NewVocab::NewVocab(QWidget *parent) :
 }
 
 void NewVocab::resizeEvent(QResizeEvent *qresizeEvent){
-    this->setFixedWidth(ui->widgetForCreateNewVocab->width()+40);
-    this->setFixedHeight(ui->widgetForCreateNewVocab->height()+40);
-    QWidget::resizeEvent(qresizeEvent);
+    if(!addWord){
+        this->setFixedWidth(ui->widgetForCreateNewVocab->width()+40);
+        this->setFixedHeight(ui->widgetForCreateNewVocab->height()+40);
+        QWidget::resizeEvent(qresizeEvent);
+    }
 }
 
 void NewVocab::enableEvent(){
@@ -146,6 +148,10 @@ void NewVocab::addingWord(int num){
     newLineEdit->setFixedHeight(20);
     listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
     listLineEditForWord.at(num)->push_back(newLineEdit);
+    addWord = true;
+    this->setFixedHeight(this->height()+20);
+
+    addWord = false;
 }
 
 void NewVocab::saveColumnName(){

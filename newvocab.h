@@ -37,6 +37,7 @@ private:
     bool verifLineEdit();
     void saveColumnName();
     void addingWord(int num);
+    bool addWord = false;
 
     std::vector<QLineEdit*> listLineEdit;
     std::vector<std::string> listNameColumn;

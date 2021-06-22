@@ -37,7 +37,7 @@ private:
     bool verifLineEdit();
     void saveColumnName();
     void addingWord(int num);
-    bool addWord = false;
+    void removeWord(int num);
 
     std::vector<QLineEdit*> listLineEdit;
     std::vector<std::string> listNameColumn;
@@ -45,6 +45,7 @@ private:
     std::vector<QVBoxLayout *> listVBoxLayoutForListWord;
     std::vector<QPushButton *> listQPushButton;
     int numberOfColumn;
+    bool addWord = false;
     std::string nameVocab;
     QLabel *errorLabelForNameColumn = new QLabel;
     Ui::NewVocab *ui;

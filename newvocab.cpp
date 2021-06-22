@@ -131,6 +131,7 @@ void NewVocab::valideNameColumn(){
 
 
             connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
+            connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
             // TODO create function to remove a word.
         }
 
@@ -152,6 +153,14 @@ void NewVocab::addingWord(int num){
     this->setFixedHeight(this->height()+20);
 
     addWord = false;
+    // TODO add limit
+}
+
+void NewVocab::removeWord(int num){
+    if(listLineEditForWord.at(num)->size()>1){
+        delete listLineEditForWord.at(num)->at(listLineEditForWord.at(num)->size()-1);
+        listLineEditForWord.at(num)->erase(listLineEditForWord.at(num)->end()-1);
+    }
 }
 
 void NewVocab::saveColumnName(){

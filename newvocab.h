@@ -29,7 +29,7 @@ public:
     ~NewVocab();
 
 protected:
-    void resizeEvent(QResizeEvent *qresizeEvent);
+    void resizeEvent(QResizeEvent *qresizeEvent) override;
 
 private:
     void enableEvent();
@@ -38,6 +38,7 @@ private:
     void saveColumnName();
     void addingWord(int num);
     void removeWord(int num);
+    void closeEvent(QCloseEvent*) override;
 
     std::vector<QLineEdit*> listLineEdit;
     std::vector<std::string> listNameColumn;
@@ -50,6 +51,7 @@ private:
     std::string nameVocab;
     QLabel *errorLabelForNameColumn = new QLabel;
     Ui::NewVocab *ui;
+    std::fstream fileToSaveVocab;
 
 private slots:
     void runFirstButton();

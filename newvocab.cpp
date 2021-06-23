@@ -19,6 +19,15 @@ NewVocab::NewVocab(QWidget *parent) :
     errorLabelForNameColumn->setStyleSheet("QLabel {color:red;}");
 }
 
+NewVocab::~NewVocab(){
+    fileToSaveVocab.close();
+}
+
+void NewVocab::closeEvent(QCloseEvent *event){
+    fileToSaveVocab.close();
+    QWidget::closeEvent(event);
+}
+
 void NewVocab::resizeEvent(QResizeEvent *qresizeEvent){
     if(!addWord){
         this->setFixedWidth(ui->widgetForCreateNewVocab->width()+40);
@@ -79,19 +88,18 @@ void NewVocab::runFirstButton(){
 }
 
 void NewVocab::valideNameColumn(){
-    fstream file;
 
-    file.open(nameVocab+".vocab", ios::out);
+    fileToSaveVocab.open(nameVocab+".vocab", ios::out);
     if(verifLineEdit()){
         saveColumnName();
-        file << numberOfColumn << endl;
+        fileToSaveVocab << numberOfColumn << endl;
         for(unsigned int i=0; i<listNameColumn.size();i++){
-            file << listNameColumn.at(i);
+            fileToSaveVocab << listNameColumn.at(i);
             if(i<listNameColumn.size()-1){
-                file<<";";
+                fileToSaveVocab<<";";
             }
         }
-        file << endl;
+        fileToSaveVocab << endl;
         QWidget *newWidget = new QWidget;
         QVBoxLayout *newQVBoxLayout = new QVBoxLayout;
         newWidget->setLayout(newQVBoxLayout);
@@ -146,27 +154,22 @@ void NewVocab::valideNameColumn(){
         newQVBoxLayout->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
     }
-    file.close();
 }
 
 void NewVocab::saveWord(){
-    // FIXME mustn't recreate the file.
-    fstream file;
-    file.open(nameVocab+".vocab", ios::out);
     for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
         for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
-            file << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
+            fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
             if(indexForLineEdit<listLineEditForWord.at(indexForVect)->size()-1){
-                file<<",";
+                fileToSaveVocab<<",";
             }
         }
         if(indexForVect < listLineEditForWord.size()-1){
-            file<<";";
+            fileToSaveVocab<<";";
         }else{
-            file<<endl;
+            fileToSaveVocab<<endl;
         }
     }
-    file.close();
 }
 
 void NewVocab::addingWord(int num){
@@ -250,9 +253,4 @@ void NewVocab::clearLayout(QLayout *layout){
      while ((item = layout->takeAt(0))){
         item->widget()->deleteLater();
      }
-}
-
-NewVocab::~NewVocab()
-{
-    delete ui;
 }

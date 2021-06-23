@@ -4,6 +4,7 @@
 using namespace std;
 
 // TODO change string for future translation.
+// TODO Put number into variable cst.
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
@@ -155,6 +156,10 @@ void NewVocab::addingWord(int num){
         listLineEditForWord.at(num)->push_back(newLineEdit);
 
         listQPushButtonRemove.at(num)->setEnabled(true);
+        if(listLineEditForWord.at(num)->size()==5){
+            listQPushButtonAdd.at(num)->setEnabled(false);
+        }
+
         bool verif = true;
         unsigned int otherNum = num;
         for(unsigned int i = 0; i<listLineEditForWord.size(); i++){

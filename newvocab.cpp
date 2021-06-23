@@ -177,8 +177,6 @@ void NewVocab::addingWord(int num){
             addWord = false;
         }
     }
-
-    // TODO disable button add when we cannot add anymore.
 }
 
 void NewVocab::removeWord(int num){

@@ -148,34 +148,32 @@ void NewVocab::valideNameColumn(){
 }
 
 void NewVocab::addingWord(int num){
-    if(listLineEditForWord.at(num)->size()<5){
-        QLineEdit *newLineEdit = new QLineEdit;
-        newLineEdit->setFixedWidth(250);
-        newLineEdit->setFixedHeight(20);
-        listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
-        listLineEditForWord.at(num)->push_back(newLineEdit);
+    QLineEdit *newLineEdit = new QLineEdit;
+    newLineEdit->setFixedWidth(250);
+    newLineEdit->setFixedHeight(20);
+    listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
+    listLineEditForWord.at(num)->push_back(newLineEdit);
 
-        listQPushButtonRemove.at(num)->setEnabled(true);
-        if(listLineEditForWord.at(num)->size()==5){
-            listQPushButtonAdd.at(num)->setEnabled(false);
-        }
+    listQPushButtonRemove.at(num)->setEnabled(true);
+    if(listLineEditForWord.at(num)->size()==5){
+        listQPushButtonAdd.at(num)->setEnabled(false);
+    }
 
-        bool verif = true;
-        unsigned int otherNum = num;
-        for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
-            if(i!=otherNum){
-                if(listLineEditForWord.at(i)->size()>=listLineEditForWord.at(otherNum)->size()){
-                    verif = false;
-                }
+    bool verif = true;
+    unsigned int otherNum = num;
+    for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
+        if(i!=otherNum){
+            if(listLineEditForWord.at(i)->size()>=listLineEditForWord.at(otherNum)->size()){
+                verif = false;
             }
         }
+    }
 
-        if(verif){
-            addWord = true;
-            this->setFixedHeight(this->height()+20);
+    if(verif){
+        addWord = true;
+        this->setFixedHeight(this->height()+20);
 
-            addWord = false;
-        }
+        addWord = false;
     }
 }
 

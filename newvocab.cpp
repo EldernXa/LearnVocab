@@ -145,16 +145,18 @@ void NewVocab::valideNameColumn(){
 }
 
 void NewVocab::addingWord(int num){
-    QLineEdit *newLineEdit = new QLineEdit;
-    newLineEdit->setFixedWidth(250);
-    newLineEdit->setFixedHeight(20);
-    listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
-    listLineEditForWord.at(num)->push_back(newLineEdit);
-    addWord = true;
-    this->setFixedHeight(this->height()+20);
+    if(listLineEditForWord.at(num)->size()<5){
+        QLineEdit *newLineEdit = new QLineEdit;
+        newLineEdit->setFixedWidth(250);
+        newLineEdit->setFixedHeight(20);
+        listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
+        listLineEditForWord.at(num)->push_back(newLineEdit);
+        addWord = true;
+        this->setFixedHeight(this->height()+20);
 
-    addWord = false;
-    // TODO add limit
+        addWord = false;
+    }
+    // FIXME : problème d'aggrandissement trop grand
 }
 
 void NewVocab::removeWord(int num){

@@ -3,6 +3,8 @@
 
 using namespace std;
 
+// TODO change string for future translation.
+
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::NewVocab)

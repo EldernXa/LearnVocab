@@ -151,12 +151,23 @@ void NewVocab::addingWord(int num){
         newLineEdit->setFixedHeight(20);
         listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
         listLineEditForWord.at(num)->push_back(newLineEdit);
-        addWord = true;
-        this->setFixedHeight(this->height()+20);
+        bool verif = true;
+        unsigned int otherNum = num;
+        for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
+            if(i!=otherNum){
+                if(listLineEditForWord.at(i)->size()>=listLineEditForWord.at(otherNum)->size()){
+                    verif = false;
+                }
+            }
+        }
 
-        addWord = false;
+        if(verif){
+            addWord = true;
+            this->setFixedHeight(this->height()+20);
+
+            addWord = false;
+        }
     }
-    // FIXME : problème d'aggrandissement trop grand
 }
 
 void NewVocab::removeWord(int num){

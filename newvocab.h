@@ -43,7 +43,8 @@ private:
     std::vector<std::string> listNameColumn;
     std::vector<std::vector<QLineEdit *>*> listLineEditForWord;
     std::vector<QVBoxLayout *> listVBoxLayoutForListWord;
-    std::vector<QPushButton *> listQPushButton;
+    std::vector<QPushButton *> listQPushButtonAdd;
+    std::vector<QPushButton *> listQPushButtonRemove;
     int numberOfColumn;
     bool addWord = false;
     std::string nameVocab;

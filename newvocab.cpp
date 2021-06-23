@@ -124,12 +124,14 @@ void NewVocab::valideNameColumn(){
             buttonAddWord->setText("+");
             buttonAddWord->setFixedWidth(250);
             layoutForButtonAddWord->addWidget(buttonAddWord);
-            listQPushButton.push_back(buttonAddWord);
+            listQPushButtonAdd.push_back(buttonAddWord);
 
             QPushButton *buttonRemoveWord = new QPushButton;
+            buttonRemoveWord->setEnabled(false);
             buttonRemoveWord->setText("-");
             buttonRemoveWord->setFixedWidth(250);
             layoutForButtonRemoveWord->addWidget(buttonRemoveWord);
+            listQPushButtonRemove.push_back(buttonRemoveWord);
 
 
             connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
@@ -151,6 +153,8 @@ void NewVocab::addingWord(int num){
         newLineEdit->setFixedHeight(20);
         listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
         listLineEditForWord.at(num)->push_back(newLineEdit);
+
+        listQPushButtonRemove.at(num)->setEnabled(true);
         bool verif = true;
         unsigned int otherNum = num;
         for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
@@ -168,6 +172,8 @@ void NewVocab::addingWord(int num){
             addWord = false;
         }
     }
+
+    // TODO disable button add when we cannot add anymore.
 }
 
 void NewVocab::removeWord(int num){
@@ -191,6 +197,9 @@ void NewVocab::removeWord(int num){
             addWord = false;
         }
     }
+
+    // TODO disable button remove when we cannot remove anymore.
+    // TODO enable button add.
 }
 
 void NewVocab::saveColumnName(){

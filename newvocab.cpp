@@ -174,6 +174,22 @@ void NewVocab::removeWord(int num){
     if(listLineEditForWord.at(num)->size()>1){
         delete listLineEditForWord.at(num)->at(listLineEditForWord.at(num)->size()-1);
         listLineEditForWord.at(num)->erase(listLineEditForWord.at(num)->end()-1);
+
+        bool verif = true;
+        unsigned int unsignedNum = num;
+        for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
+            if(i!=unsignedNum){
+                if(listLineEditForWord.at(i)->size()>listLineEditForWord.at(unsignedNum)->size()){
+                    verif = false;
+                }
+            }
+        }
+
+        if(verif){
+            addWord = true;
+            this->setFixedHeight(this->height()-20);
+            addWord = false;
+        }
     }
 }
 

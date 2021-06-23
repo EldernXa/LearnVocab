@@ -182,6 +182,8 @@ void NewVocab::removeWord(int num){
         delete listLineEditForWord.at(num)->at(listLineEditForWord.at(num)->size()-1);
         listLineEditForWord.at(num)->erase(listLineEditForWord.at(num)->end()-1);
 
+        listQPushButtonAdd.at(num)->setEnabled(true);
+
         bool verif = true;
         unsigned int unsignedNum = num;
         for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
@@ -200,7 +202,6 @@ void NewVocab::removeWord(int num){
     }
 
     // TODO disable button remove when we cannot remove anymore.
-    // TODO enable button add.
 }
 
 void NewVocab::saveColumnName(){

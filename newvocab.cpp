@@ -148,11 +148,22 @@ void NewVocab::valideNameColumn(){
             connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
         }
 
+        QHBoxLayout *layoutForButton = new QHBoxLayout;
+
         QPushButton *validButton = new QPushButton;
         validButton->setText("Ajouter le mot");
         validButton->setFixedWidth(250);
-        newQVBoxLayout->addWidget(validButton);
+        layoutForButton->addWidget(validButton);
+        //newQVBoxLayout->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
+
+        QPushButton *finishButton = new QPushButton;
+        finishButton->setText(QString::fromStdString("Terminer le vocabulaire '" + nameVocab + "'"));
+        finishButton->setFixedWidth(250);
+        layoutForButton->addWidget(finishButton);
+        // TODO add connect for the button finish vocab.
+
+        newQVBoxLayout->addLayout(layoutForButton);
     }
 }
 

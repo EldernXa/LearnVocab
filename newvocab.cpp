@@ -5,6 +5,7 @@ using namespace std;
 
 // TODO change string for future translation.
 // TODO Put number into variable cst.
+// TODO remove the resize to set the size initially.
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
@@ -183,6 +184,9 @@ void NewVocab::removeWord(int num){
         listLineEditForWord.at(num)->erase(listLineEditForWord.at(num)->end()-1);
 
         listQPushButtonAdd.at(num)->setEnabled(true);
+        if(listLineEditForWord.at(num)->size()==1){
+            listQPushButtonRemove.at(num)->setEnabled(false);
+        }
 
         bool verif = true;
         unsigned int unsignedNum = num;
@@ -200,8 +204,6 @@ void NewVocab::removeWord(int num){
             addWord = false;
         }
     }
-
-    // TODO disable button remove when we cannot remove anymore.
 }
 
 void NewVocab::saveColumnName(){

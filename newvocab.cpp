@@ -144,6 +144,27 @@ void NewVocab::valideNameColumn(){
         validButton->setText("Ajouter le mot");
         validButton->setFixedWidth(250);
         newQVBoxLayout->addWidget(validButton);
+        connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
+    }
+    file.close();
+}
+
+void NewVocab::saveWord(){
+    // FIXME mustn't recreate the file.
+    fstream file;
+    file.open(nameVocab+".vocab", ios::out);
+    for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
+        for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
+            file << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
+            if(indexForLineEdit<listLineEditForWord.at(indexForVect)->size()-1){
+                file<<",";
+            }
+        }
+        if(indexForVect < listLineEditForWord.size()-1){
+            file<<";";
+        }else{
+            file<<endl;
+        }
     }
     file.close();
 }

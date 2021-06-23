@@ -54,6 +54,7 @@ private:
 private slots:
     void runFirstButton();
     void valideNameColumn();
+    void saveWord();
 };
 
 #endif // NEWVOCAB_H

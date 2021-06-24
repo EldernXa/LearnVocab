@@ -188,12 +188,14 @@ void NewVocab::saveWord(){
         }
     }
 
-    // TODO init other list.
-
     for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size(); indexForVect++){
-        for(unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
-            indexForLineEdit>=1; indexForLineEdit--){
+        vector<QLineEdit*>::iterator it;
+        unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
+        for(it = listLineEditForWord.at(indexForVect)->end()-1;
+            it>=listLineEditForWord.at(indexForVect)->begin()+1; it--){
             delete listLineEditForWord.at(indexForVect)->at(indexForLineEdit);
+            listLineEditForWord.at(indexForVect)->erase(it);
+            indexForLineEdit--;
         }
         listLineEditForWord.at(indexForVect)->at(0)->clear();
     }

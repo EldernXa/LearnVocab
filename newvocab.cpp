@@ -154,7 +154,6 @@ void NewVocab::valideNameColumn(){
         validButton->setText("Ajouter le mot");
         validButton->setFixedWidth(250);
         layoutForButton->addWidget(validButton);
-        //newQVBoxLayout->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
 
         QPushButton *finishButton = new QPushButton;
@@ -174,6 +173,7 @@ void NewVocab::finishVocab(){
 }
 
 void NewVocab::saveWord(){
+    // TODO reinit the list of actual word.
     for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
         for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
             fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();

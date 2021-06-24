@@ -161,10 +161,16 @@ void NewVocab::valideNameColumn(){
         finishButton->setText(QString::fromStdString("Terminer le vocabulaire '" + nameVocab + "'"));
         finishButton->setFixedWidth(250);
         layoutForButton->addWidget(finishButton);
-        // TODO add connect for the button finish vocab.
+        connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
 
         newQVBoxLayout->addLayout(layoutForButton);
     }
+}
+
+void NewVocab::finishVocab(){
+    // TODO clear the different list used by this class.
+    fileToSaveVocab.close();
+    this->close();
 }
 
 void NewVocab::saveWord(){

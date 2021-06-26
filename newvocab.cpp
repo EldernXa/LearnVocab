@@ -6,7 +6,6 @@ using namespace std;
 // verify if the vocab doesn't actually exist.
 // TODO change string for future translation.
 // TODO remove the resize to set the size initially.
-// enable button finish vocab after adding at least one word.
 // display the last word saved
 
 NewVocab::NewVocab(QWidget *parent) :
@@ -158,9 +157,10 @@ void NewVocab::valideNameColumn(){
         layoutForButton->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
 
-        QPushButton *finishButton = new QPushButton;
+        finishButton = new QPushButton;
         finishButton->setText(QString::fromStdString("Terminer le vocabulaire '" + nameVocab + "'"));
         finishButton->setFixedWidth(WIDTH_WIDGET);
+        finishButton->setVisible(false);
         layoutForButton->addWidget(finishButton);
         connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
 
@@ -210,6 +210,9 @@ void NewVocab::saveWord(){
         }
         listLineEditForWord.at(indexForVect)->at(0)->clear();
     }
+
+    finishButton->setVisible(true);
+
 }
 
 void NewVocab::addingWord(int num){

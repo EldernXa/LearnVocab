@@ -40,6 +40,7 @@ private:
     void removeWord(int num);
     void closeEvent(QCloseEvent*) override;
 
+    QPushButton *finishButton = nullptr;
     std::vector<QLineEdit*> listLineEdit;
     std::vector<std::string> listNameColumn;
     std::vector<std::vector<QLineEdit *>*> listLineEditForWord;

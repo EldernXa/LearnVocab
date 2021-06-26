@@ -20,8 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::getVocab(){
     std::set<std::filesystem::path> sorted_by_name;
     for (const auto & entry : std::filesystem::directory_iterator("./")){
-            //std::cout << entry.path() << std::endl;
-            //sorted_by_name.insert(entry.path());
         std::vector<std::string> list = split(entry.path().generic_string(), '.');
         if(list.at(list.size()-1).compare("vocab") == 0){
             QPushButton *pushButton = new QPushButton;

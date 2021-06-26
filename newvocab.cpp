@@ -4,8 +4,9 @@
 using namespace std;
 
 // TODO change string for future translation.
-// TODO Put number into variable cst.
 // TODO remove the resize to set the size initially.
+// enable button finish vocab after adding at least one word.
+// display the last word saved
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
@@ -13,7 +14,7 @@ NewVocab::NewVocab(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->widgetForCreateNewVocab->adjustSize();
-    this->resize(ui->widgetForCreateNewVocab->width()+40, ui->widgetForCreateNewVocab->height()+40);
+    this->resize(ui->widgetForCreateNewVocab->width()+WIDTH_LINE_EDIT_WORD, ui->widgetForCreateNewVocab->height()+HEIGHT_LINE_EDIT_WORD);
     enableEvent();
     ui->labelError->setStyleSheet("QLabel {color:red;}");
     errorLabelForNameColumn->setStyleSheet("QLabel {color:red;}");
@@ -30,8 +31,8 @@ void NewVocab::closeEvent(QCloseEvent *event){
 
 void NewVocab::resizeEvent(QResizeEvent *qresizeEvent){
     if(!addWord){
-        this->setFixedWidth(ui->widgetForCreateNewVocab->width()+40);
-        this->setFixedHeight(ui->widgetForCreateNewVocab->height()+40);
+        this->setFixedWidth(ui->widgetForCreateNewVocab->width()+WIDTH_LINE_EDIT_WORD);
+        this->setFixedHeight(ui->widgetForCreateNewVocab->height()+HEIGHT_LINE_EDIT_WORD);
         QWidget::resizeEvent(qresizeEvent);
     }
 }
@@ -68,17 +69,17 @@ void NewVocab::runFirstButton(){
                 hboxLayout->setSpacing(2);
                 newQVBoxLayout->addLayout(hboxLayout);
                 numberOfColumn = ui->lineEditNumberOfColumn->text().toInt();
-                this->setFixedWidth(250*numberOfColumn+40);
-                ui->centralwidget->setFixedWidth(250*numberOfColumn+40+5*numberOfColumn);
+                this->setFixedWidth(WIDTH_WIDGET*numberOfColumn+WIDTH_LINE_EDIT_WORD);
+                ui->centralwidget->setFixedWidth(WIDTH_WIDGET*numberOfColumn+WIDTH_LINE_EDIT_WORD+LIMIT_NUMBER_WORD*numberOfColumn);
                 for(int i=0; i<numberOfColumn; i++){
                     QLineEdit *qlineEdit = new QLineEdit;
-                    qlineEdit->setFixedWidth(250);
+                    qlineEdit->setFixedWidth(WIDTH_WIDGET);
                     listLineEdit.push_back(qlineEdit);
                     hboxLayout->addWidget(qlineEdit);
                 }
                 QPushButton *termineAddingNameForColumn = new QPushButton;
                 termineAddingNameForColumn->setText("Valider");
-                termineAddingNameForColumn->setFixedWidth(250);
+                termineAddingNameForColumn->setFixedWidth(WIDTH_WIDGET);
                 newQVBoxLayout->addWidget(termineAddingNameForColumn);
                 newQVBoxLayout->addWidget(errorLabelForNameColumn);
                 connect(termineAddingNameForColumn, SIGNAL(clicked()), this, SLOT(valideNameColumn()));
@@ -114,16 +115,16 @@ void NewVocab::valideNameColumn(){
         newQVBoxLayout->addLayout(layoutForButtonRemoveWord);
         for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
-            lblNameColumn->setFixedWidth(250);
-            lblNameColumn->setFixedHeight(20);
+            lblNameColumn->setFixedWidth(WIDTH_WIDGET);
+            lblNameColumn->setFixedHeight(HEIGHT_WIDGET);
             lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
             displayColumn->addWidget(lblNameColumn);
 
             QVBoxLayout *hboxLayoutForListWord = new QVBoxLayout;
             listVBoxLayoutForListWord.push_back(hboxLayoutForListWord);
             QLineEdit *newLineEdit = new QLineEdit;
-            newLineEdit->setFixedWidth(250);
-            newLineEdit->setFixedHeight(20);
+            newLineEdit->setFixedWidth(WIDTH_WIDGET);
+            newLineEdit->setFixedHeight(HEIGHT_WIDGET);
             hboxLayoutForListWord->addWidget(newLineEdit);
             listLineEditForWord.push_back(new std::vector<QLineEdit*>());
             listLineEditForWord.at(i)->push_back(newLineEdit);
@@ -132,14 +133,14 @@ void NewVocab::valideNameColumn(){
 
             QPushButton *buttonAddWord = new QPushButton;
             buttonAddWord->setText("+");
-            buttonAddWord->setFixedWidth(250);
+            buttonAddWord->setFixedWidth(WIDTH_WIDGET);
             layoutForButtonAddWord->addWidget(buttonAddWord);
             listQPushButtonAdd.push_back(buttonAddWord);
 
             QPushButton *buttonRemoveWord = new QPushButton;
             buttonRemoveWord->setEnabled(false);
             buttonRemoveWord->setText("-");
-            buttonRemoveWord->setFixedWidth(250);
+            buttonRemoveWord->setFixedWidth(WIDTH_WIDGET);
             layoutForButtonRemoveWord->addWidget(buttonRemoveWord);
             listQPushButtonRemove.push_back(buttonRemoveWord);
 
@@ -152,13 +153,13 @@ void NewVocab::valideNameColumn(){
 
         QPushButton *validButton = new QPushButton;
         validButton->setText("Ajouter le mot");
-        validButton->setFixedWidth(250);
+        validButton->setFixedWidth(WIDTH_WIDGET);
         layoutForButton->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
 
         QPushButton *finishButton = new QPushButton;
         finishButton->setText(QString::fromStdString("Terminer le vocabulaire '" + nameVocab + "'"));
-        finishButton->setFixedWidth(250);
+        finishButton->setFixedWidth(WIDTH_WIDGET);
         layoutForButton->addWidget(finishButton);
         connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
 
@@ -212,13 +213,13 @@ void NewVocab::saveWord(){
 
 void NewVocab::addingWord(int num){
     QLineEdit *newLineEdit = new QLineEdit;
-    newLineEdit->setFixedWidth(250);
-    newLineEdit->setFixedHeight(20);
+    newLineEdit->setFixedWidth(WIDTH_WIDGET);
+    newLineEdit->setFixedHeight(HEIGHT_WIDGET);
     listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
     listLineEditForWord.at(num)->push_back(newLineEdit);
 
     listQPushButtonRemove.at(num)->setEnabled(true);
-    if(listLineEditForWord.at(num)->size()==5){
+    if(listLineEditForWord.at(num)->size()==LIMIT_NUMBER_WORD){
         listQPushButtonAdd.at(num)->setEnabled(false);
     }
 
@@ -234,7 +235,7 @@ void NewVocab::addingWord(int num){
 
     if(verif){
         addWord = true;
-        this->setFixedHeight(this->height()+20);
+        this->setFixedHeight(this->height()+HEIGHT_WIDGET);
 
         addWord = false;
     }
@@ -261,7 +262,7 @@ void NewVocab::removeWord(int num){
 
     if(verif){
         addWord = true;
-        this->setFixedHeight(this->height()-20);
+        this->setFixedHeight(this->height()-HEIGHT_WIDGET);
         addWord = false;
     }
 }

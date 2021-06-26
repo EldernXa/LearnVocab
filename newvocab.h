@@ -53,6 +53,12 @@ private:
     Ui::NewVocab *ui;
     std::fstream fileToSaveVocab;
 
+    const int WIDTH_LINE_EDIT_WORD = 40;
+    const int HEIGHT_LINE_EDIT_WORD = 40;
+    const int WIDTH_WIDGET = 250;
+    const int HEIGHT_WIDGET = 20;
+    const unsigned int LIMIT_NUMBER_WORD = 5;
+
 private slots:
     void runFirstButton();
     void valideNameColumn();

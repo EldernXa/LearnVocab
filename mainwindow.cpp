@@ -7,13 +7,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     enableEvent();
-    ui->scrollArea->setLayout(new QVBoxLayout);
-    QPushButton *pushButton1 = new QPushButton;
-    pushButton1->setText("okok");
-    QPushButton *pushButton2 = new QPushButton;
-    pushButton2->setText("ddd");
-    ui->scrollArea->layout()->addWidget(pushButton1);
-    ui->scrollArea->layout()->addWidget(pushButton2);
+    QWidget *scrollAreaContent = new QWidget;
+    scrollAreaContent->setLayout(new QVBoxLayout);
+    //ui->scrollArea->setLayout(new QVBoxLayout);
+    ui->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    ui->scrollArea->setWidgetResizable(true);
+    ui->scrollArea->setWidget(scrollAreaContent);
     getVocab();
 }
 
@@ -22,20 +22,15 @@ void MainWindow::getVocab(){
     for (const auto & entry : std::filesystem::directory_iterator("./")){
             //std::cout << entry.path() << std::endl;
             //sorted_by_name.insert(entry.path());
-        QPushButton *pushButton = new QPushButton;
-        pushButton->setText(QString::fromStdString(entry.path().generic_string()));
-        ui->scrollArea->layout()->addWidget(pushButton);
+        std::vector<std::string> list = split(entry.path().generic_string(), '.');
+        if(list.at(list.size()-1).compare("vocab") == 0){
+            QPushButton *pushButton = new QPushButton;
+            std::string newString = split(entry.path().generic_string(), '/').at(1);
+            std::string lastString = split(newString, '.').at(0);
+            pushButton->setText(QString::fromStdString(lastString));
+            ui->scrollArea->widget()->layout()->addWidget(pushButton);
+        }
     }
-
-//    for(std::filesystem::path path : sorted_by_name){
-//        std::string te = path.generic_string();
-//        std::vector<std::string> list = split(te, '.');
-//        //std::cout << list.at(list.size()-1) << std::endl;
-//        if(list.at(list.size()-1).compare("jpg") == 0 ||
-//                list.at(list.size()-1).compare("png")==0){
-//            //listPathPicture.push_back(te);
-//        }
-//    }
 }
 
 std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)

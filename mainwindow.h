@@ -2,9 +2,13 @@
 #define MAINWINDOW_H
 
 #include <iostream>
+#include <filesystem>
+#include <set>
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QVBoxLayout>
+#include <QScrollArea>
 
 #include "newvocab.h"
 
@@ -22,6 +26,8 @@ public:
 
 private:
     void enableEvent();
+    void getVocab();
+    std::vector<std::string> split(const std::string&, char);
 
     Ui::MainWindow *ui;
 

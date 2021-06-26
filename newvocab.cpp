@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// verify if the vocab doesn't actually exist.
 // TODO change string for future translation.
 // TODO remove the resize to set the size initially.
 // enable button finish vocab after adding at least one word.

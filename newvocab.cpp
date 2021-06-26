@@ -167,7 +167,16 @@ void NewVocab::valideNameColumn(){
 }
 
 void NewVocab::finishVocab(){
-    // TODO clear the different list used by this class.
+    for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size(); indexForVect++){
+        vector<QLineEdit*>::iterator it;
+        unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
+        for(it = listLineEditForWord.at(indexForVect)->end()-1 ;
+            it>=listLineEditForWord.at(indexForVect)->begin(); it--){
+            delete listLineEditForWord.at(indexForVect)->at(indexForLineEdit);
+            listLineEditForWord.at(indexForVect)->erase(it);
+            indexForLineEdit--;
+        }
+    }
     fileToSaveVocab.close();
     this->close();
 }

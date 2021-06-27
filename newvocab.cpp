@@ -3,10 +3,10 @@
 
 using namespace std;
 
-// verify if the vocab doesn't actually exist.
+// TODO verify if the vocab doesn't actually exist.
 // TODO change string for future translation.
 // TODO remove the resize to set the size initially.
-// display the last word saved
+// TODO display the last word saved
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),

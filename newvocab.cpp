@@ -106,19 +106,26 @@ void NewVocab::valideNameColumn(){
         QVBoxLayout *newQVBoxLayout = new QVBoxLayout(otherWidget);
         //newWidget->setLayout(newQVBoxLayout);
         setCentralWidget(mainWidget);
-        QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout;
-        newQVBoxLayout->addLayout(layoutForButtonAddWord);
+
+        // Layout for adding new word in vocab.
+        QWidget *widgetForAddingWord = new QWidget(mainWidget);
+        otherWidget->move(0, HEIGHT_WIDGET);
+        QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout(widgetForAddingWord);
+        //newQVBoxLayout->addLayout(layoutForButtonAddWord);
+
         QHBoxLayout *displayColumn = new QHBoxLayout;
         newQVBoxLayout->addLayout(displayColumn);
         QHBoxLayout *boxAllWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(boxAllWord);
+
+        // Layout for remove word in vocab.
         QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(layoutForButtonRemoveWord);
 
         addWord = true;
         this->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing() * (LIMIT_NUMBER_WORD+6));
-
         addWord = false;
+
         mainWidget->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
         otherWidget->setFixedHeight((LIMIT_NUMBER_WORD+5)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+5));
         for(unsigned int i=0; i<listNameColumn.size(); i++){

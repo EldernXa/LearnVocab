@@ -172,6 +172,8 @@ void NewVocab::valideNameColumn(){
         finishButton->setVisible(false);
         //layoutForButton->addWidget(finishButton);
         connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
+        finishButton->move(WIDTH_WIDGET+50,
+                           (LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6) - finishButton->height());
 
         //newQVBoxLayout->addLayout(layoutForButton);
     }

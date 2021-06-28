@@ -237,23 +237,6 @@ void NewVocab::addingWord(int num){
     if(listLineEditForWord.at(num)->size()==LIMIT_NUMBER_WORD){
         listQPushButtonAdd.at(num)->setEnabled(false);
     }
-
-    bool verif = true;
-    unsigned int otherNum = num;
-    for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
-        if(i!=otherNum){
-            if(listLineEditForWord.at(i)->size()>=listLineEditForWord.at(otherNum)->size()){
-                verif = false;
-            }
-        }
-    }
-    // TODO remove the resize for adding word and remove word
-//    if(verif){
-//        addWord = true;
-//        this->setFixedHeight(this->height()+HEIGHT_WIDGET);
-
-//        addWord = false;
-//    }
 }
 
 void NewVocab::removeWord(int num){
@@ -264,22 +247,6 @@ void NewVocab::removeWord(int num){
     if(listLineEditForWord.at(num)->size()==1){
         listQPushButtonRemove.at(num)->setEnabled(false);
     }
-
-    bool verif = true;
-    unsigned int unsignedNum = num;
-    for(unsigned int i = 0; i<listLineEditForWord.size(); i++){
-        if(i!=unsignedNum){
-            if(listLineEditForWord.at(i)->size()>listLineEditForWord.at(unsignedNum)->size()){
-                verif = false;
-            }
-        }
-    }
-
-//    if(verif){
-//        addWord = true;
-//        this->setFixedHeight(this->height()-HEIGHT_WIDGET);
-//        addWord = false;
-//    }
 }
 
 void NewVocab::saveColumnName(){

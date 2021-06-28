@@ -6,7 +6,7 @@ using namespace std;
 // TODO verify if the vocab doesn't actually exist.
 // TODO change string for future translation.
 // TODO remove the resize to set the size initially.
-// TODO display the last word saved
+// TODO display the last word saved.
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
@@ -101,10 +101,11 @@ void NewVocab::valideNameColumn(){
             }
         }
         fileToSaveVocab << endl;
-        QWidget *newWidget = new QWidget;
-        QVBoxLayout *newQVBoxLayout = new QVBoxLayout;
-        newWidget->setLayout(newQVBoxLayout);
-        setCentralWidget(newWidget);
+        QWidget *mainWidget = new QWidget;
+        QWidget *otherWidget = new QWidget(mainWidget);
+        QVBoxLayout *newQVBoxLayout = new QVBoxLayout(otherWidget);
+        //newWidget->setLayout(newQVBoxLayout);
+        setCentralWidget(mainWidget);
         QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(layoutForButtonAddWord);
         QHBoxLayout *displayColumn = new QHBoxLayout;
@@ -113,6 +114,13 @@ void NewVocab::valideNameColumn(){
         newQVBoxLayout->addLayout(boxAllWord);
         QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout;
         newQVBoxLayout->addLayout(layoutForButtonRemoveWord);
+
+        addWord = true;
+        this->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing() * (LIMIT_NUMBER_WORD+6));
+
+        addWord = false;
+        mainWidget->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
+        otherWidget->setFixedHeight((LIMIT_NUMBER_WORD+5)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+5));
         for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(WIDTH_WIDGET);
@@ -149,22 +157,23 @@ void NewVocab::valideNameColumn(){
             connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
         }
 
-        QHBoxLayout *layoutForButton = new QHBoxLayout;
+        //QHBoxLayout *layoutForButton = new QHBoxLayout;
 
-        QPushButton *validButton = new QPushButton;
+        QPushButton *validButton = new QPushButton(mainWidget);
         validButton->setText("Ajouter le mot");
         validButton->setFixedWidth(WIDTH_WIDGET);
-        layoutForButton->addWidget(validButton);
+        //layoutForButton->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
+        validButton->move(0, (LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6) - validButton->height());
 
-        finishButton = new QPushButton;
+        finishButton = new QPushButton(mainWidget);
         finishButton->setText(QString::fromStdString("Terminer le vocabulaire '" + nameVocab + "'"));
         finishButton->setFixedWidth(WIDTH_WIDGET);
         finishButton->setVisible(false);
-        layoutForButton->addWidget(finishButton);
+        //layoutForButton->addWidget(finishButton);
         connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
 
-        newQVBoxLayout->addLayout(layoutForButton);
+        //newQVBoxLayout->addLayout(layoutForButton);
     }
 }
 
@@ -236,13 +245,13 @@ void NewVocab::addingWord(int num){
             }
         }
     }
+    // TODO remove the resize for adding word and remove word
+//    if(verif){
+//        addWord = true;
+//        this->setFixedHeight(this->height()+HEIGHT_WIDGET);
 
-    if(verif){
-        addWord = true;
-        this->setFixedHeight(this->height()+HEIGHT_WIDGET);
-
-        addWord = false;
-    }
+//        addWord = false;
+//    }
 }
 
 void NewVocab::removeWord(int num){
@@ -264,11 +273,11 @@ void NewVocab::removeWord(int num){
         }
     }
 
-    if(verif){
-        addWord = true;
-        this->setFixedHeight(this->height()-HEIGHT_WIDGET);
-        addWord = false;
-    }
+//    if(verif){
+//        addWord = true;
+//        this->setFixedHeight(this->height()-HEIGHT_WIDGET);
+//        addWord = false;
+//    }
 }
 
 void NewVocab::saveColumnName(){

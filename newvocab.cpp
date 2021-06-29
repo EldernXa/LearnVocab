@@ -106,9 +106,11 @@ void NewVocab::valideNameColumn(){
         QWidget *widgetForAddingWord = new QWidget(mainWidget);
         otherWidget->move(0, HEIGHT_WIDGET);
         QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout(widgetForAddingWord);
+        layoutForButtonAddWord->sizeConstraint();
 
         QWidget *widgetForDisplayColumn = new QWidget(mainWidget);
         QHBoxLayout *displayColumn = new QHBoxLayout(widgetForDisplayColumn);
+        displayColumn->sizeConstraint();
         widgetForDisplayColumn->move(0, HEIGHT_WIDGET+10);
 
         QWidget *widgetForBoxAllWord = new QWidget(mainWidget);
@@ -119,6 +121,7 @@ void NewVocab::valideNameColumn(){
         // Layout for remove word in vocab.
         QWidget *widgetForRemovingWord = new QWidget(mainWidget);
         QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout(widgetForRemovingWord);
+        layoutForButtonRemoveWord->sizeConstraint();
         widgetForRemovingWord->move(0, (LIMIT_NUMBER_WORD+4)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+4) - HEIGHT_WIDGET);
 
 

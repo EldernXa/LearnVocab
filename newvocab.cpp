@@ -121,12 +121,7 @@ void NewVocab::valideNameColumn(){
         QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout(widgetForRemovingWord);
         widgetForRemovingWord->move(0, (LIMIT_NUMBER_WORD+4)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+4) - HEIGHT_WIDGET);
 
-        addWord = true;
-        this->setFixedHeight((LIMIT_NUMBER_WORD+7)*HEIGHT_WIDGET + boxAllWord->spacing() * (LIMIT_NUMBER_WORD+7));
-        addWord = false;
 
-        mainWidget->setFixedHeight((LIMIT_NUMBER_WORD+7)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+7));
-        otherWidget->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
         for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(WIDTH_WIDGET);
@@ -158,7 +153,6 @@ void NewVocab::valideNameColumn(){
             layoutForButtonRemoveWord->addWidget(buttonRemoveWord);
             listQPushButtonRemove.push_back(buttonRemoveWord);
 
-
             connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
             connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
         }
@@ -186,6 +180,21 @@ void NewVocab::valideNameColumn(){
         lblLastWord->setFixedWidth(1000);
         lblLastWord->move(0,(LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
         //newQVBoxLayout->addLayout(layoutForButton);
+
+        errorInsertingWord = new QLabel(mainWidget);
+        errorInsertingWord->setText("");
+        errorInsertingWord->setStyleSheet("QLabel {color:red;}");
+        errorInsertingWord->move(0, (LIMIT_NUMBER_WORD+7)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+7));
+
+        addWord = true;
+        this->setFixedHeight((LIMIT_NUMBER_WORD+mainWidget->children().size())*HEIGHT_WIDGET + boxAllWord->spacing()
+                             * (LIMIT_NUMBER_WORD+mainWidget->children().size()));
+        addWord = false;
+
+        mainWidget->setFixedHeight((LIMIT_NUMBER_WORD+mainWidget->children().size())*HEIGHT_WIDGET +
+                                   boxAllWord->spacing()*(LIMIT_NUMBER_WORD+mainWidget->children().size()));
+        otherWidget->setFixedHeight((LIMIT_NUMBER_WORD+mainWidget->children().size()-1)*HEIGHT_WIDGET +
+                                    boxAllWord->spacing()*(LIMIT_NUMBER_WORD+mainWidget->children().size()-1));
     }
 }
 

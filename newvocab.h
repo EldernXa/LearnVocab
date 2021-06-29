@@ -51,6 +51,7 @@ private:
     bool addWord = false;
     std::string nameVocab;
     QLabel *errorLabelForNameColumn = new QLabel;
+    QLabel *errorInsertingWord = nullptr;
     Ui::NewVocab *ui;
     std::fstream fileToSaveVocab;
 

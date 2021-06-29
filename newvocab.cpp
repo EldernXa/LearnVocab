@@ -4,7 +4,6 @@
 using namespace std;
 
 // TODO verify if the vocab doesn't actually exist.
-// TODO change string for future translation.
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
@@ -42,18 +41,18 @@ void NewVocab::enableEvent(){
 void NewVocab::runFirstButton(){
     ui->labelError->setText("");
     if(ui->lineEditForName->text() == ""){
-        ui->labelError->setText("Vous n'avez pas rentrée de nom\n pour le nouveau vocabulaire.");
+        ui->labelError->setText(tr("Vous n'avez pas rentrée de nom\n pour le nouveau vocabulaire."));
     }
     else if(ui->lineEditNumberOfColumn->text() == ""){
-        ui->labelError->setText("Vous n'avez pas indiquée combien de colonne\n vous voulez avoir.");
+        ui->labelError->setText(tr("Vous n'avez pas indiquée combien de colonne\n vous voulez avoir."));
     }else{
         if(!regex_match(ui->lineEditNumberOfColumn->text().toStdString(), std::regex{"[+-]?[0-9]+"})){
-            ui->labelError->setText("La valeur entrée pour le nombre\n de colonne n'est pas un entier !");
+            ui->labelError->setText(tr("La valeur entrée pour le nombre\n de colonne n'est pas un entier !"));
         }else{
             if(ui->lineEditNumberOfColumn->text().toInt()<=1){
-                ui->labelError->setText("Valeur minimum requise est de 2.");
+                ui->labelError->setText(tr("Valeur minimum requise est de 2."));
             }else if(ui->lineEditNumberOfColumn->text().toInt()>4){
-                ui->labelError->setText("Valeur maximum permise est de 4.");
+                ui->labelError->setText(tr("Valeur maximum permise est de 4."));
             }
             else{
                 nameVocab = ui->lineEditForName->text().toStdString();
@@ -61,7 +60,7 @@ void NewVocab::runFirstButton(){
                 QVBoxLayout *newQVBoxLayout = new QVBoxLayout;
                 ui->centralwidget->setLayout(newQVBoxLayout);
                 QLabel *newlbl = new QLabel;
-                newlbl->setText("Nom des colonnes :");
+                newlbl->setText(tr("Nom des colonnes :"));
                 newQVBoxLayout->addWidget(newlbl);
                 QHBoxLayout *hboxLayout = new QHBoxLayout;
                 hboxLayout->setSpacing(2);
@@ -76,7 +75,7 @@ void NewVocab::runFirstButton(){
                     hboxLayout->addWidget(qlineEdit);
                 }
                 QPushButton *termineAddingNameForColumn = new QPushButton;
-                termineAddingNameForColumn->setText("Valider");
+                termineAddingNameForColumn->setText(tr("Valider"));
                 termineAddingNameForColumn->setFixedWidth(WIDTH_WIDGET);
                 newQVBoxLayout->addWidget(termineAddingNameForColumn);
                 newQVBoxLayout->addWidget(errorLabelForNameColumn);
@@ -167,14 +166,14 @@ void NewVocab::valideNameColumn(){
         //QHBoxLayout *layoutForButton = new QHBoxLayout;
 
         QPushButton *validButton = new QPushButton(mainWidget);
-        validButton->setText("Ajouter le mot");
+        validButton->setText(tr("Ajouter le mot"));
         validButton->setFixedWidth(WIDTH_WIDGET);
         //layoutForButton->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
         validButton->move(0, (LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6) - validButton->height());
 
         finishButton = new QPushButton(mainWidget);
-        finishButton->setText(QString::fromStdString("Terminer le vocabulaire '" + nameVocab + "'"));
+        finishButton->setText(tr("Terminer le vocabulaire") + QString::fromStdString(" '" +nameVocab + "'"));
         finishButton->setFixedWidth(WIDTH_WIDGET);
         finishButton->setVisible(false);
         //layoutForButton->addWidget(finishButton);
@@ -207,7 +206,7 @@ void NewVocab::finishVocab(){
 
 void NewVocab::saveWord(){
     // TODO verify if all input aren't empty before saving.
-    lblLastWord->setText("Le dernier mot sauvegardée contenait le mot : " + listLineEditForWord.at(0)->at(0)->text()+".");
+    lblLastWord->setText(tr("Le dernier mot sauvegardée contenait le mot : ") + listLineEditForWord.at(0)->at(0)->text()+".");
     for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
         for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
             fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
@@ -271,7 +270,7 @@ bool NewVocab::verifLineEdit(){
     errorLabelForNameColumn->setText("");
     for(QLineEdit* lineEdit:listLineEdit){
         if(lineEdit->text() == ""){
-            errorLabelForNameColumn->setText("Un des champs n'est pas rempli.");
+            errorLabelForNameColumn->setText(tr("Un des champs n'est pas rempli."));
         }
     }
 

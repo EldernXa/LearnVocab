@@ -160,12 +160,9 @@ void NewVocab::valideNameColumn(){
             connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
         }
 
-        //QHBoxLayout *layoutForButton = new QHBoxLayout;
-
         QPushButton *validButton = new QPushButton(mainWidget);
         validButton->setText(tr("Ajouter le mot"));
         validButton->setFixedWidth(WIDTH_WIDGET);
-        //layoutForButton->addWidget(validButton);
         connect(validButton, SIGNAL(clicked()), this, SLOT(saveWord()));
         validButton->move(0, (LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6) - validButton->height());
 
@@ -173,7 +170,6 @@ void NewVocab::valideNameColumn(){
         finishButton->setText(tr("Terminer le vocabulaire") + QString::fromStdString(" '" +nameVocab + "'"));
         finishButton->setFixedWidth(WIDTH_WIDGET);
         finishButton->setVisible(false);
-        //layoutForButton->addWidget(finishButton);
         connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
         finishButton->move(WIDTH_WIDGET+50,
                            (LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6) - finishButton->height());
@@ -182,7 +178,6 @@ void NewVocab::valideNameColumn(){
         lblLastWord->setText("");
         lblLastWord->setFixedWidth(1000);
         lblLastWord->move(0,(LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
-        //newQVBoxLayout->addLayout(layoutForButton);
 
         errorInsertingWord = new QLabel(mainWidget);
         errorInsertingWord->setText("");

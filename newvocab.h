@@ -54,6 +54,8 @@ private:
     Ui::NewVocab *ui;
     std::fstream fileToSaveVocab;
 
+    QLabel *lblLastWord = nullptr;
+
     const int WIDTH_LINE_EDIT_WORD = 40;
     const int HEIGHT_LINE_EDIT_WORD = 40;
     const int WIDTH_WIDGET = 250;

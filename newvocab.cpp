@@ -5,8 +5,6 @@ using namespace std;
 
 // TODO verify if the vocab doesn't actually exist.
 // TODO change string for future translation.
-// TODO remove the resize to set the size initially.
-// TODO display the last word saved.
 
 NewVocab::NewVocab(QWidget *parent) :
     QMainWindow(parent),
@@ -103,31 +101,33 @@ void NewVocab::valideNameColumn(){
         fileToSaveVocab << endl;
         QWidget *mainWidget = new QWidget;
         QWidget *otherWidget = new QWidget(mainWidget);
-        QVBoxLayout *newQVBoxLayout = new QVBoxLayout(otherWidget);
-        //newWidget->setLayout(newQVBoxLayout);
         setCentralWidget(mainWidget);
 
         // Layout for adding new word in vocab.
         QWidget *widgetForAddingWord = new QWidget(mainWidget);
         otherWidget->move(0, HEIGHT_WIDGET);
         QHBoxLayout *layoutForButtonAddWord = new QHBoxLayout(widgetForAddingWord);
-        //newQVBoxLayout->addLayout(layoutForButtonAddWord);
 
-        QHBoxLayout *displayColumn = new QHBoxLayout;
-        newQVBoxLayout->addLayout(displayColumn);
-        QHBoxLayout *boxAllWord = new QHBoxLayout;
-        newQVBoxLayout->addLayout(boxAllWord);
+        QWidget *widgetForDisplayColumn = new QWidget(mainWidget);
+        QHBoxLayout *displayColumn = new QHBoxLayout(widgetForDisplayColumn);
+        widgetForDisplayColumn->move(0, HEIGHT_WIDGET+10);
+
+        QWidget *widgetForBoxAllWord = new QWidget(mainWidget);
+        QHBoxLayout *boxAllWord = new QHBoxLayout(widgetForBoxAllWord);
+        widgetForBoxAllWord->move(0, HEIGHT_WIDGET*2+10);
+        widgetForBoxAllWord->setFixedHeight((LIMIT_NUMBER_WORD)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD));
 
         // Layout for remove word in vocab.
-        QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout;
-        newQVBoxLayout->addLayout(layoutForButtonRemoveWord);
+        QWidget *widgetForRemovingWord = new QWidget(mainWidget);
+        QHBoxLayout *layoutForButtonRemoveWord = new QHBoxLayout(widgetForRemovingWord);
+        widgetForRemovingWord->move(0, (LIMIT_NUMBER_WORD+4)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+4) - HEIGHT_WIDGET);
 
         addWord = true;
-        this->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing() * (LIMIT_NUMBER_WORD+6));
+        this->setFixedHeight((LIMIT_NUMBER_WORD+7)*HEIGHT_WIDGET + boxAllWord->spacing() * (LIMIT_NUMBER_WORD+7));
         addWord = false;
 
-        mainWidget->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
-        otherWidget->setFixedHeight((LIMIT_NUMBER_WORD+5)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+5));
+        mainWidget->setFixedHeight((LIMIT_NUMBER_WORD+7)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+7));
+        otherWidget->setFixedHeight((LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
         for(unsigned int i=0; i<listNameColumn.size(); i++){
             QLabel *lblNameColumn = new QLabel;
             lblNameColumn->setFixedWidth(WIDTH_WIDGET);
@@ -182,6 +182,10 @@ void NewVocab::valideNameColumn(){
         finishButton->move(WIDTH_WIDGET+50,
                            (LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6) - finishButton->height());
 
+        lblLastWord = new QLabel(mainWidget);
+        lblLastWord->setText("");
+        lblLastWord->setFixedWidth(1000);
+        lblLastWord->move(0,(LIMIT_NUMBER_WORD+6)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+6));
         //newQVBoxLayout->addLayout(layoutForButton);
     }
 }
@@ -203,6 +207,7 @@ void NewVocab::finishVocab(){
 
 void NewVocab::saveWord(){
     // TODO verify if all input aren't empty before saving.
+    lblLastWord->setText("Le dernier mot sauvegardée contenait le mot : " + listLineEditForWord.at(0)->at(0)->text()+".");
     for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
         for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
             fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();

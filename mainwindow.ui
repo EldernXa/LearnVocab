@@ -57,6 +57,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="displayVocab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Afficher une liste</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="modifVocab">
          <property name="enabled">
           <bool>false</bool>

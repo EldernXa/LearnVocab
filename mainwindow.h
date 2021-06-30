@@ -34,6 +34,6 @@ private:
     std::vector<QPushButton*> listButtonForVocab;
 
 private slots :
-    void newfunction();
+    void newVocab();
 };
 #endif // MAINWINDOW_H

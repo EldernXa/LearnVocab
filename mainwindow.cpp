@@ -6,7 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    enableEvent();
     QWidget *scrollAreaContent = new QWidget;
     scrollAreaContent->setLayout(new QVBoxLayout);
     //ui->scrollArea->setLayout(new QVBoxLayout);
@@ -15,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->scrollArea->setWidgetResizable(true);
     ui->scrollArea->setWidget(scrollAreaContent);
     getVocab();
+    enableEvent();
 }
 
 void MainWindow::getVocab(){
@@ -64,10 +64,10 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 }
 
 void MainWindow::enableEvent(){
-    connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newfunction()));
+    connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
 }
 
-void MainWindow::newfunction(){
+void MainWindow::newVocab(){
     NewVocab *newVocab = new NewVocab(this);
     newVocab->show();
 }

@@ -58,6 +58,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="modifVocab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Modifier une liste</string>
          </property>
@@ -65,6 +68,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="removeVocab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Delete une liste</string>
          </property>
@@ -72,6 +78,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="quizVocab">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Quiz</string>
          </property>

@@ -27,7 +27,28 @@ void MainWindow::getVocab(){
             std::string lastString = split(newString, '.').at(0);
             pushButton->setText(QString::fromStdString(lastString));
             ui->scrollArea->widget()->layout()->addWidget(pushButton);
+            listButtonForVocab.push_back(pushButton);
+            //pushButton->setDown(true);
+            pushButton->setCheckable(true);
+            connect(pushButton, &QPushButton::clicked, this, [this, pushButton]{clickButtonVocab(pushButton);});
         }
+    }
+}
+
+void MainWindow::clickButtonVocab(QPushButton *pushButton){
+    if(pushButton->isChecked()){
+        for(auto *btn : listButtonForVocab){
+            if(btn!=pushButton){
+                btn->setChecked(false);
+            }
+        }
+        ui->modifVocab->setEnabled(true);
+        ui->quizVocab->setEnabled(true);
+        ui->removeVocab->setEnabled(true);
+    }else{
+        ui->modifVocab->setEnabled(false);
+        ui->quizVocab->setEnabled(false);
+        ui->removeVocab->setEnabled(false);
     }
 }
 

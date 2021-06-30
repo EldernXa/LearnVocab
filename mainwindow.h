@@ -27,9 +27,11 @@ public:
 private:
     void enableEvent();
     void getVocab();
+    void clickButtonVocab(QPushButton *);
     std::vector<std::string> split(const std::string&, char);
 
     Ui::MainWindow *ui;
+    std::vector<QPushButton*> listButtonForVocab;
 
 private slots :
     void newfunction();

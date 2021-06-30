@@ -28,7 +28,6 @@ void MainWindow::getVocab(){
             pushButton->setText(QString::fromStdString(lastString));
             ui->scrollArea->widget()->layout()->addWidget(pushButton);
             listButtonForVocab.push_back(pushButton);
-            //pushButton->setDown(true);
             pushButton->setCheckable(true);
             connect(pushButton, &QPushButton::clicked, this, [this, pushButton]{clickButtonVocab(pushButton);});
         }

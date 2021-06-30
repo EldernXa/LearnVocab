@@ -36,5 +36,6 @@ private:
 
 private slots :
     void newVocab();
+    void displayVocab();
 };
 #endif // MAINWINDOW_H

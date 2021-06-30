@@ -44,10 +44,12 @@ void MainWindow::clickButtonVocab(QPushButton *pushButton){
         ui->modifVocab->setEnabled(true);
         ui->quizVocab->setEnabled(true);
         ui->removeVocab->setEnabled(true);
+        ui->displayVocab->setEnabled(true);
     }else{
         ui->modifVocab->setEnabled(false);
         ui->quizVocab->setEnabled(false);
         ui->removeVocab->setEnabled(false);
+        ui->displayVocab->setEnabled(false);
     }
 }
 
@@ -65,6 +67,7 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 
 void MainWindow::enableEvent(){
     connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
+    connect(ui->displayVocab, SIGNAL(clicked()), this, SLOT(displayVocab()));
 }
 
 void MainWindow::newVocab(){
@@ -76,8 +79,34 @@ void MainWindow::newVocab(){
     actualOtherWindow = newVocab;
 }
 
+void MainWindow::displayVocab(){
+    std::cout << "okok" << std::endl;
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

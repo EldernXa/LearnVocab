@@ -3,10 +3,13 @@
 
 #include <fstream>
 #include <iostream>
+#include <filesystem>
+#include <set>
 
 #include <QMainWindow>
 #include <QScrollArea>
 #include <QVBoxLayout>
+#include <QLabel>
 
 using namespace std;
 
@@ -17,10 +20,18 @@ class DisplayVocab : public QMainWindow
 public:
     explicit DisplayVocab(std::string nameVocab, QWidget *parent = nullptr);
 
+protected:
+    void resizeEvent(QResizeEvent *qresizeEvent) override;
 
 private:
+    vector<string> split(const string&, char delimiter);
+
     string nameVocabToDisplay;
     int numberOfColumn;
+    int lastHeight=0;
+    vector<string> nameColumns;
+    const int WIDTH_LABEL = 50;
+    const int HEIGHT_LABEL = 20;
 
     fstream fileToDisplayVocab;
 

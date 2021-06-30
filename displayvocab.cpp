@@ -30,7 +30,10 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
         lblNameColumn->setFixedWidth(WIDTH_LABEL);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
-    //scrollAreaContent->layout()->addWidget(widgetForNameColumns);
+    while(getline(fileToDisplayVocab, value)){
+        vector<string> valueToDisplay = split(value, ';');
+        // TODO display all value here
+    }
     fileToDisplayVocab.close();
 }
 

@@ -11,6 +11,7 @@
 #include <QScrollArea>
 
 #include "newvocab.h"
+#include "displayvocab.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +30,7 @@ private:
     void getVocab();
     void clickButtonVocab(QPushButton *);
     std::vector<std::string> split(const std::string&, char);
+    std::string getNameVocab();
 
     Ui::MainWindow *ui;
     std::vector<QPushButton*> listButtonForVocab;

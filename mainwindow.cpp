@@ -73,6 +73,7 @@ void MainWindow::enableEvent(){
 void MainWindow::newVocab(){
     if(actualOtherWindow!=nullptr){
         actualOtherWindow->close();
+        actualOtherWindow = nullptr;
     }
     NewVocab *newVocab = new NewVocab(this);
     newVocab->show();
@@ -80,7 +81,22 @@ void MainWindow::newVocab(){
 }
 
 void MainWindow::displayVocab(){
-    std::cout << "okok" << std::endl;
+    if(actualOtherWindow!=nullptr){
+        actualOtherWindow->close();
+        actualOtherWindow = nullptr;
+    }
+    DisplayVocab *displayVocab = new DisplayVocab(getNameVocab(), this);
+    displayVocab->show();
+    actualOtherWindow = displayVocab;
+}
+
+std::string MainWindow::getNameVocab(){
+    for(auto &button : listButtonForVocab){
+        if(button->isChecked()){
+            return button->text().toStdString();
+        }
+    }
+    return nullptr;
 }
 
 MainWindow::~MainWindow()

@@ -68,8 +68,12 @@ void MainWindow::enableEvent(){
 }
 
 void MainWindow::newVocab(){
+    if(actualOtherWindow!=nullptr){
+        actualOtherWindow->close();
+    }
     NewVocab *newVocab = new NewVocab(this);
     newVocab->show();
+    actualOtherWindow = newVocab;
 }
 
 MainWindow::~MainWindow()

@@ -32,6 +32,7 @@ private:
 
     Ui::MainWindow *ui;
     std::vector<QPushButton*> listButtonForVocab;
+    QMainWindow *actualOtherWindow = nullptr;
 
 private slots :
     void newVocab();

@@ -35,6 +35,7 @@ private:
     void enableEvent();
     void clearLayout(QLayout *layout);
     bool verifLineEdit();
+    bool verifyInputWord();
     void saveColumnName();
     void addingWord(int num);
     void removeWord(int num);

@@ -182,6 +182,7 @@ void NewVocab::valideNameColumn(){
         errorInsertingWord = new QLabel(mainWidget);
         errorInsertingWord->setText("");
         errorInsertingWord->setStyleSheet("QLabel {color:red;}");
+        errorInsertingWord->setFixedWidth(1000);
         errorInsertingWord->move(0, (LIMIT_NUMBER_WORD+7)*HEIGHT_WIDGET + boxAllWord->spacing()*(LIMIT_NUMBER_WORD+7));
 
         addWord = true;
@@ -212,36 +213,51 @@ void NewVocab::finishVocab(){
 }
 
 void NewVocab::saveWord(){
-    // TODO verify if all input aren't empty before saving.
-    lblLastWord->setText(tr("Le dernier mot sauvegardée contenait le mot : ") + listLineEditForWord.at(0)->at(0)->text()+".");
-    for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
-        for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
-            fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
-            if(indexForLineEdit<listLineEditForWord.at(indexForVect)->size()-1){
-                fileToSaveVocab<<",";
+    if(verifyInputWord()){
+        lblLastWord->setText(tr("Le dernier mot sauvegardée contenait le mot : ") + listLineEditForWord.at(0)->at(0)->text()+".");
+        for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size();indexForVect++){
+            for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
+                fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
+                if(indexForLineEdit<listLineEditForWord.at(indexForVect)->size()-1){
+                    fileToSaveVocab<<",";
+                }
+            }
+            if(indexForVect < listLineEditForWord.size()-1){
+                fileToSaveVocab<<";";
+            }else{
+                fileToSaveVocab<<endl;
             }
         }
-        if(indexForVect < listLineEditForWord.size()-1){
-            fileToSaveVocab<<";";
-        }else{
-            fileToSaveVocab<<endl;
+
+        for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size(); indexForVect++){
+            vector<QLineEdit*>::iterator it;
+            unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
+            for(it = listLineEditForWord.at(indexForVect)->end()-1;
+                it>=listLineEditForWord.at(indexForVect)->begin()+1; it--){
+                delete listLineEditForWord.at(indexForVect)->at(indexForLineEdit);
+                listLineEditForWord.at(indexForVect)->erase(it);
+                indexForLineEdit--;
+            }
+            listLineEditForWord.at(indexForVect)->at(0)->clear();
+        }
+
+        finishButton->setVisible(true);
+        errorInsertingWord->setText("");
+    }else
+    {
+        errorInsertingWord->setText(tr("Vous avez pas remplis tous les champs de texte."));
+    }
+}
+
+bool NewVocab::verifyInputWord(){
+    for(auto *var : listLineEditForWord){
+        for(auto *lineEdit : *var){
+            if(lineEdit->text() == ""){
+                return false;
+            }
         }
     }
-
-    for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size(); indexForVect++){
-        vector<QLineEdit*>::iterator it;
-        unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
-        for(it = listLineEditForWord.at(indexForVect)->end()-1;
-            it>=listLineEditForWord.at(indexForVect)->begin()+1; it--){
-            delete listLineEditForWord.at(indexForVect)->at(indexForLineEdit);
-            listLineEditForWord.at(indexForVect)->erase(it);
-            indexForLineEdit--;
-        }
-        listLineEditForWord.at(indexForVect)->at(0)->clear();
-    }
-
-    finishButton->setVisible(true);
-
+    return true;
 }
 
 void NewVocab::addingWord(int num){

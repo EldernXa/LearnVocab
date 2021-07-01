@@ -83,7 +83,7 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
 void DisplayVocab::resizeEvent(QResizeEvent *qresizeEvent){
     scrollArea->setFixedHeight(this->height());
     scrollArea->setFixedWidth(this->width());
-    scrollArea->widget()->setFixedHeight(this->height()+(lastHeight-this->height()+10));
+    scrollArea->widget()->setFixedHeight(this->height()+(lastHeight-this->height()+20));
     scrollArea->widget()->setFixedWidth(this->width());
     QWidget::resizeEvent(qresizeEvent);
 }

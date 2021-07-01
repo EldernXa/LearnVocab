@@ -32,7 +32,17 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
     }
     while(getline(fileToDisplayVocab, value)){
         vector<string> valueToDisplay = split(value, ';');
-        // TODO display all value here
+        QWidget *widgetForNameWord = new QWidget(scrollAreaContent);
+        QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
+        lastHeight+=HEIGHT_LABEL;
+        widgetForNameWord->move(0, lastHeight);
+        for(auto &nameWord : valueToDisplay){
+            QLabel *lblNameWord = new QLabel;
+            lblNameWord->setText(QString::fromStdString(nameWord));
+            lblNameWord->setFixedHeight(HEIGHT_LABEL);
+            lblNameWord->setFixedWidth(WIDTH_LABEL);
+            layoutForNameWord->addWidget(lblNameWord);
+        }
     }
     fileToDisplayVocab.close();
 }

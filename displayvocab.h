@@ -30,8 +30,8 @@ private:
     int numberOfColumn;
     int lastHeight=0;
     vector<string> nameColumns;
-    const int WIDTH_LABEL = 50;
-    const int HEIGHT_LABEL = 20;
+    const int WIDTH_LABEL = 70;
+    const int HEIGHT_LABEL = 30;
 
     fstream fileToDisplayVocab;
 

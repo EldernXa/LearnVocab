@@ -10,6 +10,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QSpacerItem>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ private:
     int numberOfColumn;
     int lastHeight=0;
     vector<string> nameColumns;
-    const int WIDTH_LABEL = 70;
+    const int WIDTH_LABEL = 150;
     const int HEIGHT_LABEL = 30;
     const int LIMIT_WIDGET = 5;
     const int HEIGHT_WIDGET = 30*LIMIT_WIDGET;

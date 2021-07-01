@@ -32,6 +32,8 @@ private:
     vector<string> nameColumns;
     const int WIDTH_LABEL = 70;
     const int HEIGHT_LABEL = 30;
+    const int LIMIT_WIDGET = 5;
+    const int HEIGHT_WIDGET = 30*LIMIT_WIDGET;
 
     fstream fileToDisplayVocab;
 

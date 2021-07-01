@@ -21,6 +21,8 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
     getline(fileToDisplayVocab, value);
     nameColumns = split(value, ';');
 
+    this->resize(numberOfColumn*WIDTH_LABEL + WIDTH_LABEL, 200);
+
     QWidget *widgetForNameColumns = new QWidget(scrollAreaContent);
     QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumns);
     for(auto &nameColumn : nameColumns){
@@ -30,19 +32,44 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
         lblNameColumn->setFixedWidth(WIDTH_LABEL);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
+    lastHeight += HEIGHT_LABEL+1;
     while(getline(fileToDisplayVocab, value)){
         vector<string> valueToDisplay = split(value, ';');
         QWidget *widgetForNameWord = new QWidget(scrollAreaContent);
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
-        lastHeight+=HEIGHT_LABEL;
         widgetForNameWord->move(0, lastHeight);
+        unsigned int multiply_value=1;
         for(auto &nameWord : valueToDisplay){
-            QLabel *lblNameWord = new QLabel;
-            lblNameWord->setText(QString::fromStdString(nameWord));
-            lblNameWord->setFixedHeight(HEIGHT_LABEL);
-            lblNameWord->setFixedWidth(WIDTH_LABEL);
-            layoutForNameWord->addWidget(lblNameWord);
+            vector<string> differentValueForAWord = split(nameWord, ',');
+            if(differentValueForAWord.size()>1){
+                QWidget *widgetForAWord = new QWidget;
+                QVBoxLayout *layoutForAWord = new QVBoxLayout(widgetForAWord);
+                layoutForAWord->setSpacing(0);
+                if(differentValueForAWord.size()>multiply_value){
+                    multiply_value = differentValueForAWord.size();
+                }
+                for(auto &word : differentValueForAWord){
+                    QLabel *lblNameWord = new QLabel;
+                    //lblNameWord->setStyleSheet("border: 1px solid black;");;
+                    lblNameWord->setText(QString::fromStdString(word));
+                    lblNameWord->setFixedHeight(HEIGHT_LABEL);
+                    lblNameWord->setFixedWidth(WIDTH_LABEL);
+                    layoutForAWord->addWidget(lblNameWord);
+                }
+                layoutForNameWord->addWidget(widgetForAWord);
+            }else{
+                QLabel *lblNameWord = new QLabel;
+                lblNameWord->setText(QString::fromStdString(nameWord));
+                lblNameWord->setFixedHeight(HEIGHT_LABEL);
+                lblNameWord->setFixedWidth(WIDTH_LABEL);
+                layoutForNameWord->addWidget(lblNameWord);
+            }
         }
+        lastHeight+=(HEIGHT_LABEL*multiply_value);
+        QFrame *frameLine = new QFrame(scrollAreaContent);
+        frameLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
+        frameLine->setFrameShape(QFrame::HLine);
+        frameLine->move(0, lastHeight);
     }
     fileToDisplayVocab.close();
 }

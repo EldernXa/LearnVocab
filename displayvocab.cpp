@@ -81,11 +81,9 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
 }
 
 void DisplayVocab::resizeEvent(QResizeEvent *qresizeEvent){
-    // TODO fix the ratio of the scroll
-    // TODO change the variables uses here.
     scrollArea->setFixedHeight(this->height());
     scrollArea->setFixedWidth(this->width());
-    scrollArea->widget()->setFixedHeight(this->height()+lastHeight);
+    scrollArea->widget()->setFixedHeight(this->height()+(lastHeight-this->height()+10));
     scrollArea->widget()->setFixedWidth(this->width());
     QWidget::resizeEvent(qresizeEvent);
 }

@@ -84,7 +84,7 @@
      <property name="title">
       <string>Quiz</string>
      </property>
-     <addaction name="actionn_mot"/>
+     <addaction name="actionRandomNWord"/>
     </widget>
     <addaction name="actionDisplayList"/>
     <addaction name="actionModifyList"/>
@@ -94,9 +94,9 @@
    <addaction name="menuVocab"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionn_mot">
+  <action name="actionRandomNWord">
    <property name="text">
-    <string>quiz sur un chiffre donné</string>
+    <string>quiz aléatoire avec un nombre de mots donnée</string>
    </property>
   </action>
   <action name="actionDisplayList">

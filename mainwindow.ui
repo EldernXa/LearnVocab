@@ -56,46 +56,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QPushButton" name="displayVocab">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Afficher une liste</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="modifVocab">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Modifier une liste</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="removeVocab">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Delete une liste</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="quizVocab">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Quiz</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
     </layout>
@@ -110,8 +70,50 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuVocab">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Vocab</string>
+    </property>
+    <widget class="QMenu" name="menuQuiz">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Quiz</string>
+     </property>
+     <addaction name="actionn_mot"/>
+    </widget>
+    <addaction name="actionDisplayList"/>
+    <addaction name="actionModifyList"/>
+    <addaction name="actionDeleteList"/>
+    <addaction name="menuQuiz"/>
+   </widget>
+   <addaction name="menuVocab"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionn_mot">
+   <property name="text">
+    <string>quiz sur un chiffre donné</string>
+   </property>
+  </action>
+  <action name="actionDisplayList">
+   <property name="text">
+    <string>Afficher une liste</string>
+   </property>
+  </action>
+  <action name="actionModifyList">
+   <property name="text">
+    <string>Modifier une liste</string>
+   </property>
+  </action>
+  <action name="actionDeleteList">
+   <property name="text">
+    <string>Supprimer une liste</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

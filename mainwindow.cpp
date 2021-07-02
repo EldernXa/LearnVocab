@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->menuVocab->setEnabled(false);
     QWidget *scrollAreaContent = new QWidget;
     scrollAreaContent->setLayout(new QVBoxLayout);
     //ui->scrollArea->setLayout(new QVBoxLayout);
@@ -41,15 +42,9 @@ void MainWindow::clickButtonVocab(QPushButton *pushButton){
                 btn->setChecked(false);
             }
         }
-        ui->modifVocab->setEnabled(true);
-        ui->quizVocab->setEnabled(true);
-        ui->removeVocab->setEnabled(true);
-        ui->displayVocab->setEnabled(true);
+        ui->menuVocab->setEnabled(true);
     }else{
-        ui->modifVocab->setEnabled(false);
-        ui->quizVocab->setEnabled(false);
-        ui->removeVocab->setEnabled(false);
-        ui->displayVocab->setEnabled(false);
+        ui->menuVocab->setEnabled(false);
     }
 }
 
@@ -67,7 +62,7 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 
 void MainWindow::enableEvent(){
     connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
-    connect(ui->displayVocab, SIGNAL(clicked()), this, SLOT(displayVocab()));
+    connect(ui->actionDisplayList, SIGNAL(triggered()), this, SLOT(displayVocab()));
 }
 
 void MainWindow::newVocab(){

@@ -12,6 +12,7 @@
 
 #include "newvocab.h"
 #include "displayvocab.h"
+#include "quizvocab.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,5 +40,6 @@ private:
 private slots :
     void newVocab();
     void displayVocab();
+    void quizVocab();
 };
 #endif // MAINWINDOW_H

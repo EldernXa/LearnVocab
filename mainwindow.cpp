@@ -63,6 +63,17 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 void MainWindow::enableEvent(){
     connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
     connect(ui->actionDisplayList, SIGNAL(triggered()), this, SLOT(displayVocab()));
+    connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
+}
+
+void MainWindow::quizVocab(){
+    if(actualOtherWindow!=nullptr){
+        actualOtherWindow->close();
+        actualOtherWindow = nullptr;
+    }
+    QuizVocab * quizVocab = new QuizVocab(getNameVocab(), this);
+    quizVocab->show();
+    actualOtherWindow = quizVocab;
 }
 
 void MainWindow::newVocab(){

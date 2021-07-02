@@ -12,16 +12,19 @@ SOURCES += \
     displayvocab.cpp \
     main.cpp \
     mainwindow.cpp \
-    newvocab.cpp
+    newvocab.cpp \
+    quizvocab.cpp
 
 HEADERS += \
     displayvocab.h \
     mainwindow.h \
-    newvocab.h
+    newvocab.h \
+    quizvocab.h
 
 FORMS += \
     mainwindow.ui \
-    newvocab.ui
+    newvocab.ui \
+    quizvocab.ui
 
 TRANSLATIONS += \
     LearnVocab_fr_FR.ts

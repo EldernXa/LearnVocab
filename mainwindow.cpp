@@ -71,7 +71,7 @@ void MainWindow::quizVocab(){
         actualOtherWindow->close();
         actualOtherWindow = nullptr;
     }
-    QuizVocab * quizVocab = new QuizVocab(getNameVocab(), this);
+    QuizVocab * quizVocab = new QuizVocab(getNameVocab(), QuizVocab::QuizType::randomNWord, this);
     quizVocab->show();
     actualOtherWindow = quizVocab;
 }

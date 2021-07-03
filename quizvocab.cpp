@@ -3,7 +3,7 @@
 
 using namespace std;
 
-QuizVocab::QuizVocab(string nameVocabToQuiz, QWidget *parent) :
+QuizVocab::QuizVocab(string nameVocabToQuiz, QuizType quizType, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::QuizVocab)
 {

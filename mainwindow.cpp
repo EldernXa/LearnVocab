@@ -107,6 +107,7 @@ std::string MainWindow::getNameVocab(){
 
 MainWindow::~MainWindow()
 {
+    delete actualOtherWindow;
     delete ui;
 }
 

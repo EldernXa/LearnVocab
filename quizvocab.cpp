@@ -7,9 +7,16 @@ QuizVocab::QuizVocab(string nameVocabToQuiz, QuizType quizType, QWidget *parent)
     QMainWindow(parent),
     ui(new Ui::QuizVocab)
 {
-    ui->setupUi(this);
-    nameVocab = nameVocabToQuiz;
-    saveVocabWord();
+    if(quizType == randomNWord){
+        ui->setupUi(this);
+        nameVocab = nameVocabToQuiz;
+        saveVocabWord();
+        enableEvent();
+    }
+}
+
+void QuizVocab::enableEvent(){
+    connect(ui->pushButtonToValidNumberOfWord, SIGNAL(clicked()), this, SLOT(saveNumberOfWord()));
 }
 
 void QuizVocab::saveVocabWord(){
@@ -22,6 +29,22 @@ void QuizVocab::saveVocabWord(){
     for(auto& str : QString::fromStdString(valueTempForRead).split(';')){
         nameColumn.push_back(str.toStdString());
     }
+
+    while(getline(fileVocabToRead, valueTempForRead)){
+        listWord.append(new QVector<QVector<string>*>());
+        for(auto& qStr : QString::fromStdString(valueTempForRead).split(";")){
+            QStringList listStr = qStr.split(",");
+            listWord.at(listWord.size()-1)->append(new QVector<string>());
+            for(auto &s:listStr){
+                listWord.at(listWord.size()-1)->at(listWord.at(listWord.size()-1)->size()-1)->push_back(s.toStdString());
+            }
+        }
+    }
+    fileVocabToRead.close();
+}
+
+void QuizVocab::saveNumberOfWord(){
+
 }
 
 QuizVocab::~QuizVocab()

@@ -18,7 +18,7 @@ class QuizVocab : public QMainWindow
     Q_OBJECT
 
 public:
-    enum QuizType {randomNWord};
+    enum QuizType {randomNWord, wordNotKnow};
     explicit QuizVocab(std::string, QuizType, QWidget *parent = nullptr);
     ~QuizVocab();
 
@@ -27,8 +27,13 @@ private:
     std::string nameVocab;
     int numberOfColumn;
     vector<string> nameColumn;
+    QVector<QVector<QVector<string>*>*> listWord;
 
     void saveVocabWord();
+    void enableEvent();
+
+private slots:
+    void saveNumberOfWord();
 };
 
 #endif // QUIZVOCAB_H

@@ -2,6 +2,8 @@
 #define QUIZVOCAB_H
 
 #include <iostream>
+#include <fstream>
+#include <filesystem>
 
 #include <QMainWindow>
 
@@ -25,6 +27,8 @@ private:
     std::string nameVocab;
     int numberOfColumn;
     vector<string> nameColumn;
+
+    void saveVocabWord();
 };
 
 #endif // QUIZVOCAB_H

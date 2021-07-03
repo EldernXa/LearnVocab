@@ -4,6 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <regex>
+#include <algorithm>
+#include <random>
 
 #include <QMainWindow>
 
@@ -28,6 +31,7 @@ private:
     int numberOfColumn;
     vector<string> nameColumn;
     QVector<QVector<QVector<string>*>*> listWord;
+    int numberOfWord;
 
     void saveVocabWord();
     void enableEvent();

@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>468</width>
-    <height>198</height>
+    <width>531</width>
+    <height>279</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>70</x>
       <y>30</y>
-      <width>319</width>
-      <height>81</height>
+      <width>401</width>
+      <height>151</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -28,6 +28,13 @@
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Nombre de mots que vous voulez dans le quiz</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelMaxWordAvailable">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
@@ -43,13 +50,26 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="errorInputNbOfWordLbl">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>190</y>
+      <width>399</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>468</width>
+     <width>531</width>
      <height>22</height>
     </rect>
    </property>

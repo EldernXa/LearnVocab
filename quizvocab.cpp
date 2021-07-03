@@ -12,6 +12,8 @@ QuizVocab::QuizVocab(string nameVocabToQuiz, QuizType quizType, QWidget *parent)
         nameVocab = nameVocabToQuiz;
         saveVocabWord();
         enableEvent();
+        ui->labelMaxWordAvailable->setText(tr("(Le nombre maximale permis est ") + QString::number(listWord.size()) + ")");
+        ui->errorInputNbOfWordLbl->setStyleSheet("QLabel {color:red;}");
     }
 }
 
@@ -44,10 +46,50 @@ void QuizVocab::saveVocabWord(){
 }
 
 void QuizVocab::saveNumberOfWord(){
-
+    ui->errorInputNbOfWordLbl->setText("");
+    if(ui->lineEditNumberOfWord->text().compare("")==0){
+        ui->errorInputNbOfWordLbl->setText(tr("Vous devez rentrer une valeur."));
+    }else{
+        if(!regex_match(ui->lineEditNumberOfWord->text().toStdString(), regex{"[+-]?[0-9]+"})){
+            ui->errorInputNbOfWordLbl->setText(tr("Vous devez rentrée une valeur."));
+        }else if(stoi(ui->lineEditNumberOfWord->text().toStdString())<1 ||
+                 stoi(ui->lineEditNumberOfWord->text().toStdString())>listWord.size()){
+            ui->errorInputNbOfWordLbl->setText(tr("La valeur minimal permis est 1 et\nla valeur maximale permise est ") + QString::number(listWord.size()));
+        }else{
+            numberOfWord = stoi(ui->lineEditNumberOfWord->text().toStdString());
+            auto rd = random_device{};
+            auto rng = default_random_engine{rd()};
+            shuffle(begin(listWord), end(listWord), rng);
+            cout << listWord.at(0)->at(0)->at(0) << endl;
+        }
+    }
 }
 
 QuizVocab::~QuizVocab()
 {
     delete ui;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

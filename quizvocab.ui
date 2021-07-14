@@ -44,7 +44,7 @@
      <item>
       <widget class="QPushButton" name="pushButtonToValidNumberOfWord">
        <property name="text">
-        <string>PushButton</string>
+        <string>Valider</string>
        </property>
       </widget>
      </item>

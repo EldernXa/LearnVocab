@@ -27,7 +27,10 @@ FORMS += \
     quizvocab.ui
 
 TRANSLATIONS += \
-    LearnVocab_fr_FR.ts
+    LearnVocab_fr_FR.ts \
+    LearnVocab_en_US.ts \
+    LearnVocab_jap_JAP.ts
+
 CONFIG += lrelease
 CONFIG += embed_translations
 

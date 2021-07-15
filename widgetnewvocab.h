@@ -14,6 +14,8 @@
 #include <QLineEdit>
 #include <QLabel>
 
+#include "widgetnewvocabsecondstep.h"
+
 using namespace std;
 
 namespace Ui {
@@ -30,10 +32,10 @@ public:
 
 private:
     void enableEventForFirstStep();
-//    void clearLayout(QLayout *layout);
-//    bool verifyLineEdit();
+    void clearLayout(QLayout *layout, bool deleteWidgets = true);
+    bool verifLineEdit();
 //    bool verifyInputWord();
-//    void saveColumnName();
+    void saveColumnName();
 //    void addingWord();
 //    void removeWord(int num);
 
@@ -62,7 +64,7 @@ private:
 
 private slots:
     void runFirstButton();
-//    void valideNameColumn();
+    void valideNameColumn();
 //    void saveWord();
 //    void finishVocab();
 };

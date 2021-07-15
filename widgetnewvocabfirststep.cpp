@@ -24,6 +24,10 @@ QLineEdit* WidgetNewVocabFirstStep::getLineEditNumberOfColumn(){
     return ui->lineEditNumberColumn;
 }
 
+QLabel* WidgetNewVocabFirstStep::getNameLabel(){
+    return ui->labelForName;
+}
+
 WidgetNewVocabFirstStep::~WidgetNewVocabFirstStep()
 {
     delete ui;

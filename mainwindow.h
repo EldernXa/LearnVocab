@@ -9,10 +9,12 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QWidget>
 
 #include "newvocab.h"
 #include "displayvocab.h"
 #include "quizvocab.h"
+#include "widgetmainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

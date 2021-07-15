@@ -9,11 +9,28 @@ MainWindow::MainWindow(QWidget *parent)
     ui->menuVocab->setEnabled(false);
     QWidget *scrollAreaContent = new QWidget;
     scrollAreaContent->setLayout(new QVBoxLayout);
+
+    ui->widget->getScrollArea()->setLayout(new QVBoxLayout);
     //ui->scrollArea->setLayout(new QVBoxLayout);
-    ui->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    ui->scrollArea->setWidgetResizable(true);
-    ui->scrollArea->setWidget(scrollAreaContent);
+    ui->widget->getScrollArea()->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->widget->getScrollArea()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    ui->widget->getScrollArea()->setWidgetResizable(true);
+    ui->widget->getScrollArea()->setWidget(scrollAreaContent);
+
+
+
+
+
+
+
+
+
+
+
+//    ui->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+//    ui->scrollArea->setWidgetResizable(true);
+//    ui->scrollArea->setWidget(scrollAreaContent);
     getVocab();
     enableEvent();
 }
@@ -27,7 +44,8 @@ void MainWindow::getVocab(){
             std::string newString = split(entry.path().generic_string(), '/').at(1);
             std::string lastString = split(newString, '.').at(0);
             pushButton->setText(QString::fromStdString(lastString));
-            ui->scrollArea->widget()->layout()->addWidget(pushButton);
+            ui->widget->getScrollArea()->layout()->addWidget(pushButton);
+            //ui->scrollArea->widget()->layout()->addWidget(pushButton);
             listButtonForVocab.push_back(pushButton);
             pushButton->setCheckable(true);
             connect(pushButton, &QPushButton::clicked, this, [this, pushButton]{clickButtonVocab(pushButton);});
@@ -61,7 +79,8 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 }
 
 void MainWindow::enableEvent(){
-    connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
+    connect(ui->widget->getButtonSaveNewVocab(), SIGNAL(clicked()), this, SLOT(newVocab()));
+    //connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
     connect(ui->actionDisplayList, SIGNAL(triggered()), this, SLOT(displayVocab()));
     connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
 }

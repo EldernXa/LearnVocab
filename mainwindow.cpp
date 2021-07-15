@@ -106,15 +106,16 @@ void MainWindow::newVocab(){
 }
 
 void MainWindow::displayVocab(){
-    //clearLayout(layout());
+    clearLayout(ui->widget->layout());
 
-    if(actualOtherWindow!=nullptr){
-        actualOtherWindow->close();
-        actualOtherWindow = nullptr;
-    }
-    DisplayVocab *displayVocab = new DisplayVocab(getNameVocab(), this);
-    displayVocab->show();
-    actualOtherWindow = displayVocab;
+    ui->widget->layout()->addWidget(new WidgetDisplayVocab(getNameVocab()));
+//    if(actualOtherWindow!=nullptr){
+//        actualOtherWindow->close();
+//        actualOtherWindow = nullptr;
+//    }
+//    DisplayVocab *displayVocab = new DisplayVocab(getNameVocab(), this);
+//    displayVocab->show();
+//    actualOtherWindow = displayVocab;
 }
 
 std::string MainWindow::getNameVocab(){

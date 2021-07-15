@@ -14,6 +14,7 @@ SOURCES += \
     mainwindow.cpp \
     newvocab.cpp \
     quizvocab.cpp \
+    widgetdisplayvocab.cpp \
     widgetmainwindow.cpp
 
 HEADERS += \
@@ -21,12 +22,14 @@ HEADERS += \
     mainwindow.h \
     newvocab.h \
     quizvocab.h \
+    widgetdisplayvocab.h \
     widgetmainwindow.h
 
 FORMS += \
     mainwindow.ui \
     newvocab.ui \
     quizvocab.ui \
+    widgetdisplayvocab.ui \
     widgetmainwindow.ui
 
 TRANSLATIONS += \

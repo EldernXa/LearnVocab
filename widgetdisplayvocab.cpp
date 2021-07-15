@@ -1,18 +1,17 @@
-#include "displayvocab.h"
+#include "widgetdisplayvocab.h"
+#include "ui_widgetdisplayvocab.h"
 
-DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow(parent)
+WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::WidgetDisplayVocab)
 {
+    ui->setupUi(this);
     nameVocabToDisplay = nameVocab;
-    scrollArea = new QScrollArea(this);
-    //this->setCentralWidget(scrollArea);
-    QWidget *scrollAreaContent = new QWidget;
-    //scrollAreaContent->setLayout(new QVBoxLayout);
-//    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-//    scrollArea->setWidgetResizable(true);
-    scrollArea->setWidget(scrollAreaContent);
-    //scrollArea->setFixedHeight(this->size().height());
-    //scrollArea->setFixedWidth(this->size().width());
+//    QWidget *scrollAreaContent = new QWidget;
+//    ui->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+//    ui->scrollArea->setWidgetResizable(true);
+//    ui->scrollArea->setWidget(scrollAreaContent);
 
     fileToDisplayVocab.open(nameVocab+".vocab", ios::in);
     string value;
@@ -22,11 +21,12 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
     nameColumns = split(value, ';');
 
     this->resize(numberOfColumn*WIDTH_LABEL + WIDTH_LABEL, 400);
-
-    QWidget *widgetForNameColumns = new QWidget(scrollAreaContent);
+    ui->widget->setLayout(new QVBoxLayout);
+    QWidget *widgetForNameColumns = new QWidget;
+    ui->widget->layout()->addWidget(widgetForNameColumns);
     QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumns);
     for(auto &nameColumn : nameColumns){
-        QLabel *lblNameColumn = new QLabel();
+        QLabel *lblNameColumn = new QLabel;
         lblNameColumn->setText(QString::fromStdString(nameColumn));
         lblNameColumn->setAlignment(Qt::AlignCenter);
         lblNameColumn->setFixedHeight(HEIGHT_LABEL);
@@ -34,16 +34,18 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
         layoutForNameColumns->addWidget(lblNameColumn);
     }
     lastHeight += HEIGHT_LABEL+1;
-    QFrame *frameVLine = new QFrame(scrollAreaContent);
+    QFrame *frameVLine = new QFrame;
+    ui->widget->layout()->addWidget(frameVLine);
     frameVLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
     frameVLine->setFrameShape(QFrame::HLine);
     frameVLine->move(0, lastHeight);
     while(getline(fileToDisplayVocab, value)){
         vector<string> valueToDisplay = split(value, ';');
-        QWidget *widgetForNameWord = new QWidget(scrollAreaContent);
+        QWidget *widgetForNameWord = new QWidget;
+        ui->widget->layout()->addWidget(widgetForNameWord);
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
         widgetForNameWord->move(0, lastHeight);
-        unsigned int multiply_value=1;
+        unsigned int multiply_value = 1;
         for(auto &nameWord : valueToDisplay){
             vector<string> differentValueForAWord = split(nameWord, ',');
             if(differentValueForAWord.size()>1){
@@ -72,42 +74,27 @@ DisplayVocab::DisplayVocab(std::string nameVocab, QWidget *parent) : QMainWindow
             }
         }
         lastHeight+=(HEIGHT_LABEL*multiply_value);
-        QFrame *frameLine = new QFrame(scrollAreaContent);
+        QFrame *frameLine = new QFrame;
+        ui->widget->layout()->addWidget(frameLine);
         frameLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
         frameLine->setFrameShape(QFrame::HLine);
         frameLine->move(0, lastHeight);
     }
     fileToDisplayVocab.close();
+
 }
 
-void DisplayVocab::resizeEvent(QResizeEvent *qresizeEvent){
-    scrollArea->setFixedHeight(this->height());
-    scrollArea->setFixedWidth(this->width());
-    scrollArea->widget()->setFixedHeight(this->height()+(lastHeight-this->height()+20));
-    scrollArea->widget()->setFixedWidth(this->width());
-    QWidget::resizeEvent(qresizeEvent);
+std::vector<std::string> WidgetDisplayVocab::split(const std::string& s, char delimiter){
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream tokenStream(s);
+    while(std::getline(tokenStream, token, delimiter)){
+        tokens.push_back(token);
+    }
+    return tokens;
 }
 
-std::vector<std::string> DisplayVocab::split(const std::string& s, char delimiter)
+WidgetDisplayVocab::~WidgetDisplayVocab()
 {
-   std::vector<std::string> tokens;
-   std::string token;
-   std::istringstream tokenStream(s);
-   while (std::getline(tokenStream, token, delimiter))
-   {
-      tokens.push_back(token);
-   }
-   return tokens;
+    delete ui;
 }
-
-
-
-
-
-
-
-
-
-
-
-

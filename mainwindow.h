@@ -16,6 +16,7 @@
 #include "quizvocab.h"
 #include "widgetmainwindow.h"
 #include "widgetdisplayvocab.h"
+#include "widgetnewvocab.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

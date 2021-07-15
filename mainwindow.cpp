@@ -96,13 +96,18 @@ void MainWindow::quizVocab(){
 }
 
 void MainWindow::newVocab(){
-    if(actualOtherWindow!=nullptr){
-        actualOtherWindow->close();
-        actualOtherWindow = nullptr;
-    }
-    NewVocab *newVocab = new NewVocab(this);
-    newVocab->show();
-    actualOtherWindow = newVocab;
+    clearLayout(ui->widget->layout());
+
+    ui->widget->layout()->addWidget(new WidgetNewVocab);
+    ui->menuVocab->setEnabled(false);
+
+//    if(actualOtherWindow!=nullptr){
+//        actualOtherWindow->close();
+//        actualOtherWindow = nullptr;
+//    }
+//    NewVocab *newVocab = new NewVocab(this);
+//    newVocab->show();
+//    actualOtherWindow = newVocab;
 }
 
 void MainWindow::displayVocab(){

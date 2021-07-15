@@ -106,6 +106,8 @@ void MainWindow::newVocab(){
 }
 
 void MainWindow::displayVocab(){
+    //clearLayout(layout());
+
     if(actualOtherWindow!=nullptr){
         actualOtherWindow->close();
         actualOtherWindow = nullptr;
@@ -122,6 +124,21 @@ std::string MainWindow::getNameVocab(){
         }
     }
     return nullptr;
+}
+
+void MainWindow::clearLayout(QLayout* layout, bool deleteWidgets)
+{
+    while (QLayoutItem* item = layout->takeAt(0))
+    {
+        if (deleteWidgets)
+        {
+            if (QWidget* widget = item->widget())
+                widget->deleteLater();
+        }
+        if (QLayout* childLayout = item->layout())
+            clearLayout(childLayout, deleteWidgets);
+        delete item;
+    }
 }
 
 MainWindow::~MainWindow()

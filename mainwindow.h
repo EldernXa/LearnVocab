@@ -34,6 +34,7 @@ private:
     void clickButtonVocab(QPushButton *);
     std::vector<std::string> split(const std::string&, char);
     std::string getNameVocab();
+    void clearLayout(QLayout*, bool deleteWidgets = true);
 
     Ui::MainWindow *ui;
     std::vector<QPushButton*> listButtonForVocab;

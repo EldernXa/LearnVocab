@@ -109,6 +109,7 @@ void MainWindow::displayVocab(){
     clearLayout(ui->widget->layout());
 
     ui->widget->layout()->addWidget(new WidgetDisplayVocab(getNameVocab()));
+    ui->menuVocab->setEnabled(false);
 //    if(actualOtherWindow!=nullptr){
 //        actualOtherWindow->close();
 //        actualOtherWindow = nullptr;

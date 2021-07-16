@@ -32,7 +32,7 @@ void WidgetNewVocab::runFirstButton(){
                 ui->widget_2->getLabelError()->setText(tr("La valeur maximum requise est de 4."));
             }
             else{
-                nameVocab = ui->widget_2->getNameLabel()->text().toStdString();
+                nameVocab = ui->widget_2->getLineEditForName()->text().toStdString();
                 numberOfColumn = ui->widget_2->getLineEditNumberOfColumn()->text().toInt();
                 clearLayout(ui->widget_2->layout());
                 WidgetNewVocabSecondStep *widgetSecondStep = new WidgetNewVocabSecondStep;

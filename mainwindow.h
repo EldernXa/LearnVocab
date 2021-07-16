@@ -32,7 +32,7 @@ public:
 
 private:
     void enableEvent();
-    void getVocab();
+    void getVocab(QScrollArea*);
     void clickButtonVocab(QPushButton *);
     std::vector<std::string> split(const std::string&, char);
     std::string getNameVocab();

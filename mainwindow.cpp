@@ -18,24 +18,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->widget->getScrollArea()->setWidget(scrollAreaContent);
 
 
-
-
-
-
-
-
-
-
-
 //    ui->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 //    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 //    ui->scrollArea->setWidgetResizable(true);
 //    ui->scrollArea->setWidget(scrollAreaContent);
-    getVocab();
+    getVocab(ui->widget->getScrollArea());
     enableEvent();
 }
 
-void MainWindow::getVocab(){
+void MainWindow::getVocab(QScrollArea *scrollArea){
     std::set<std::filesystem::path> sorted_by_name;
     for (const auto & entry : std::filesystem::directory_iterator("./")){
         std::vector<std::string> list = split(entry.path().generic_string(), '.');
@@ -44,7 +35,7 @@ void MainWindow::getVocab(){
             std::string newString = split(entry.path().generic_string(), '/').at(1);
             std::string lastString = split(newString, '.').at(0);
             pushButton->setText(QString::fromStdString(lastString));
-            ui->widget->getScrollArea()->layout()->addWidget(pushButton);
+            scrollArea->layout()->addWidget(pushButton);
             //ui->scrollArea->widget()->layout()->addWidget(pushButton);
             listButtonForVocab.push_back(pushButton);
             pushButton->setCheckable(true);
@@ -129,7 +120,20 @@ void MainWindow::displayVocab(){
 }
 
 void MainWindow::restoreMainWidget(){
-    cout << "okok" << endl;
+    clearLayout(ui->widget->layout());
+    WidgetMainWindow *widgetMainWindow = new WidgetMainWindow;
+    ui->widget->layout()->addWidget(widgetMainWindow);
+
+    QWidget *scrollAreaContent = new QWidget;
+    scrollAreaContent->setLayout(new QVBoxLayout);
+
+    widgetMainWindow->getScrollArea()->setLayout(new QVBoxLayout);
+    widgetMainWindow->getScrollArea()->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    widgetMainWindow->getScrollArea()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    widgetMainWindow->getScrollArea()->setWidgetResizable(true);
+    widgetMainWindow->getScrollArea()->setWidget(scrollAreaContent);
+
+    getVocab(widgetMainWindow->getScrollArea());
 }
 
 std::string MainWindow::getNameVocab(){

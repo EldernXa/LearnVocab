@@ -46,5 +46,6 @@ private slots :
     void newVocab();
     void displayVocab();
     void quizVocab();
+    void restoreMainWidget();
 };
 #endif // MAINWINDOW_H

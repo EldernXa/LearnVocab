@@ -134,6 +134,7 @@ void WidgetNewVocab::finishVocab(){
         }
     }
     fileToSaveVocab.close();
+    this->setAttribute(Qt::WA_DeleteOnClose);
     this->close();
 }
 

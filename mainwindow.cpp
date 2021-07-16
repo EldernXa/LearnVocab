@@ -96,10 +96,14 @@ void MainWindow::quizVocab(){
 }
 
 void MainWindow::newVocab(){
+    // TODO find a way to delete class after uses.
     clearLayout(ui->widget->layout());
 
-    ui->widget->layout()->addWidget(new WidgetNewVocab);
+    WidgetNewVocab *widgetNewVocab = new WidgetNewVocab;
+    ui->widget->layout()->addWidget(widgetNewVocab);
     ui->menuVocab->setEnabled(false);
+    connect(widgetNewVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
+
 
 //    if(actualOtherWindow!=nullptr){
 //        actualOtherWindow->close();
@@ -122,6 +126,10 @@ void MainWindow::displayVocab(){
 //    DisplayVocab *displayVocab = new DisplayVocab(getNameVocab(), this);
 //    displayVocab->show();
 //    actualOtherWindow = displayVocab;
+}
+
+void MainWindow::restoreMainWidget(){
+    cout << "okok" << endl;
 }
 
 std::string MainWindow::getNameVocab(){

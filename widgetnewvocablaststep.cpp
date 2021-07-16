@@ -24,6 +24,21 @@ QHBoxLayout* WidgetNewVocabLastStep::getLayoutForRemovingBtn(){
     return ui->layoutRemovingBtn;
 }
 
+QPushButton* WidgetNewVocabLastStep::getBtnAddWord(){
+    return ui->btnAddWord;
+}
+
+QPushButton* WidgetNewVocabLastStep::getConfirmBtn(){
+    return ui->validBtn;
+}
+
+QLabel* WidgetNewVocabLastStep::getLblLastWord(){
+    return ui->lblLastWord;
+}
+
+QLabel* WidgetNewVocabLastStep::getLblError(){
+    return ui->lblError;
+}
 
 
 

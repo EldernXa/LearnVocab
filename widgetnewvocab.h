@@ -37,11 +37,11 @@ private:
     bool verifLineEdit();
     bool verifyInputWord();
     void saveColumnName();
-    void addingWord();
+    void addingWord(int num);
     void removeWord(int num);
     void startLastStep();
 
-    QPushButton *finishBuutton = nullptr;
+    QPushButton *finishButton = nullptr;
     vector<QLineEdit*> listLineEdit;
     vector<string> listNameColumn;
     vector<vector<QLineEdit *>*> listLineEditForWord;
@@ -67,8 +67,8 @@ private:
 private slots:
     void runFirstButton();
     void valideNameColumn();
-    //void saveWord();
-    //void finishVocab();
+    void saveWord();
+    void finishVocab();
 };
 
 

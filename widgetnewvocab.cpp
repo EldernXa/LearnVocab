@@ -2,6 +2,7 @@
 #include "ui_widgetnewvocab.h"
 
 // TODO verify if the vocab doesn't actually exist.
+// TODO add qlineedit in the start and set their visible attribute to false.
 
 WidgetNewVocab::WidgetNewVocab(QWidget *parent) :
     QWidget(parent),
@@ -103,9 +104,105 @@ void WidgetNewVocab::startLastStep(){
         buttonRemoveWord->setText("-");
         widgetLastStep->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
         listQPushButtonRemove.push_back(buttonRemoveWord);
+
+        connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
+        connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
     }
+    connect(widgetLastStep->getBtnAddWord(), SIGNAL(clicked()), this, SLOT(saveWord()));
+
+    finishButton = widgetLastStep->getConfirmBtn();
+    finishButton->setText(tr("Terminer le vocabulaire '%1'").arg(QString::fromStdString(nameVocab)));
+    finishButton->setVisible(false);
+    connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
+
+    lblLastWord = widgetLastStep->getLblLastWord();
+    errorInsertingWord = widgetLastStep->getLblError();
+
 
     ui->widget_2->layout()->addWidget(widgetLastStep);
+}
+
+void WidgetNewVocab::finishVocab(){
+    for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size();indexForVect++){
+        vector<QLineEdit *>::iterator it;
+        unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
+        for(it = listLineEditForWord.at(indexForVect)->end()-1;
+            it>=listLineEditForWord.at(indexForVect)->begin();it--){
+            delete listLineEditForWord.at(indexForVect)->at(indexForLineEdit);
+            listLineEditForWord.at(indexForVect)->erase(it);
+            indexForLineEdit--;
+        }
+    }
+    fileToSaveVocab.close();
+    this->close();
+}
+
+void WidgetNewVocab::saveWord(){
+    if(verifyInputWord()){
+        lblLastWord->setText(tr("Le dernier mot sauvegardée contenait le mot : %1.").arg(listLineEditForWord.at(0)->at(0)->text()));
+        for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size(); indexForVect++){
+            for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
+                fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
+                if(indexForLineEdit < listLineEditForWord.at(indexForVect)->size()-1){
+                    fileToSaveVocab<<",";
+                }
+            }
+            if(indexForVect<listLineEditForWord.size()-1){
+                fileToSaveVocab<<";";
+            }else{
+                fileToSaveVocab << endl;
+            }
+        }
+
+        for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size(); indexForVect++){
+            vector<QLineEdit*>::iterator it;
+            unsigned int indexForLineEdit = listLineEditForWord.at(indexForVect)->size()-1;
+            for(it = listLineEditForWord.at(indexForVect)->end()-1;
+                it>= listLineEditForWord.at(indexForVect)->begin()+1; it--){
+                delete listLineEditForWord.at(indexForVect)->at(indexForLineEdit);
+                listLineEditForWord.at(indexForVect)->erase(it);
+                indexForLineEdit--;
+            }
+            listLineEditForWord.at(indexForVect)->at(0)->clear();
+        }
+
+        finishButton->setVisible(true);
+        errorInsertingWord->setText("");
+    }else{
+        errorInsertingWord->setText(tr("Vous n'avez pas remplis tous les champs de texte."));
+    }
+}
+
+bool WidgetNewVocab::verifyInputWord(){
+    for(auto *var : listLineEditForWord){
+        for(auto *lineEdit: *var){
+            if(lineEdit->text() ==""){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void WidgetNewVocab::addingWord(int num){
+    QLineEdit *newLineEdit = new QLineEdit;
+    listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
+    listLineEditForWord.at(num)->push_back(newLineEdit);
+
+    listQPushButtonRemove.at(num)->setEnabled(true);
+    if(listLineEditForWord.at(num)->size()==LIMIT_NUMBER_WORD){
+        listQPushButtonAdd.at(num)->setEnabled(false);
+    }
+}
+
+void WidgetNewVocab::removeWord(int num){
+    delete listLineEditForWord.at(num)->at(listLineEditForWord.at(num)->size()-1);
+    listLineEditForWord.at(num)->erase(listLineEditForWord.at(num)->end()-1);
+
+    listQPushButtonAdd.at(num)->setEnabled(true);
+    if(listLineEditForWord.at(num)->size()==1){
+        listQPushButtonRemove.at(num)->setEnabled(false);
+    }
 }
 
 void WidgetNewVocab::saveColumnName(){

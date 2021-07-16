@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QHBoxLayout>
+#include <QPushButton>
+#include <QLabel>
 
 namespace Ui {
 class WidgetNewVocabLastStep;
@@ -20,6 +22,10 @@ public:
     QHBoxLayout* getLayoutForNameColumn();
     QHBoxLayout* getLayoutForQLineEdit();
     QHBoxLayout* getLayoutForRemovingBtn();
+    QPushButton* getBtnAddWord();
+    QPushButton* getConfirmBtn();
+    QLabel* getLblLastWord();
+    QLabel* getLblError();
 
 private:
     Ui::WidgetNewVocabLastStep *ui;

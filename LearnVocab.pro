@@ -18,6 +18,7 @@ SOURCES += \
     widgetmainwindow.cpp \
     widgetnewvocab.cpp \
     widgetnewvocabfirststep.cpp \
+    widgetnewvocablaststep.cpp \
     widgetnewvocabsecondstep.cpp
 
 HEADERS += \
@@ -29,6 +30,7 @@ HEADERS += \
     widgetmainwindow.h \
     widgetnewvocab.h \
     widgetnewvocabfirststep.h \
+    widgetnewvocablaststep.h \
     widgetnewvocabsecondstep.h
 
 FORMS += \
@@ -39,6 +41,7 @@ FORMS += \
     widgetmainwindow.ui \
     widgetnewvocab.ui \
     widgetnewvocabfirststep.ui \
+    widgetnewvocablaststep.ui \
     widgetnewvocabsecondstep.ui
 
 TRANSLATIONS += \

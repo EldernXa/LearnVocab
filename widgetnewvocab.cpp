@@ -67,8 +67,45 @@ void WidgetNewVocab::valideNameColumn(){
         }
         fileToSaveVocab << endl;
 
+        startLastStep();
+
     }
 
+}
+
+void WidgetNewVocab::startLastStep(){
+    clearLayout(ui->widget_2->layout());
+
+    WidgetNewVocabLastStep *widgetLastStep = new WidgetNewVocabLastStep;
+
+    for(unsigned int i=0; i<listNameColumn.size(); i++){
+
+        QPushButton *buttonAddWord = new QPushButton;
+        buttonAddWord->setText("+");
+        widgetLastStep->getLayoutForAddingBtn()->addWidget(buttonAddWord);
+        listQPushButtonAdd.push_back(buttonAddWord);
+
+        QLabel *lblNameColumn = new QLabel;
+        lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
+        widgetLastStep->getLayoutForNameColumn()->addWidget(lblNameColumn);
+
+        QVBoxLayout *hboxLayoutForListWord = new QVBoxLayout;
+        listVBoxLayoutForListWord.push_back(hboxLayoutForListWord);
+        QLineEdit *newLineEdit = new QLineEdit;
+        hboxLayoutForListWord->addWidget(newLineEdit);
+        listLineEditForWord.push_back(new vector<QLineEdit*>());
+        listLineEditForWord.at(i)->push_back(newLineEdit);
+
+        widgetLastStep->getLayoutForQLineEdit()->addLayout(hboxLayoutForListWord);
+
+        QPushButton *buttonRemoveWord = new QPushButton;
+        buttonRemoveWord->setEnabled(false);
+        buttonRemoveWord->setText("-");
+        widgetLastStep->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
+        listQPushButtonRemove.push_back(buttonRemoveWord);
+    }
+
+    ui->widget_2->layout()->addWidget(widgetLastStep);
 }
 
 void WidgetNewVocab::saveColumnName(){

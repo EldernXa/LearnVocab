@@ -15,6 +15,7 @@
 #include <QLabel>
 
 #include "widgetnewvocabsecondstep.h"
+#include "widgetnewvocablaststep.h"
 
 using namespace std;
 
@@ -34,15 +35,16 @@ private:
     void enableEventForFirstStep();
     void clearLayout(QLayout *layout, bool deleteWidgets = true);
     bool verifLineEdit();
-//    bool verifyInputWord();
+    bool verifyInputWord();
     void saveColumnName();
-//    void addingWord();
-//    void removeWord(int num);
+    void addingWord();
+    void removeWord(int num);
+    void startLastStep();
 
     QPushButton *finishBuutton = nullptr;
     vector<QLineEdit*> listLineEdit;
     vector<string> listNameColumn;
-    vector<vector<QLineEdit *>> listLineEditForWord;
+    vector<vector<QLineEdit *>*> listLineEditForWord;
     vector<QVBoxLayout*> listVBoxLayoutForListWord;
     vector<QPushButton*> listQPushButtonAdd;
     vector<QPushButton*> listQPushButtonRemove;
@@ -65,8 +67,8 @@ private:
 private slots:
     void runFirstButton();
     void valideNameColumn();
-//    void saveWord();
-//    void finishVocab();
+    //void saveWord();
+    //void finishVocab();
 };
 
 

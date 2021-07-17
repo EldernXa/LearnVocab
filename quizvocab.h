@@ -21,7 +21,7 @@ class QuizVocab : public QMainWindow
     Q_OBJECT
 
 public:
-    enum QuizType {randomNWord, wordNotKnow};
+    enum QuizType {randomNWord, NFirstwordNotKnow};
     explicit QuizVocab(std::string, QuizType, QWidget *parent = nullptr);
     ~QuizVocab();
 

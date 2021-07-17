@@ -77,13 +77,18 @@ void MainWindow::enableEvent(){
 }
 
 void MainWindow::quizVocab(){
-    if(actualOtherWindow!=nullptr){
-        actualOtherWindow->close();
-        actualOtherWindow = nullptr;
-    }
-    QuizVocab * quizVocab = new QuizVocab(getNameVocab(), QuizVocab::QuizType::randomNWord, this);
-    quizVocab->show();
-    actualOtherWindow = quizVocab;
+//    if(actualOtherWindow!=nullptr){
+//        actualOtherWindow->close();
+//        actualOtherWindow = nullptr;
+//    }
+//    QuizVocab * quizVocab = new QuizVocab(getNameVocab(), QuizVocab::QuizType::randomNWord, this);
+//    quizVocab->show();
+//    actualOtherWindow = quizVocab;
+    clearLayout(ui->widget->layout());
+
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::randomNWord);
+    ui->widget->layout()->addWidget(widgetQuizVocab);
+    ui->menuVocab->setEnabled(false);
 }
 
 void MainWindow::newVocab(){

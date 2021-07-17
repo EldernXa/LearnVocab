@@ -19,7 +19,10 @@ SOURCES += \
     widgetnewvocab.cpp \
     widgetnewvocabfirststep.cpp \
     widgetnewvocablaststep.cpp \
-    widgetnewvocabsecondstep.cpp
+    widgetnewvocabsecondstep.cpp \
+    widgetquizvocab.cpp \
+    widgetquizvocabinitstep.cpp \
+    widgetquizvocablaststep.cpp
 
 HEADERS += \
     displayvocab.h \
@@ -31,7 +34,10 @@ HEADERS += \
     widgetnewvocab.h \
     widgetnewvocabfirststep.h \
     widgetnewvocablaststep.h \
-    widgetnewvocabsecondstep.h
+    widgetnewvocabsecondstep.h \
+    widgetquizvocab.h \
+    widgetquizvocabinitstep.h \
+    widgetquizvocablaststep.h
 
 FORMS += \
     mainwindow.ui \
@@ -42,7 +48,10 @@ FORMS += \
     widgetnewvocab.ui \
     widgetnewvocabfirststep.ui \
     widgetnewvocablaststep.ui \
-    widgetnewvocabsecondstep.ui
+    widgetnewvocabsecondstep.ui \
+    widgetquizvocab.ui \
+    widgetquizvocabinitstep.ui \
+    widgetquizvocablaststep.ui
 
 TRANSLATIONS += \
     LearnVocab_fr_FR.ts \

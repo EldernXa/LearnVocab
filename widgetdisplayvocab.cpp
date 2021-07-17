@@ -29,8 +29,8 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         QLabel *lblNameColumn = new QLabel;
         lblNameColumn->setText(QString::fromStdString(nameColumn));
         lblNameColumn->setAlignment(Qt::AlignCenter);
-        lblNameColumn->setFixedHeight(HEIGHT_LABEL);
-        lblNameColumn->setFixedWidth(WIDTH_LABEL);
+        //lblNameColumn->setFixedHeight(HEIGHT_LABEL);
+        //lblNameColumn->setFixedWidth(WIDTH_LABEL);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
     lastHeight += HEIGHT_LABEL+1;

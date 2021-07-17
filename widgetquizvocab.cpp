@@ -67,7 +67,7 @@ void WidgetQuizVocab::startingQuiz(){
     clearLayout(ui->widget->layout());
     WidgetQuizVocabLastStep* widgetQuizLastStep = new WidgetQuizVocabLastStep;
     srand(time(NULL));
-    int randNum = rand()%(listWord.at(actualWord)->size()-0 + 1) + 0;
+    int randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
     for(unsigned int i = 0; i< nameColumn.size();i++){
         QLabel* lbl = new QLabel;
         lbl->setText(QString::fromStdString(nameColumn.at(i)));
@@ -75,6 +75,7 @@ void WidgetQuizVocab::startingQuiz(){
         lbl->setFixedWidth(200);
         widgetQuizLastStep->getLayoutNameColumn()->addWidget(lbl);
     }
+    cout << randNum << endl;
     QHBoxLayout* vBoxLayout = new QHBoxLayout;
     for(int i=0; i<listWord.at(actualWord)->size();i++){
         QVBoxLayout *layout = new QVBoxLayout;

@@ -167,7 +167,7 @@ void MainWindow::clearLayout(QLayout* layout, bool deleteWidgets)
 
 MainWindow::~MainWindow()
 {
-    delete actualOtherWindow;
+    //delete actualOtherWindow;
     delete ui;
 }
 

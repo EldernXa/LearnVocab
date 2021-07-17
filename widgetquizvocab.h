@@ -9,6 +9,7 @@
 #include <random>
 
 #include <QWidget>
+#include <QLineEdit>
 
 #include "widgetquizvocablaststep.h"
 
@@ -29,10 +30,13 @@ public:
 
 private:
     Ui::WidgetQuizVocab *ui;
+    WidgetQuizVocabLastStep *widgetQuizLastStep;
     string nameVocab;
     int numberOfColumn;
+    int randNum;
     vector<string> nameColumn;
     QVector<QVector<QVector<string>*>*> listWord;
+    vector<vector<QLineEdit*>*> listLineEdit;
     int numberOfWord = 0;
     int actualWord=0;
 
@@ -43,6 +47,7 @@ private:
 
 private slots:
     void saveNumberOfWord();
+    void correctVocab();
 };
 
 #endif // WIDGETQUIZVOCAB_H

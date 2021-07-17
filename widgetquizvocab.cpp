@@ -65,9 +65,9 @@ void WidgetQuizVocab::saveNumberOfWord(){
 
 void WidgetQuizVocab::startingQuiz(){
     clearLayout(ui->widget->layout());
-    WidgetQuizVocabLastStep* widgetQuizLastStep = new WidgetQuizVocabLastStep;
+    widgetQuizLastStep = new WidgetQuizVocabLastStep;
     srand(time(NULL));
-    int randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
+    randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
     for(unsigned int i = 0; i< nameColumn.size();i++){
         QLabel* lbl = new QLabel;
         lbl->setText(QString::fromStdString(nameColumn.at(i)));
@@ -75,10 +75,13 @@ void WidgetQuizVocab::startingQuiz(){
         lbl->setFixedWidth(200);
         widgetQuizLastStep->getLayoutNameColumn()->addWidget(lbl);
     }
-    cout << randNum << endl;
+
     QHBoxLayout* vBoxLayout = new QHBoxLayout;
     for(int i=0; i<listWord.at(actualWord)->size();i++){
         QVBoxLayout *layout = new QVBoxLayout;
+        if(i!=randNum){
+            listLineEdit.push_back(new vector<QLineEdit*>);
+        }
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
@@ -89,6 +92,7 @@ void WidgetQuizVocab::startingQuiz(){
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
                 lineEdit->setFixedWidth(200);
+                listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
         }
@@ -97,6 +101,40 @@ void WidgetQuizVocab::startingQuiz(){
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
     widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(listWord.size()));
     ui->widget->layout()->addWidget(widgetQuizLastStep);
+
+    connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
+}
+
+void WidgetQuizVocab::correctVocab(){
+    clearLayout(widgetQuizLastStep->getLayoutForQLineEdit());
+    widgetQuizLastStep->getConfirmButton()->setEnabled(false);
+    widgetQuizLastStep->getNextWordBtn()->setEnabled(true);
+    int num=0;
+    QHBoxLayout* vBoxLayout = new QHBoxLayout;
+    for(int i = 0; i<listWord.at(actualWord)->size(); i++){
+        QVBoxLayout *layout = new QVBoxLayout;
+        for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
+            QLabel *lbl = new QLabel;
+            lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
+            lbl->setAlignment(Qt::AlignCenter);
+            lbl->setFixedWidth(200);
+
+            if(randNum != i){
+                if(listLineEdit.at(num)->at(j)->text().compare(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)))==0){
+                    lbl->setStyleSheet("QLabel {color:green;}");
+                }else{
+                    lbl->setStyleSheet("QLabel {color:red};");
+                }
+                num++;
+            }
+
+            layout->addWidget(lbl);
+        }
+        vBoxLayout->addLayout(layout);
+
+    }
+    widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
+
 }
 
 void WidgetQuizVocab::clearLayout(QLayout* layout, bool deleteWidgets){
@@ -115,6 +153,7 @@ void WidgetQuizVocab::clearLayout(QLayout* layout, bool deleteWidgets){
 
 WidgetQuizVocab::~WidgetQuizVocab()
 {
+    delete widgetQuizLastStep;
     delete ui;
 }
 

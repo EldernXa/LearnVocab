@@ -36,11 +36,12 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
     lastHeight += HEIGHT_LABEL+1;
     QFrame *frameVLine = new QFrame;
     ui->widget->layout()->addWidget(frameVLine);
-    frameVLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
+    //frameVLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
     frameVLine->setFrameShape(QFrame::HLine);
     frameVLine->move(0, lastHeight);
     while(getline(fileToDisplayVocab, value)){
-        vector<string> valueToDisplay = split(value, ';');
+        bool verifIsKnown = split(value, ':').size()>1;
+        vector<string> valueToDisplay = split(split(value, ':').at(0), ';');
         QWidget *widgetForNameWord = new QWidget;
         ui->widget->layout()->addWidget(widgetForNameWord);
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
@@ -59,8 +60,13 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
                     QLabel *lblNameWord = new QLabel;
                     lblNameWord->setAlignment(Qt::AlignCenter);
                     lblNameWord->setText(QString::fromStdString(word));
-                    lblNameWord->setFixedHeight(HEIGHT_LABEL);
-                    lblNameWord->setFixedWidth(WIDTH_LABEL);
+                    //lblNameWord->setFixedHeight(HEIGHT_LABEL);
+                    //lblNameWord->setFixedWidth(WIDTH_LABEL);
+                    if(verifIsKnown){
+                        lblNameWord->setStyleSheet("QLabel {color:green;}");
+                    }else{
+                        lblNameWord->setStyleSheet("QLabel {color:red;}");
+                    }
                     layoutForAWord->addWidget(lblNameWord);
                 }
                 layoutForNameWord->addWidget(widgetForAWord);
@@ -68,15 +74,20 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
                 QLabel *lblNameWord = new QLabel;
                 lblNameWord->setAlignment(Qt::AlignCenter);
                 lblNameWord->setText(QString::fromStdString(nameWord));
-                lblNameWord->setFixedHeight(HEIGHT_LABEL);
-                lblNameWord->setFixedWidth(WIDTH_LABEL);
+                //lblNameWord->setFixedHeight(HEIGHT_LABEL);
+                //lblNameWord->setFixedWidth(WIDTH_LABEL);
+                if(verifIsKnown){
+                    lblNameWord->setStyleSheet("QLabel {color:green;}");
+                }else{
+                    lblNameWord->setStyleSheet("QLabel {color:red;}");
+                }
                 layoutForNameWord->addWidget(lblNameWord);
             }
         }
         lastHeight+=(HEIGHT_LABEL*multiply_value);
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);
-        frameLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
+        //frameLine->setFixedWidth(numberOfColumn*WIDTH_LABEL);
         frameLine->setFrameShape(QFrame::HLine);
         frameLine->move(0, lastHeight);
     }

@@ -102,6 +102,7 @@ void WidgetQuizVocab::startingQuiz(){
     widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(listWord.size()));
     ui->widget->layout()->addWidget(widgetQuizLastStep);
 
+    // widgetQuizLastStep->getConfirmButton()->disconnect();
     connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
     connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(nextVocab()));
 }

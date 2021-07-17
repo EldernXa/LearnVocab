@@ -103,6 +103,41 @@ void WidgetQuizVocab::startingQuiz(){
     ui->widget->layout()->addWidget(widgetQuizLastStep);
 
     connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
+    connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(nextVocab()));
+}
+
+void WidgetQuizVocab::nextVocab(){
+    actualWord++;
+    clearLayout(widgetQuizLastStep->getLayoutForQLineEdit());
+    widgetQuizLastStep->getConfirmButton()->setEnabled(true);
+    widgetQuizLastStep->getNextWordBtn()->setEnabled(false);
+    listLineEdit.clear(); // TODO delete all widget inside instead of clear it.
+    srand(time(NULL));
+    randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
+    QHBoxLayout* vBoxLayout = new QHBoxLayout;
+    for(int i=0; i<listWord.at(actualWord)->size();i++){
+        QVBoxLayout* layout = new QVBoxLayout;
+        if(i!=randNum){
+            listLineEdit.push_back(new vector<QLineEdit*>);
+        }
+        for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
+            if(i==randNum){
+                QLabel *lbl = new QLabel;
+                lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
+                lbl->setAlignment(Qt::AlignCenter);
+                lbl->setFixedWidth(200);
+                layout->addWidget(lbl);
+            }else{
+                QLineEdit* lineEdit = new QLineEdit;
+                lineEdit->setFixedWidth(200);
+                listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
+                layout->addWidget(lineEdit);
+            }
+        }
+        vBoxLayout->addLayout(layout);
+    }
+    widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
+    widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(listWord.size()));
 }
 
 void WidgetQuizVocab::correctVocab(){

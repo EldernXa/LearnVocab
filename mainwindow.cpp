@@ -27,20 +27,22 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::getVocab(QScrollArea *scrollArea){
-    std::set<std::filesystem::path> sorted_by_name;
-    for (const auto & entry : std::filesystem::directory_iterator("./")){
-        std::vector<std::string> list = split(entry.path().generic_string(), '.');
-        if(list.at(list.size()-1).compare("vocab") == 0){
-            QPushButton *pushButton = new QPushButton;
-            std::string newString = split(entry.path().generic_string(), '/').at(1);
-            std::string lastString = split(newString, '.').at(0);
-            pushButton->setText(QString::fromStdString(lastString));
-            scrollArea->layout()->addWidget(pushButton);
-            //ui->scrollArea->widget()->layout()->addWidget(pushButton);
-            listButtonForVocab.push_back(pushButton);
-            pushButton->setCheckable(true);
-            connect(pushButton, &QPushButton::clicked, this, [this, pushButton]{clickButtonVocab(pushButton);});
+    DIR *dir;
+    struct dirent *ent;
+    if((dir = opendir("./")) != NULL){
+        while((ent = readdir(dir)) != NULL){
+            std::vector<std::string> list = split(ent->d_name, '.');
+            if(list.at(list.size()-1).compare("vocab") == 0){
+                QPushButton *pushButton = new QPushButton;
+                string lastString = split(ent->d_name, '.').at(0);
+                pushButton->setText(QString::fromStdString(lastString));
+                scrollArea->layout()->addWidget(pushButton);
+                listButtonForVocab.push_back(pushButton);
+                pushButton->setCheckable(true);
+                connect(pushButton, &QPushButton::clicked, this, [this, pushButton]{clickButtonVocab(pushButton);});
+            }
         }
+        closedir(dir);
     }
 }
 

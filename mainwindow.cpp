@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->menuVocab->setEnabled(false);
     QWidget *scrollAreaContent = new QWidget;
     scrollAreaContent->setLayout(new QVBoxLayout);
+    this->setWindowTitle(QString("LearnVocab (v.%1)").arg(QString::fromStdString(NUM_VERSION)));
 
     ui->widget->getScrollArea()->setLayout(new QVBoxLayout);
     //ui->scrollArea->setLayout(new QVBoxLayout);

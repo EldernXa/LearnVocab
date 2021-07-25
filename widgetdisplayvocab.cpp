@@ -8,7 +8,6 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
     ui->setupUi(this);
     nameVocabToDisplay = nameVocab;
     readerVocab = new ReaderVocab(nameVocab);
-    this->resize(readerVocab->getNumberOfColumns()*WIDTH_LABEL + WIDTH_LABEL, 400);
     ui->widget->setLayout(new QVBoxLayout);
     QWidget *widgetForNameColumns = new QWidget;
     ui->widget->layout()->addWidget(widgetForNameColumns);
@@ -19,11 +18,9 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         lblNameColumn->setAlignment(Qt::AlignCenter);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
-    lastHeight += HEIGHT_LABEL+1;
     QFrame *frameVLine = new QFrame;
     ui->widget->layout()->addWidget(frameVLine);
     frameVLine->setFrameShape(QFrame::HLine);
-    frameVLine->move(0, lastHeight);
 
     for (unsigned int i=0; i< readerVocab->getAllLineOfTheVocab().size(); i++){
         bool verifIsKnown = readerVocab->isLineVocabKnown(i);
@@ -31,7 +28,6 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         QWidget *widgetForNameWord = new QWidget;
         ui->widget->layout()->addWidget(widgetForNameWord);
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
-        widgetForNameWord->move(0, lastHeight);
         unsigned int multiply_value = 1;
         for(unsigned int j = 0; j<valueToDisplay.size(); j++){
             vector<string> differentValueForAWord = readerVocab->getWordSplitedFromLineSplited(i, j);
@@ -67,11 +63,9 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
                 layoutForNameWord->addWidget(lblNameWord);
             }
         }
-        lastHeight += (HEIGHT_LABEL*multiply_value);
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);
         frameLine->setFrameShape(QFrame::HLine);
-        frameLine->move(0, lastHeight);
     }
 }
 

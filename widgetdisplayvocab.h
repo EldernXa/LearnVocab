@@ -37,7 +37,6 @@ private:
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocabToDisplay;
-    int lastHeight = 0;
     const int WIDTH_LABEL = 150;
     const int HEIGHT_LABEL = 30;
     const int LIMIT_WIDGET = 5;

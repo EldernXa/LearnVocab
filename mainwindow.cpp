@@ -86,14 +86,18 @@ void MainWindow::newVocab(){
     WidgetNewVocab *widgetNewVocab = new WidgetNewVocab;
     ui->widget->layout()->addWidget(widgetNewVocab);
     ui->menuVocab->setEnabled(false);
+    listButtonForVocab.clear();
     connect(widgetNewVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 
 void MainWindow::displayVocab(){
     clearLayout(ui->widget->layout());
 
-    ui->widget->layout()->addWidget(new WidgetDisplayVocab(getNameVocab()));
+    WidgetDisplayVocab *widgetDisplayVocab = new WidgetDisplayVocab(getNameVocab());
+    ui->widget->layout()->addWidget(widgetDisplayVocab);
     ui->menuVocab->setEnabled(false);
+    listButtonForVocab.clear();
+    connect(widgetDisplayVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 
 void MainWindow::restoreMainWidget(){

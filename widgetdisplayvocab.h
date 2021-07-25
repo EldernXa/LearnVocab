@@ -27,6 +27,9 @@ public:
     explicit WidgetDisplayVocab(string nameVocab, QWidget *parent = nullptr);
     ~WidgetDisplayVocab();
 
+private slots:
+    void on_buttonBack_clicked();
+
 private:
     vector<string> split(const string&, char delimiter);
 

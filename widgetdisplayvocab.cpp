@@ -109,3 +109,10 @@ WidgetDisplayVocab::~WidgetDisplayVocab()
 {
     delete ui;
 }
+
+void WidgetDisplayVocab::on_buttonBack_clicked()
+{
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->close();
+}
+

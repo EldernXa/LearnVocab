@@ -13,6 +13,8 @@
 #include <QLabel>
 #include <QSpacerItem>
 
+#include "readervocab.h"
+
 using namespace std;
 
 namespace Ui {
@@ -33,17 +35,18 @@ private slots:
 private:
     vector<string> split(const string&, char delimiter);
 
+    ReaderVocab *readerVocab = nullptr;
     string nameVocabToDisplay;
-    int numberOfColumn;
+    //int numberOfColumn;
     int lastHeight = 0;
-    vector<string> nameColumns;
+    //vector<string> nameColumns;
     const int WIDTH_LABEL = 150;
     const int HEIGHT_LABEL = 30;
     const int LIMIT_WIDGET = 5;
     const int HEIGHT_WIDGET = 30 * LIMIT_WIDGET;
     QScrollArea *scrollArea;
 
-    fstream fileToDisplayVocab;
+    //fstream fileToDisplayVocab;
 
     Ui::WidgetDisplayVocab *ui;
 };

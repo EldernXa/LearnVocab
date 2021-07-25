@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    readervocab.cpp \
     widgetdisplayvocab.cpp \
     widgetmainwindow.cpp \
     widgetnewvocab.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
+    readervocab.h \
     widgetdisplayvocab.h \
     widgetmainwindow.h \
     widgetnewvocab.h \

@@ -66,6 +66,8 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);
         frameLine->setFrameShape(QFrame::HLine);
+        QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        ui->widget->layout()->addItem(itemSpacer);
     }
 }
 

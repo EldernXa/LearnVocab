@@ -12,17 +12,10 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle(QString("LearnVocab (v.%1)").arg(QString::fromStdString(NUM_VERSION)));
 
     ui->widget->getScrollArea()->setLayout(new QVBoxLayout);
-    //ui->scrollArea->setLayout(new QVBoxLayout);
     ui->widget->getScrollArea()->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->widget->getScrollArea()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->widget->getScrollArea()->setWidgetResizable(true);
     ui->widget->getScrollArea()->setWidget(scrollAreaContent);
-
-
-//    ui->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-//    ui->scrollArea->setWidgetResizable(true);
-//    ui->scrollArea->setWidget(scrollAreaContent);
     getVocab(ui->widget->getScrollArea());
     enableEvent();
 }
@@ -74,19 +67,11 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 
 void MainWindow::enableEvent(){
     connect(ui->widget->getButtonSaveNewVocab(), SIGNAL(clicked()), this, SLOT(newVocab()));
-    //connect(ui->saveNewVocab, SIGNAL(clicked()), this, SLOT(newVocab()));
     connect(ui->actionDisplayList, SIGNAL(triggered()), this, SLOT(displayVocab()));
     connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
 }
 
 void MainWindow::quizVocab(){
-//    if(actualOtherWindow!=nullptr){
-//        actualOtherWindow->close();
-//        actualOtherWindow = nullptr;
-//    }
-//    QuizVocab * quizVocab = new QuizVocab(getNameVocab(), QuizVocab::QuizType::randomNWord, this);
-//    quizVocab->show();
-//    actualOtherWindow = quizVocab;
     clearLayout(ui->widget->layout());
 
     WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::randomNWord);
@@ -102,15 +87,6 @@ void MainWindow::newVocab(){
     ui->widget->layout()->addWidget(widgetNewVocab);
     ui->menuVocab->setEnabled(false);
     connect(widgetNewVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
-
-
-//    if(actualOtherWindow!=nullptr){
-//        actualOtherWindow->close();
-//        actualOtherWindow = nullptr;
-//    }
-//    NewVocab *newVocab = new NewVocab(this);
-//    newVocab->show();
-//    actualOtherWindow = newVocab;
 }
 
 void MainWindow::displayVocab(){
@@ -118,13 +94,6 @@ void MainWindow::displayVocab(){
 
     ui->widget->layout()->addWidget(new WidgetDisplayVocab(getNameVocab()));
     ui->menuVocab->setEnabled(false);
-//    if(actualOtherWindow!=nullptr){
-//        actualOtherWindow->close();
-//        actualOtherWindow = nullptr;
-//    }
-//    DisplayVocab *displayVocab = new DisplayVocab(getNameVocab(), this);
-//    displayVocab->show();
-//    actualOtherWindow = displayVocab;
 }
 
 void MainWindow::restoreMainWidget(){
@@ -170,7 +139,6 @@ void MainWindow::clearLayout(QLayout* layout, bool deleteWidgets)
 
 MainWindow::~MainWindow()
 {
-    //delete actualOtherWindow;
     delete ui;
 }
 

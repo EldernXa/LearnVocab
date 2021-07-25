@@ -9,11 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    displayvocab.cpp \
     main.cpp \
     mainwindow.cpp \
-    newvocab.cpp \
-    quizvocab.cpp \
     widgetdisplayvocab.cpp \
     widgetmainwindow.cpp \
     widgetnewvocab.cpp \
@@ -25,10 +22,7 @@ SOURCES += \
     widgetquizvocablaststep.cpp
 
 HEADERS += \
-    displayvocab.h \
     mainwindow.h \
-    newvocab.h \
-    quizvocab.h \
     widgetdisplayvocab.h \
     widgetmainwindow.h \
     widgetnewvocab.h \
@@ -41,8 +35,6 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
-    newvocab.ui \
-    quizvocab.ui \
     widgetdisplayvocab.ui \
     widgetmainwindow.ui \
     widgetnewvocab.ui \

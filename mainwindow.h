@@ -11,9 +11,6 @@
 #include <QScrollArea>
 #include <QWidget>
 
-#include "newvocab.h"
-#include "displayvocab.h"
-#include "quizvocab.h"
 #include "widgetmainwindow.h"
 #include "widgetdisplayvocab.h"
 #include "widgetnewvocab.h"

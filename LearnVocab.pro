@@ -20,7 +20,8 @@ SOURCES += \
     widgetnewvocabsecondstep.cpp \
     widgetquizvocab.cpp \
     widgetquizvocabinitstep.cpp \
-    widgetquizvocablaststep.cpp
+    widgetquizvocablaststep.cpp \
+    writervocab.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -33,7 +34,8 @@ HEADERS += \
     widgetnewvocabsecondstep.h \
     widgetquizvocab.h \
     widgetquizvocabinitstep.h \
-    widgetquizvocablaststep.h
+    widgetquizvocablaststep.h \
+    writervocab.h
 
 FORMS += \
     mainwindow.ui \

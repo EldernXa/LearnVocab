@@ -57,16 +57,17 @@ void WidgetNewVocab::runFirstButton(){
 void WidgetNewVocab::valideNameColumn(){
 
     if(verifLineEdit()){
-        fileToSaveVocab.open(nameVocab+".vocab", ios::out);
+//        fileToSaveVocab.open(nameVocab+".vocab", ios::out);
         saveColumnName();
-        fileToSaveVocab << numberOfColumn << endl;
-        for(unsigned int i = 0; i<listNameColumn.size(); i++){
-            fileToSaveVocab << listNameColumn.at(i);
-            if(i<listNameColumn.size()-1){
-                fileToSaveVocab <<";";
-            }
-        }
-        fileToSaveVocab << endl;
+//        fileToSaveVocab << numberOfColumn << endl;
+//        for(unsigned int i = 0; i<listNameColumn.size(); i++){
+//            fileToSaveVocab << listNameColumn.at(i);
+//            if(i<listNameColumn.size()-1){
+//                fileToSaveVocab <<";";
+//            }
+//        }
+//        fileToSaveVocab << endl;
+        writerVocab = new WriterVocab(nameVocab, numberOfColumn, listNameColumn);
 
         startLastStep();
 
@@ -133,7 +134,9 @@ void WidgetNewVocab::finishVocab(){
             indexForLineEdit--;
         }
     }
-    fileToSaveVocab.close();
+    //fileToSaveVocab.close();
+    if(writerVocab != nullptr)
+        writerVocab->close();
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->close();
 }
@@ -141,19 +144,20 @@ void WidgetNewVocab::finishVocab(){
 void WidgetNewVocab::saveWord(){
     if(verifyInputWord()){
         lblLastWord->setText(tr("Le dernier mot sauvegardée contenait le mot : %1.").arg(listLineEditForWord.at(0)->at(0)->text()));
-        for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size(); indexForVect++){
-            for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
-                fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
-                if(indexForLineEdit < listLineEditForWord.at(indexForVect)->size()-1){
-                    fileToSaveVocab<<",";
-                }
-            }
-            if(indexForVect<listLineEditForWord.size()-1){
-                fileToSaveVocab<<";";
-            }else{
-                fileToSaveVocab << endl;
-            }
-        }
+        writerVocab->addLine(listLineEditForWord);
+//        for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size(); indexForVect++){
+//            for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect)->size(); indexForLineEdit++){
+//                fileToSaveVocab << listLineEditForWord.at(indexForVect)->at(indexForLineEdit)->text().toStdString();
+//                if(indexForLineEdit < listLineEditForWord.at(indexForVect)->size()-1){
+//                    fileToSaveVocab<<",";
+//                }
+//            }
+//            if(indexForVect<listLineEditForWord.size()-1){
+//                fileToSaveVocab<<";";
+//            }else{
+//                fileToSaveVocab << endl;
+//            }
+//        }
 
         for(unsigned int indexForVect=0; indexForVect<listLineEditForWord.size(); indexForVect++){
             vector<QLineEdit*>::iterator it;
@@ -243,6 +247,7 @@ void WidgetNewVocab::clearLayout(QLayout *layout, bool deleteWidgets){
 
 WidgetNewVocab::~WidgetNewVocab()
 {
+    finishVocab();
     delete ui;
 }
 

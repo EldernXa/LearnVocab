@@ -16,6 +16,7 @@
 
 #include "widgetnewvocabsecondstep.h"
 #include "widgetnewvocablaststep.h"
+#include "writervocab.h"
 
 using namespace std;
 
@@ -54,7 +55,8 @@ private:
     QLabel *errorLabelForNameColumn = new QLabel;
     QLabel *errorInsertingWord = nullptr;
     Ui::WidgetNewVocab *ui;
-    fstream fileToSaveVocab;
+    WriterVocab *writerVocab = nullptr;
+    //fstream fileToSaveVocab;
 
     QLabel *lblLastWord = nullptr;
 

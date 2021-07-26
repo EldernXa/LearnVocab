@@ -128,6 +128,7 @@ void WidgetQuizVocab::correctVocab(){
     widgetQuizLastStep->getNextWordBtn()->setEnabled(true);
     int num=0;
     QHBoxLayout* vBoxLayout = new QHBoxLayout;
+    bool verifRand = false;
     for(int i = 0; i<listWord.at(actualWord)->size(); i++){
         QVBoxLayout *layout = new QVBoxLayout;
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
@@ -137,13 +138,21 @@ void WidgetQuizVocab::correctVocab(){
             lbl->setFixedWidth(200);
 
             if(randNum != i){
-                //FIXME problem here who cause crash of the application.
+                int num;
+                if(!verifRand){
+                    num = i;
+                }
+                else{
+                    num = i-1;
+                }
                 if(listLineEdit.at(num)->at(j)->text().compare(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)))==0){
                     lbl->setStyleSheet("QLabel {color:green;}");
                 }else{
                     lbl->setStyleSheet("QLabel {color:red};");
                 }
                 num++;
+            }else{
+                verifRand = true;
             }
 
             layout->addWidget(lbl);

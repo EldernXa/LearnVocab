@@ -19,27 +19,29 @@ void WidgetQuizVocab::enableEvent(){
 }
 
 void WidgetQuizVocab::saveVocabWord(){
-    fstream fileVocabToRead;
-    fileVocabToRead.open(nameVocab+".vocab", ios::in);
-    string valueTempForRead;
-    getline(fileVocabToRead, valueTempForRead);
-    numberOfColumn = stoi(valueTempForRead);
-    getline(fileVocabToRead, valueTempForRead);
-    for(auto& str : QString::fromStdString(valueTempForRead).split(';')){
-        nameColumn.push_back(str.toStdString());
-    }
+//    fstream fileVocabToRead;
+//    fileVocabToRead.open(nameVocab+".vocab", ios::in);
+//    string valueTempForRead;
+//    getline(fileVocabToRead, valueTempForRead);
+//    numberOfColumn = stoi(valueTempForRead);
+//    getline(fileVocabToRead, valueTempForRead);
+//    for(auto& str : QString::fromStdString(valueTempForRead).split(';')){
+//        nameColumn.push_back(str.toStdString());
+//    }
 
-    while(getline(fileVocabToRead, valueTempForRead)){
-        listWord.append(new QVector<QVector<string>*>());
-        for(auto& qStr: QString::fromStdString(valueTempForRead).split(";")){
-            QStringList listStr = qStr.split(";");
-            listWord.at(listWord.size()-1)->append(new QVector<string>());
-            for(auto &s:listStr){
-                listWord.at(listWord.size()-1)->at(listWord.at(listWord.size()-1)->size()-1)->push_back(s.toStdString());
-            }
-        }
-    }
-    fileVocabToRead.close();
+//    while(getline(fileVocabToRead, valueTempForRead)){
+//        listWord.append(new QVector<QVector<string>*>());
+//        for(auto& qStr: QString::fromStdString(valueTempForRead).split(";")){
+//            QStringList listStr = qStr.split(",");
+//            listWord.at(listWord.size()-1)->append(new QVector<string>());
+//            for(auto &s:listStr){
+//                listWord.at(listWord.size()-1)->at(listWord.at(listWord.size()-1)->size()-1)->push_back(s.toStdString());
+//            }
+//        }
+//    }
+//    fileVocabToRead.close();
+    ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
+    listWord = readerVocab->getListWord();
 }
 
 void WidgetQuizVocab::saveNumberOfWord(){
@@ -156,6 +158,7 @@ void WidgetQuizVocab::correctVocab(){
             lbl->setFixedWidth(200);
 
             if(randNum != i){
+                //FIXME problem here who cause crash of the application.
                 if(listLineEdit.at(num)->at(j)->text().compare(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)))==0){
                     lbl->setStyleSheet("QLabel {color:green;}");
                 }else{

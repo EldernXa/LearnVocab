@@ -11,6 +11,14 @@ ReaderVocab::ReaderVocab(string nameVocab)
     nameColumns = split(value, ';');
     while(getline(fileVocab, value)){
         lineOfTheFile.push_back(value);
+        listWord.append(new QVector<QVector<string>*>());
+        for(auto& qStr: split(value, ';')){
+            vector<string> listStr = split(qStr, ',');
+            listWord.at(listWord.size()-1)->append(new QVector<string>());
+            for(auto &s:listStr){
+                listWord.at(listWord.size()-1)->at(listWord.at(listWord.size()-1)->size()-1)->push_back(s);
+            }
+        }
     }
 }
 
@@ -42,6 +50,10 @@ int ReaderVocab::getNumberOfColumns(){
 
 vector<string> ReaderVocab::getColumnName(){
     return nameColumns;
+}
+
+QVector<QVector<QVector<string>*>*> ReaderVocab::getListWord(){
+    return listWord;
 }
 
 vector<string> ReaderVocab::split(const std::string& s, char delimiter){

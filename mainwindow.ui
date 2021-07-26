@@ -50,7 +50,22 @@
     <addaction name="actionDeleteList"/>
     <addaction name="menuQuiz"/>
    </widget>
+   <widget class="QMenu" name="menuModification">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Modification</string>
+    </property>
+    <addaction name="actionAjouter_un_mot"/>
+    <addaction name="actionSupprimer_un_mot"/>
+    <addaction name="actionModifier_un_mot"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionSupprimer_un_vocabulaire_2"/>
+   </widget>
    <addaction name="menuVocab"/>
+   <addaction name="menuModification"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionRandomNWord">
@@ -71,6 +86,31 @@
   <action name="actionDeleteList">
    <property name="text">
     <string>Supprimer une liste</string>
+   </property>
+  </action>
+  <action name="actionAjouter_un_mot">
+   <property name="text">
+    <string>Ajouter un mot</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_un_mot">
+   <property name="text">
+    <string>Supprimer un mot</string>
+   </property>
+  </action>
+  <action name="actionModifier_un_mot">
+   <property name="text">
+    <string>Modifier un mot</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_un_vocabulaire">
+   <property name="text">
+    <string>Supprimer un vocabulaire</string>
+   </property>
+  </action>
+  <action name="actionSupprimer_un_vocabulaire_2">
+   <property name="text">
+    <string>Supprimer un vocabulaire</string>
    </property>
   </action>
  </widget>

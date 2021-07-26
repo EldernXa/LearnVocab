@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->menuVocab->setEnabled(false);
+    disablingMenu();
     QWidget *scrollAreaContent = new QWidget;
     scrollAreaContent->setLayout(new QVBoxLayout);
     this->setWindowTitle(QString("LearnVocab (v.%1)").arg(QString::fromStdString(NUM_VERSION)));
@@ -18,6 +18,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->widget->getScrollArea()->setWidget(scrollAreaContent);
     getVocab(ui->widget->getScrollArea());
     enableEvent();
+}
+
+void MainWindow::disablingMenu(){
+    ui->menuVocab->setEnabled(false);
+    ui->menuModification->setEnabled(false);
+}
+
+void MainWindow::enablingMenu(){
+    ui->menuVocab->setEnabled(true);
+    ui->menuModification->setEnabled(true);
 }
 
 void MainWindow::getVocab(QScrollArea *scrollArea){
@@ -47,9 +57,9 @@ void MainWindow::clickButtonVocab(QPushButton *pushButton){
                 btn->setChecked(false);
             }
         }
-        ui->menuVocab->setEnabled(true);
+        enablingMenu();
     }else{
-        ui->menuVocab->setEnabled(false);
+        disablingMenu();
     }
 }
 
@@ -76,7 +86,7 @@ void MainWindow::quizVocab(){
 
     WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::randomNWord);
     ui->widget->layout()->addWidget(widgetQuizVocab);
-    ui->menuVocab->setEnabled(false);
+    disablingMenu();
     connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 
@@ -86,7 +96,7 @@ void MainWindow::newVocab(){
 
     WidgetNewVocab *widgetNewVocab = new WidgetNewVocab;
     ui->widget->layout()->addWidget(widgetNewVocab);
-    ui->menuVocab->setEnabled(false);
+    disablingMenu();
     listButtonForVocab.clear();
     connect(widgetNewVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
@@ -96,7 +106,7 @@ void MainWindow::displayVocab(){
 
     WidgetDisplayVocab *widgetDisplayVocab = new WidgetDisplayVocab(getNameVocab());
     ui->widget->layout()->addWidget(widgetDisplayVocab);
-    ui->menuVocab->setEnabled(false);
+    disablingMenu();
     listButtonForVocab.clear();
     connect(widgetDisplayVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }

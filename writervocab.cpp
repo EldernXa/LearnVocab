@@ -7,6 +7,10 @@ WriterVocab::WriterVocab(string nameVocab, int numberOfColumns, vector<string> l
     writeListNameColumn(listNameColumn);
 }
 
+WriterVocab::WriterVocab(string nameVocab){
+    fileVocabToWrite.open(nameVocab+".vocab", ios::app);
+}
+
 void WriterVocab::writeNumberColumns(int numberOfColumns){
     fileVocabToWrite << numberOfColumns << endl;
 }

@@ -84,7 +84,11 @@ void MainWindow::enableEvent(){
 }
 
 void MainWindow::addWordIntoVocab(){
-    cout << "adding word" << endl;
+    clearLayout(ui->widget->layout());
+
+    AddWord *addWord = new AddWord(getNameVocab());
+    ui->widget->layout()->addWidget(addWord);
+    disablingMenu();
 }
 
 void MainWindow::removeWordFromVocab(){

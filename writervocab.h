@@ -13,6 +13,7 @@ class WriterVocab
 {
 public:
     WriterVocab(string, int, vector<string>);
+    WriterVocab(string);
     void addLine(vector<vector<QLineEdit*>*>);
     void close();
 

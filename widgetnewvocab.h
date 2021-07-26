@@ -32,6 +32,8 @@ public:
     explicit WidgetNewVocab(QWidget *parent = nullptr);
     ~WidgetNewVocab();
 
+    static const unsigned int LIMIT_NUMBER_WORD = 5;
+
 private:
     void enableEventForFirstStep();
     void clearLayout(QLayout *layout, bool deleteWidgets = true);
@@ -64,7 +66,6 @@ private:
     const int HEIGHT_LINE_EDIT_WORD = 40;
     const int WIDTH_WIDGET = 250;
     const int HEIGHT_WIDGET = 20;
-    const unsigned int LIMIT_NUMBER_WORD = 5;
 
 private slots:
     void runFirstButton();

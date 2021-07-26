@@ -80,16 +80,20 @@ void WidgetQuizVocab::startingQuiz(){
         vBoxLayout->addLayout(layout);
     }
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
-    widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(listWord.size()));
+    widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(numberOfWord));
     ui->widget->layout()->addWidget(widgetQuizLastStep);
 
-    // widgetQuizLastStep->getConfirmButton()->disconnect();
     connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
     connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(nextVocab()));
 }
 
 void WidgetQuizVocab::nextVocab(){
     actualWord++;
+    if(actualWord+1==numberOfWord){
+        widgetQuizLastStep->getNextWordBtn()->setText("Terminer");
+        widgetQuizLastStep->getNextWordBtn()->disconnect();
+        connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(finishQuiz()));
+    }
     clearLayout(widgetQuizLastStep->getLayoutForQLineEdit());
     widgetQuizLastStep->getConfirmButton()->setEnabled(true);
     widgetQuizLastStep->getNextWordBtn()->setEnabled(false);
@@ -119,14 +123,18 @@ void WidgetQuizVocab::nextVocab(){
         vBoxLayout->addLayout(layout);
     }
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
-    widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(listWord.size()));
+    widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(numberOfWord));
+}
+
+void WidgetQuizVocab::finishQuiz(){
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->close();
 }
 
 void WidgetQuizVocab::correctVocab(){
     clearLayout(widgetQuizLastStep->getLayoutForQLineEdit());
     widgetQuizLastStep->getConfirmButton()->setEnabled(false);
     widgetQuizLastStep->getNextWordBtn()->setEnabled(true);
-    int num=0;
     QHBoxLayout* vBoxLayout = new QHBoxLayout;
     bool verifRand = false;
     for(int i = 0; i<listWord.at(actualWord)->size(); i++){

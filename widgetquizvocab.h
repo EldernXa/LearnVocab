@@ -49,6 +49,7 @@ private slots:
     void saveNumberOfWord();
     void correctVocab();
     void nextVocab();
+    void finishQuiz();
 };
 
 #endif // WIDGETQUIZVOCAB_H

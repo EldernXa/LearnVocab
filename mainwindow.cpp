@@ -77,6 +77,7 @@ void MainWindow::quizVocab(){
     WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::randomNWord);
     ui->widget->layout()->addWidget(widgetQuizVocab);
     ui->menuVocab->setEnabled(false);
+    connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 
 void MainWindow::newVocab(){

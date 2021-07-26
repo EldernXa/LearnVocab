@@ -52,17 +52,25 @@
    </widget>
    <widget class="QMenu" name="menuModification">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="title">
      <string>Modification</string>
     </property>
-    <addaction name="actionAjouter_un_mot"/>
-    <addaction name="actionSupprimer_un_mot"/>
-    <addaction name="actionModifier_un_mot"/>
+    <widget class="QMenu" name="menuModifyWord">
+     <property name="title">
+      <string>Modifier un mot</string>
+     </property>
+     <addaction name="actionModifyWord"/>
+     <addaction name="actionPutWordInKnow"/>
+     <addaction name="actionPutWordInNotKnown"/>
+    </widget>
+    <addaction name="actionAddWord"/>
+    <addaction name="actionRemoveWord"/>
+    <addaction name="menuModifyWord"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
-    <addaction name="actionSupprimer_un_vocabulaire_2"/>
+    <addaction name="actionRemoveVoc"/>
    </widget>
    <addaction name="menuVocab"/>
    <addaction name="menuModification"/>
@@ -88,19 +96,14 @@
     <string>Supprimer une liste</string>
    </property>
   </action>
-  <action name="actionAjouter_un_mot">
+  <action name="actionAddWord">
    <property name="text">
     <string>Ajouter un mot</string>
    </property>
   </action>
-  <action name="actionSupprimer_un_mot">
+  <action name="actionRemoveWord">
    <property name="text">
     <string>Supprimer un mot</string>
-   </property>
-  </action>
-  <action name="actionModifier_un_mot">
-   <property name="text">
-    <string>Modifier un mot</string>
    </property>
   </action>
   <action name="actionSupprimer_un_vocabulaire">
@@ -108,9 +111,24 @@
     <string>Supprimer un vocabulaire</string>
    </property>
   </action>
-  <action name="actionSupprimer_un_vocabulaire_2">
+  <action name="actionRemoveVoc">
    <property name="text">
     <string>Supprimer un vocabulaire</string>
+   </property>
+  </action>
+  <action name="actionModifyWord">
+   <property name="text">
+    <string>Modifier le mot</string>
+   </property>
+  </action>
+  <action name="actionPutWordInKnow">
+   <property name="text">
+    <string>Mettre des mots en connus</string>
+   </property>
+  </action>
+  <action name="actionPutWordInNotKnown">
+   <property name="text">
+    <string>Mettre des mots en pas connus</string>
    </property>
   </action>
  </widget>

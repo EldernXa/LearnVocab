@@ -79,6 +79,16 @@ void MainWindow::enableEvent(){
     connect(ui->widget->getButtonSaveNewVocab(), SIGNAL(clicked()), this, SLOT(newVocab()));
     connect(ui->actionDisplayList, SIGNAL(triggered()), this, SLOT(displayVocab()));
     connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
+    connect(ui->actionAddWord, SIGNAL(triggered()), this, SLOT(addWordIntoVocab()));
+    connect(ui->actionRemoveWord, SIGNAL(triggered()), this, SLOT(removeWordFromVocab()));
+}
+
+void MainWindow::addWordIntoVocab(){
+    cout << "adding word" << endl;
+}
+
+void MainWindow::removeWordFromVocab(){
+    cout << "removing word" << endl;
 }
 
 void MainWindow::quizVocab(){

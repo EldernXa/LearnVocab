@@ -28,6 +28,10 @@ class WidgetDisplayVocab : public QWidget
 public:
     explicit WidgetDisplayVocab(string nameVocab, QWidget *parent = nullptr);
     ~WidgetDisplayVocab();
+    static const int WIDTH_LABEL = 150;
+    static const int HEIGHT_LABEL = 30;
+    static const int LIMIT_WIDGET = 5;
+    static const int HEIGHT_WIDGET = 30 * LIMIT_WIDGET;
 
 private slots:
     void on_buttonBack_clicked();
@@ -37,10 +41,6 @@ private:
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocabToDisplay;
-    const int WIDTH_LABEL = 150;
-    const int HEIGHT_LABEL = 30;
-    const int LIMIT_WIDGET = 5;
-    const int HEIGHT_WIDGET = 30 * LIMIT_WIDGET;
     QScrollArea *scrollArea;
 
     Ui::WidgetDisplayVocab *ui;

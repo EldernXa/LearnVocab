@@ -89,10 +89,15 @@ void MainWindow::addWordIntoVocab(){
     AddWord *addWord = new AddWord(getNameVocab());
     ui->widget->layout()->addWidget(addWord);
     disablingMenu();
+    // TODO back to the main menu.
 }
 
 void MainWindow::removeWordFromVocab(){
-    cout << "removing word" << endl;
+    clearLayout(ui->widget->layout());
+
+    RemoveWord *removeWord = new RemoveWord(getNameVocab());
+    ui->widget->layout()->addWidget(removeWord);
+    disablingMenu();
 }
 
 void MainWindow::quizVocab(){

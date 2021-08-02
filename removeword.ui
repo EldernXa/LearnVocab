@@ -58,6 +58,13 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QPushButton" name="validRemoveButton">
+       <property name="text">
+        <string>Valider la suppression des mots sélectionner</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>

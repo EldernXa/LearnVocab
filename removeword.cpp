@@ -18,6 +18,7 @@ RemoveWord::RemoveWord(string nameVocab, QWidget *parent) :
         lblNameColumn->setAlignment(Qt::AlignCenter);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
+    layoutForNameColumns->addWidget(new QLabel);
 
     QFrame *frameVLine = new QFrame;
     ui->widget->layout()->addWidget(frameVLine);
@@ -54,7 +55,9 @@ RemoveWord::RemoveWord(string nameVocab, QWidget *parent) :
             }
         }
 
-        layoutForNameWord->addWidget(new QCheckBox()); // TODO continue implementation checkbox.
+        QCheckBox *newCheckBox = new QCheckBox;
+        layoutForNameWord->addWidget(newCheckBox);
+        listCheckBox.push_back(newCheckBox);
 
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);
@@ -78,3 +81,40 @@ RemoveWord::~RemoveWord()
 {
     delete ui;
 }
+
+void RemoveWord::on_pushButton_clicked()
+{
+    this->setAttribute(Qt::WA_DeleteOnClose);
+    this->close();
+}
+
+
+void RemoveWord::on_validRemoveButton_clicked()
+{
+    vector<int> listIndWhoAreDeleted;
+    for(unsigned int i=0; i<listCheckBox.size(); i++){
+        if(listCheckBox.at(i)->isChecked()){
+            listIndWhoAreDeleted.push_back(i);
+        }
+    }
+    WriterVocab *writerVocab = new WriterVocab(nameVocab, listIndWhoAreDeleted);
+    writerVocab->close();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

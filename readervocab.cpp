@@ -20,6 +20,7 @@ ReaderVocab::ReaderVocab(string nameVocab)
             }
         }
     }
+    fileVocab.close();
 }
 
 vector<string> ReaderVocab::getAllLineOfTheVocab(){

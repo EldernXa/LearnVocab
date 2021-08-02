@@ -89,6 +89,7 @@ void MainWindow::addWordIntoVocab(){
     AddWord *addWord = new AddWord(getNameVocab());
     ui->widget->layout()->addWidget(addWord);
     disablingMenu();
+    listButtonForVocab.clear();
     // TODO back to the main menu.
 }
 
@@ -98,6 +99,8 @@ void MainWindow::removeWordFromVocab(){
     RemoveWord *removeWord = new RemoveWord(getNameVocab());
     ui->widget->layout()->addWidget(removeWord);
     disablingMenu();
+    listButtonForVocab.clear();
+    connect(removeWord, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 
 void MainWindow::quizVocab(){
@@ -106,6 +109,7 @@ void MainWindow::quizVocab(){
     WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::randomNWord);
     ui->widget->layout()->addWidget(widgetQuizVocab);
     disablingMenu();
+    listButtonForVocab.clear();
     connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 

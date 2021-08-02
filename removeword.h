@@ -32,6 +32,7 @@ private slots:
 
 private:
     vector<string> split(const string&, char delimiter);
+    void clearLayout(QLayout*, bool = true);
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocab;

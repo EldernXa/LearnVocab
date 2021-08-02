@@ -99,6 +99,81 @@ void RemoveWord::on_validRemoveButton_clicked()
     }
     WriterVocab *writerVocab = new WriterVocab(nameVocab, listIndWhoAreDeleted);
     writerVocab->close();
+    clearLayout(ui->widget->layout());
+    listCheckBox.clear();
+
+    readerVocab = new ReaderVocab(nameVocab);
+    QWidget *widgetForNameColumns = new QWidget;
+    ui->widget->layout()->addWidget(widgetForNameColumns);
+    QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumns);
+    for(auto &nameColumn : readerVocab->getColumnName()){
+        QLabel *lblNameColumn = new QLabel;
+        lblNameColumn->setText(QString::fromStdString(nameColumn));
+        lblNameColumn->setAlignment(Qt::AlignCenter);
+        layoutForNameColumns->addWidget(lblNameColumn);
+    }
+    layoutForNameColumns->addWidget(new QLabel);
+
+    QFrame *frameVLine = new QFrame;
+    ui->widget->layout()->addWidget(frameVLine);
+    frameVLine->setFrameShape(QFrame::HLine);
+
+    for(unsigned int i = 0; i<readerVocab->getAllLineOfTheVocab().size(); i++){
+        vector<string> valueToDisplay = readerVocab->getLineSplited(i);
+        QWidget *widgetForNameWord = new QWidget;
+        ui->widget->layout()->addWidget(widgetForNameWord);
+        QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
+        unsigned int multiply_value = 1;
+        for(unsigned int j = 0; j<valueToDisplay.size(); j++){
+            vector<string> differentValueForAWord = readerVocab->getWordSplitedFromLineSplited(i, j);
+            if(differentValueForAWord.size()>1){
+                QWidget *widgetForAWord = new QWidget;
+                QVBoxLayout *layoutForAWord = new QVBoxLayout(widgetForAWord);
+                layoutForAWord->setSpacing(0);
+                if(differentValueForAWord.size()>multiply_value){
+                    multiply_value = differentValueForAWord.size();
+                }
+
+                for(auto& word: differentValueForAWord){
+                    QLabel *lblNameWord = new QLabel;
+                    lblNameWord->setAlignment(Qt::AlignCenter);
+                    lblNameWord->setText(QString::fromStdString(word));
+                    layoutForAWord->addWidget(lblNameWord);
+                }
+                layoutForNameWord->addWidget(widgetForAWord);
+            }else{
+                QLabel *lblNameWord = new QLabel;
+                lblNameWord->setAlignment(Qt::AlignCenter);
+                lblNameWord->setText(QString::fromStdString(valueToDisplay.at(j)));
+                layoutForNameWord->addWidget(lblNameWord);
+            }
+        }
+
+        QCheckBox *newCheckBox = new QCheckBox;
+        layoutForNameWord->addWidget(newCheckBox);
+        listCheckBox.push_back(newCheckBox);
+
+        QFrame *frameLine = new QFrame;
+        ui->widget->layout()->addWidget(frameLine);
+        frameLine->setFrameShape(QFrame::HLine);
+        QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        ui->widget->layout()->addItem(itemSpacer);
+    }
+}
+
+void RemoveWord::clearLayout(QLayout* layout, bool deleteWidgets)
+{
+    while (QLayoutItem* item = layout->takeAt(0))
+    {
+        if (deleteWidgets)
+        {
+            if (QWidget* widget = item->widget())
+                widget->deleteLater();
+        }
+        if (QLayout* childLayout = item->layout())
+            clearLayout(childLayout, deleteWidgets);
+        delete item;
+    }
 }
 
 

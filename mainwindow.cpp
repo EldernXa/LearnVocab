@@ -81,6 +81,7 @@ void MainWindow::enableEvent(){
     connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
     connect(ui->actionAddWord, SIGNAL(triggered()), this, SLOT(addWordIntoVocab()));
     connect(ui->actionRemoveWord, SIGNAL(triggered()), this, SLOT(removeWordFromVocab()));
+    connect(ui->actionModifyAWord, SIGNAL(triggered()), this, SLOT(modifyVocab()));
 }
 
 void MainWindow::addWordIntoVocab(){
@@ -101,6 +102,16 @@ void MainWindow::removeWordFromVocab(){
     disablingMenu();
     listButtonForVocab.clear();
     connect(removeWord, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
+}
+
+void MainWindow::modifyVocab(){
+    clearLayout(ui->widget->layout());
+
+    ModifyWord *modifyWord = new ModifyWord(getNameVocab());
+    ui->widget->layout()->addWidget(modifyWord);
+    disablingMenu();
+    listButtonForVocab.clear();
+    connect(modifyWord, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
 }
 
 void MainWindow::quizVocab(){

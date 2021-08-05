@@ -12,6 +12,7 @@ SOURCES += \
     addword.cpp \
     main.cpp \
     mainwindow.cpp \
+    modifyword.cpp \
     readervocab.cpp \
     removeword.cpp \
     widgetdisplayvocab.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
 HEADERS += \
     addword.h \
     mainwindow.h \
+    modifyword.h \
     readervocab.h \
     removeword.h \
     widgetdisplayvocab.h \
@@ -44,6 +46,7 @@ HEADERS += \
 FORMS += \
     addword.ui \
     mainwindow.ui \
+    modifyword.ui \
     removeword.ui \
     widgetdisplayvocab.ui \
     widgetmainwindow.ui \

@@ -17,6 +17,8 @@
 #include "widgetquizvocab.h"
 #include "addword.h"
 #include "removeword.h"
+#include "modifyword.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -48,6 +50,7 @@ private slots :
     void displayVocab();
     void quizVocab();
     void addWordIntoVocab();
+    void modifyVocab();
     void removeWordFromVocab();
     void restoreMainWidget();
 };

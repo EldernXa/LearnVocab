@@ -46,8 +46,6 @@
      <addaction name="actionRandomNWord"/>
     </widget>
     <addaction name="actionDisplayList"/>
-    <addaction name="actionModifyList"/>
-    <addaction name="actionDeleteList"/>
     <addaction name="menuQuiz"/>
    </widget>
    <widget class="QMenu" name="menuModification">
@@ -57,17 +55,9 @@
     <property name="title">
      <string>Modification</string>
     </property>
-    <widget class="QMenu" name="menuModifyWord">
-     <property name="title">
-      <string>Modifier un mot</string>
-     </property>
-     <addaction name="actionModifyWord"/>
-     <addaction name="actionPutWordInKnow"/>
-     <addaction name="actionPutWordInNotKnown"/>
-    </widget>
     <addaction name="actionAddWord"/>
+    <addaction name="actionModifyAWord"/>
     <addaction name="actionRemoveWord"/>
-    <addaction name="menuModifyWord"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionRemoveVoc"/>
@@ -98,12 +88,12 @@
   </action>
   <action name="actionAddWord">
    <property name="text">
-    <string>Ajouter un mot</string>
+    <string>Ajouter un ou des mot(s)</string>
    </property>
   </action>
   <action name="actionRemoveWord">
    <property name="text">
-    <string>Supprimer un mot</string>
+    <string>Supprimer des mots</string>
    </property>
   </action>
   <action name="actionSupprimer_un_vocabulaire">
@@ -129,6 +119,11 @@
   <action name="actionPutWordInNotKnown">
    <property name="text">
     <string>Mettre des mots en pas connus</string>
+   </property>
+  </action>
+  <action name="actionModifyAWord">
+   <property name="text">
+    <string>Modifier un Vocabulaire</string>
    </property>
   </action>
  </widget>

@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/logoImg">
         <file alias="delete">img/delete.png</file>
+        <file alias="greenCheck">img/greenCheck.png</file>
+        <file alias="redCross">img/redCross.png</file>
     </qresource>
 </RCC>

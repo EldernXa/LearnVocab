@@ -61,9 +61,11 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         layoutButton->addWidget(buttonDelete);
         QPushButton *buttonChange = new QPushButton;
         if(verifIsKnown){
-            buttonChange->setText(tr("Je connais pas"));
+            //buttonChange->setText(tr("Je connais pas"));
+            buttonChange->setIcon(QIcon(QPixmap(":/logoImg/greenCheck")));
         }else{
-            buttonChange->setText(tr("Je connais"));
+            //buttonChange->setText(tr("Je connais"));
+            buttonChange->setIcon(QIcon(QPixmap(":/logoImg/redCross")));
         }
         layoutButton->addWidget(buttonChange);
         layoutForNameWord->addWidget(widgetForButton);

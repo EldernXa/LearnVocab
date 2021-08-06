@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/logoImg">
+        <file alias="delete">img/delete.png</file>
+    </qresource>
+</RCC>

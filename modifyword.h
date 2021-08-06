@@ -37,6 +37,7 @@ private:
     ReaderVocab *readerVocab = nullptr;
     string nameVocab;
     QScrollArea *scrollArea;
+    vector<bool> listIsKnown;
 
     Ui::ModifyWord *ui;
 };

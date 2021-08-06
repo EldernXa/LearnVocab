@@ -25,6 +25,7 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
 
     for(unsigned int i=0; i<readerVocab->getAllLineOfTheVocab().size(); i++){
         bool verifIsKnown = readerVocab->isLineVocabKnown(i);
+        listIsKnown.push_back(verifIsKnown);
         vector<string> valueToDisplay = readerVocab->getLineSplited(i);
         QWidget *widgetForNameWord = new QWidget;
         ui->widget->layout()->addWidget(widgetForNameWord);
@@ -55,7 +56,8 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         QWidget *widgetForButton = new QWidget;
         QVBoxLayout *layoutButton = new QVBoxLayout(widgetForButton);
         QPushButton *buttonDelete = new QPushButton;
-        buttonDelete->setText(tr("Supprimer mot"));
+        //buttonDelete->setText(tr("Supprimer mot"));
+        buttonDelete->setIcon(QIcon(QPixmap(":/logoImg/delete")));
         layoutButton->addWidget(buttonDelete);
         QPushButton *buttonChange = new QPushButton;
         if(verifIsKnown){

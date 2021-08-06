@@ -7,6 +7,70 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
 {
     ui->setupUi(this);
     this->nameVocab = nameVocab;
+    readerVocab = new ReaderVocab(nameVocab);
+    ui->widget->setLayout(new QVBoxLayout);
+    QWidget *widgetForNameColumn = new QWidget;
+    ui->widget->layout()->addWidget(widgetForNameColumn);
+    QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumn);
+    for(auto &nameColumn : readerVocab->getColumnName()){
+        QLabel *lblNameColumn = new QLabel;
+        lblNameColumn->setText(QString::fromStdString(nameColumn));
+        lblNameColumn->setAlignment(Qt::AlignCenter);
+        layoutForNameColumns->addWidget(lblNameColumn);
+    }
+    layoutForNameColumns->addWidget(new QLabel);
+    QFrame *frameVLine = new QFrame;
+    ui->widget->layout()->addWidget(frameVLine);
+    frameVLine->setFrameShape(QFrame::HLine);
+
+    for(unsigned int i=0; i<readerVocab->getAllLineOfTheVocab().size(); i++){
+        bool verifIsKnown = readerVocab->isLineVocabKnown(i);
+        vector<string> valueToDisplay = readerVocab->getLineSplited(i);
+        QWidget *widgetForNameWord = new QWidget;
+        ui->widget->layout()->addWidget(widgetForNameWord);
+        QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
+        unsigned int multiply_value = 1;
+        for(unsigned int j = 0; j<valueToDisplay.size(); j++){
+            vector<string> differentValueForAWord = readerVocab->getWordSplitedFromLineSplited(i, j);
+            if(differentValueForAWord.size()>1){
+                QWidget *widgetForAWord = new QWidget;
+                QVBoxLayout *layoutForAWord = new QVBoxLayout(widgetForAWord);
+                layoutForAWord->setSpacing(0);
+                if(differentValueForAWord.size()>multiply_value){
+                    multiply_value = differentValueForAWord.size();
+                }
+
+                for(auto &word : differentValueForAWord){
+                    QLineEdit *lineEdit = new QLineEdit;
+                    lineEdit->setText(QString::fromStdString(word));
+                    layoutForAWord->addWidget(lineEdit);
+                }
+                layoutForNameWord->addWidget(widgetForAWord);
+            }else{
+                QLineEdit *lineEdit = new QLineEdit;
+                lineEdit->setText(QString::fromStdString(valueToDisplay.at(j)));
+                layoutForNameWord->addWidget(lineEdit);
+            }
+        }
+        QWidget *widgetForButton = new QWidget;
+        QVBoxLayout *layoutButton = new QVBoxLayout(widgetForButton);
+        QPushButton *buttonDelete = new QPushButton;
+        buttonDelete->setText(tr("Supprimer mot"));
+        layoutButton->addWidget(buttonDelete);
+        QPushButton *buttonChange = new QPushButton;
+        if(verifIsKnown){
+            buttonChange->setText(tr("Je connais pas"));
+        }else{
+            buttonChange->setText(tr("Je connais"));
+        }
+        layoutButton->addWidget(buttonChange);
+        layoutForNameWord->addWidget(widgetForButton);
+        QFrame *frameLine = new QFrame;
+        ui->widget->layout()->addWidget(frameLine);
+        frameLine->setFrameShape(QFrame::HLine);
+        QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        ui->widget->layout()->addItem(itemSpacer);
+    }
 }
 
 vector<string> ModifyWord::split(const std::string& s, char delimiter){

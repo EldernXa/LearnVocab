@@ -30,6 +30,8 @@ public:
 
 private slots:
     void on_buttonBack_clicked();
+    void deletingWord(int);
+    void changeStateWord(int);
 
 private:
     vector<string> split(const string&, char);
@@ -43,3 +45,21 @@ private:
 };
 
 #endif // MODIFYWORD_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

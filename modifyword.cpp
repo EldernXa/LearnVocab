@@ -56,17 +56,16 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         QWidget *widgetForButton = new QWidget;
         QVBoxLayout *layoutButton = new QVBoxLayout(widgetForButton);
         QPushButton *buttonDelete = new QPushButton;
-        //buttonDelete->setText(tr("Supprimer mot"));
         buttonDelete->setIcon(QIcon(QPixmap(":/logoImg/delete")));
         layoutButton->addWidget(buttonDelete);
         QPushButton *buttonChange = new QPushButton;
         if(verifIsKnown){
-            //buttonChange->setText(tr("Je connais pas"));
             buttonChange->setIcon(QIcon(QPixmap(":/logoImg/greenCheck")));
         }else{
-            //buttonChange->setText(tr("Je connais"));
             buttonChange->setIcon(QIcon(QPixmap(":/logoImg/redCross")));
         }
+        connect(buttonDelete, &QPushButton::clicked, this, [this, i]{deletingWord(i);});
+        connect(buttonChange, &QPushButton::clicked, this, [this, i]{changeStateWord(i);});
         layoutButton->addWidget(buttonChange);
         layoutForNameWord->addWidget(widgetForButton);
         QFrame *frameLine = new QFrame;
@@ -75,6 +74,14 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
         ui->widget->layout()->addItem(itemSpacer);
     }
+}
+
+void ModifyWord::deletingWord(int i){
+    cout << "deleting word." << endl;
+}
+
+void ModifyWord::changeStateWord(int i){
+    cout << "changing state of a word" << endl;
 }
 
 vector<string> ModifyWord::split(const std::string& s, char delimiter){

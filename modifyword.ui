@@ -59,7 +59,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="buttonConfirmModify">
        <property name="text">
         <string>Valider la modification du vocabulaire</string>
        </property>

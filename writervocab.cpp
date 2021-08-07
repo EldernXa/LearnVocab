@@ -24,6 +24,19 @@ WriterVocab::WriterVocab(string nameVocab, vector<int> listIndToRemove){
     }
 }
 
+WriterVocab::WriterVocab(string nameVocab, int numberOfColumn, vector<string> listColumn, vector<vector<vector<string>>> listWord, vector<bool> listWordIsKnow){
+    fileVocabToWrite.open(nameVocab+".vocab", ios::out);
+    writeNumberColumns(numberOfColumn);
+    writeListNameColumn(listColumn);
+    //QVector<QVector<QVector<string>*>*> listVoc = readerVocab->getListWord();
+    for(unsigned int i = 0; i<listWord.size(); i++){
+//        if(!count(listIndToRemove.begin(), listIndToRemove.end(), i)){
+//            addLine(listVoc.at(i));
+//        }
+        addLine(listWord.at(i), listWordIsKnow.at(i));
+    }
+}
+
 void WriterVocab::writeNumberColumns(int numberOfColumns){
     fileVocabToWrite << numberOfColumns << endl;
 }
@@ -54,6 +67,7 @@ void WriterVocab::addLine(vector<vector<QLineEdit*>*> listLineEditForWord){
     }
 }
 
+
 void WriterVocab::addLine(QVector<QVector<string>*> * listLineEditForWord){
     for(int indexForVect=0 ; indexForVect<listLineEditForWord->size(); indexForVect++){
         for(int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord->at(indexForVect)->size(); indexForLineEdit++){
@@ -65,6 +79,25 @@ void WriterVocab::addLine(QVector<QVector<string>*> * listLineEditForWord){
         if(indexForVect<listLineEditForWord->size()-1){
             fileVocabToWrite<<";";
         }else{
+            fileVocabToWrite << endl;
+        }
+    }
+}
+
+void WriterVocab::addLine(vector<vector<string>> listLineEditForWord, bool wordIsKnown){
+    for(unsigned int indexForVect=0 ; indexForVect<listLineEditForWord.size(); indexForVect++){
+        for(unsigned int indexForLineEdit = 0; indexForLineEdit<listLineEditForWord.at(indexForVect).size(); indexForLineEdit++){
+            fileVocabToWrite << listLineEditForWord.at(indexForVect).at(indexForLineEdit);
+            if(indexForLineEdit < listLineEditForWord.at(indexForVect).size()-1){
+                fileVocabToWrite<<",";
+            }
+        }
+        if(indexForVect<listLineEditForWord.size()-1){
+            fileVocabToWrite<<";";
+        }else{
+            if(wordIsKnown){
+                fileVocabToWrite << ":ok";
+            }
             fileVocabToWrite << endl;
         }
     }

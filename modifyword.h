@@ -31,6 +31,7 @@ public:
 
 private slots:
     void on_buttonBack_clicked();
+    void on_buttonConfirmModify_clicked();
     void deletingWord(int);
     void changeStateWord(int);
 
@@ -45,6 +46,7 @@ private:
     QScrollArea *scrollArea;
     vector<bool> listIsKnown;
     vector<QPushButton*> listButtonChangeState;
+    vector<vector<vector<QLineEdit*>>> listLineEditForWord;
 
     Ui::ModifyWord *ui;
 };

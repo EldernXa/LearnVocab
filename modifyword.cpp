@@ -56,13 +56,13 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         QWidget *widgetForButton = new QWidget;
         QVBoxLayout *layoutButton = new QVBoxLayout(widgetForButton);
         QPushButton *buttonDelete = new QPushButton;
-        buttonDelete->setIcon(QIcon(QPixmap(":/logoImg/delete")));
+        setDeleteIcon(buttonDelete);
         layoutButton->addWidget(buttonDelete);
         QPushButton *buttonChange = new QPushButton;
         if(verifIsKnown){
-            buttonChange->setIcon(QIcon(QPixmap(":/logoImg/greenCheck")));
+            setGreenCheckIcon(buttonChange);
         }else{
-            buttonChange->setIcon(QIcon(QPixmap(":/logoImg/redCross")));
+            setRedCrossIcon(buttonChange);
         }
         connect(buttonDelete, &QPushButton::clicked, this, [this, i]{deletingWord(i);});
         connect(buttonChange, &QPushButton::clicked, this, [this, i]{changeStateWord(i);});
@@ -82,6 +82,18 @@ void ModifyWord::deletingWord(int i){
 
 void ModifyWord::changeStateWord(int i){
     cout << "changing state of a word" << endl;
+}
+
+void ModifyWord::setDeleteIcon(QPushButton* buttonWeWantToSetIcon){
+    buttonWeWantToSetIcon->setIcon(QIcon(QPixmap(":/logoImg/delete")));
+}
+
+void ModifyWord::setGreenCheckIcon(QPushButton* buttonWeWantToSetIcon){
+    buttonWeWantToSetIcon->setIcon(QIcon(QPixmap(":/logoImg/greenCheck")));
+}
+
+void ModifyWord::setRedCrossIcon(QPushButton* buttonWeWantToSetIcon){
+    buttonWeWantToSetIcon->setIcon(QIcon(QPixmap(":/logoImg/redCross")));
 }
 
 vector<string> ModifyWord::split(const std::string& s, char delimiter){

@@ -12,6 +12,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QSpacerItem>
+#include <QPushButton>
 
 #include "readervocab.h"
 #include "writervocab.h"
@@ -35,11 +36,15 @@ private slots:
 
 private:
     vector<string> split(const string&, char);
+    void setDeleteIcon(QPushButton*);
+    void setGreenCheckIcon(QPushButton*);
+    void setRedCrossIcon(QPushButton*);
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocab;
     QScrollArea *scrollArea;
     vector<bool> listIsKnown;
+    vector<QPushButton*> listButtonChangeState;
 
     Ui::ModifyWord *ui;
 };

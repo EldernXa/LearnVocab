@@ -82,6 +82,8 @@ void MainWindow::enableEvent(){
     connect(ui->actionAddWord, SIGNAL(triggered()), this, SLOT(addWordIntoVocab()));
     connect(ui->actionRemoveWord, SIGNAL(triggered()), this, SLOT(removeWordFromVocab()));
     connect(ui->actionModifyAWord, SIGNAL(triggered()), this, SLOT(modifyVocab()));
+    connect(ui->actionRandomNWordKnow, SIGNAL(triggered()), this, SLOT(quizVocabNWordKnow()));
+    connect(ui->actionRandomNWordNotKnow, SIGNAL(triggered()), this, SLOT(quizVocabNWordNotKnow()));
 }
 
 void MainWindow::addWordIntoVocab(){
@@ -118,6 +120,26 @@ void MainWindow::quizVocab(){
     clearLayout(ui->widget->layout());
 
     WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::randomNWord);
+    ui->widget->layout()->addWidget(widgetQuizVocab);
+    disablingMenu();
+    listButtonForVocab.clear();
+    connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
+}
+
+void MainWindow::quizVocabNWordKnow(){
+    clearLayout(ui->widget->layout());
+
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NFirstWordKnow);
+    ui->widget->layout()->addWidget(widgetQuizVocab);
+    disablingMenu();
+    listButtonForVocab.clear();
+    connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
+}
+
+void MainWindow::quizVocabNWordNotKnow(){
+    clearLayout(ui->widget->layout());
+
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NFirstWordNotKnow);
     ui->widget->layout()->addWidget(widgetQuizVocab);
     disablingMenu();
     listButtonForVocab.clear();

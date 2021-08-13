@@ -7,11 +7,18 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
 {
     ui->setupUi(this);
     nameVocab = nameVocabToQuiz;
-    saveVocabWord();
+    //saveVocabWord();
+    ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
     if(quizType == randomNWord){
-        ui->widget->getLblMaxWord()->setText(tr("(Le nombre maximale permis est %1)").arg(listWord.size()));
-        enableEvent();
+        listWord = readerVocab->getListWord();
+    }else if(quizType == NFirstWordKnow){
+        listWord = readerVocab->getListWordKnow();
+    }else if(quizType == NFirstWordNotKnow){
+        listWord = readerVocab->getListWordNotKnow();
     }
+
+    ui->widget->getLblMaxWord()->setText(tr("(Le nombre maximale permis est %1)").arg(listWord.size()));
+    enableEvent();
 }
 
 void WidgetQuizVocab::enableEvent(){

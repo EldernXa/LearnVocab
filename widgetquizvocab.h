@@ -24,7 +24,7 @@ class WidgetQuizVocab : public QWidget
     Q_OBJECT
 
 public:
-    enum QuizType {randomNWord, NFirstWordNotKnow};
+    enum QuizType {randomNWord, NFirstWordNotKnow, NFirstWordKnow};
     explicit WidgetQuizVocab(string, QuizType, QWidget *parent = nullptr);
     ~WidgetQuizVocab();
 

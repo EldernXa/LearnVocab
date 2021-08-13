@@ -12,15 +12,33 @@ ReaderVocab::ReaderVocab(string nameVocab)
     while(getline(fileVocab, value)){
         lineOfTheFile.push_back(value);
         listWord.append(new QVector<QVector<string>*>());
+        if(isLineVocabKnown(listWord.size()-1)){
+            listWordKnow.append(new QVector<QVector<string>*>());
+        }else{
+            listWordNotKnow.append(new QVector<QVector<string>*>());
+        }
         for(auto& qStr: split(value, ';')){
             vector<string> listStr = split(qStr, ',');
-            listWord.at(listWord.size()-1)->append(new QVector<string>());
-            for(auto &s:listStr){
-                listWord.at(listWord.size()-1)->at(listWord.at(listWord.size()-1)->size()-1)->push_back(s);
+//            listWord.at(listWord.size()-1)->append(new QVector<string>());
+//            for(auto &s:listStr){
+//                listWord.at(listWord.size()-1)->at(listWord.at(listWord.size()-1)->size()-1)->push_back(s);
+//            }
+            fillList(listWord, listStr);
+            if(isLineVocabKnown(listWord.size()-1)){
+                fillList(listWordKnow, listStr);
+            }else{
+                fillList(listWordNotKnow, listStr);
             }
         }
     }
     fileVocab.close();
+}
+
+void ReaderVocab::fillList(QVector<QVector<QVector<string>*>*> listToFill, vector<string> listStr){
+    listToFill.at(listToFill.size()-1)->append(new QVector<string>());
+    for(auto &s:listStr){
+        listToFill.at(listToFill.size()-1)->at(listToFill.at(listToFill.size()-1)->size()-1)->push_back(s);
+    }
 }
 
 vector<string> ReaderVocab::getAllLineOfTheVocab(){
@@ -55,6 +73,14 @@ vector<string> ReaderVocab::getColumnName(){
 
 QVector<QVector<QVector<string>*>*> ReaderVocab::getListWord(){
     return listWord;
+}
+
+QVector<QVector<QVector<string>*>*> ReaderVocab::getListWordKnow(){
+    return listWordKnow;
+}
+
+QVector<QVector<QVector<string>*>*> ReaderVocab::getListWordNotKnow(){
+    return listWordNotKnow;
 }
 
 vector<string> ReaderVocab::split(const std::string& s, char delimiter){

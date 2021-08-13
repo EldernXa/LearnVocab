@@ -43,12 +43,14 @@ private:
 
     Ui::MainWindow *ui;
     std::vector<QPushButton*> listButtonForVocab;
-    string const NUM_VERSION = "1.1.1";
+    string const NUM_VERSION = "1.2.0";
 
 private slots :
     void newVocab();
     void displayVocab();
     void quizVocab();
+    void quizVocabNWordKnow();
+    void quizVocabNWordNotKnow();
     void addWordIntoVocab();
     void modifyVocab();
     void removeWordFromVocab();

@@ -22,6 +22,7 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
     QFrame *frameVLine = new QFrame;
     ui->widget->layout()->addWidget(frameVLine);
     frameVLine->setFrameShape(QFrame::HLine);
+    listHLine.push_back(frameVLine);
 
     for(unsigned int i=0; i<readerVocab->getAllLineOfTheVocab().size(); i++){
         listLineEditForWord.push_back(vector<vector<QLineEdit*>>());
@@ -29,13 +30,15 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         listIsKnown.push_back(verifIsKnown);
         vector<string> valueToDisplay = readerVocab->getLineSplited(i);
         QWidget *widgetForNameWord = new QWidget;
+        listWidget.push_back(widgetForNameWord);
         ui->widget->layout()->addWidget(widgetForNameWord);
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
+        listLayout.push_back(layoutForNameWord);
         unsigned int multiply_value = 1;
         for(unsigned int j = 0; j<valueToDisplay.size(); j++){
             listLineEditForWord.at(i).push_back(vector<QLineEdit*>());
             vector<string> differentValueForAWord = readerVocab->getWordSplitedFromLineSplited(i, j);
-            if(differentValueForAWord.size()>1){
+//            if(differentValueForAWord.size()>1){
                 QWidget *widgetForAWord = new QWidget;
                 QVBoxLayout *layoutForAWord = new QVBoxLayout(widgetForAWord);
                 if(differentValueForAWord.size()>multiply_value){
@@ -49,12 +52,12 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
                     listLineEditForWord.at(i).at(j).push_back(lineEdit);
                 }
                 layoutForNameWord->addWidget(widgetForAWord);
-            }else{
-                QLineEdit *lineEdit = new QLineEdit;
-                lineEdit->setText(QString::fromStdString(valueToDisplay.at(j)));
-                layoutForNameWord->addWidget(lineEdit);
-                listLineEditForWord.at(i).at(j).push_back(lineEdit);
-            }
+//            }else{
+//                QLineEdit *lineEdit = new QLineEdit;
+//                lineEdit->setText(QString::fromStdString(valueToDisplay.at(j)));
+//                layoutForNameWord->addWidget(lineEdit);
+//                listLineEditForWord.at(i).at(j).push_back(lineEdit);
+//            }
         }
         QWidget *widgetForButton = new QWidget;
         QVBoxLayout *layoutButton = new QVBoxLayout(widgetForButton);
@@ -75,17 +78,23 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);
         frameLine->setFrameShape(QFrame::HLine);
+        listHLine.push_back(frameLine);
         QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
         ui->widget->layout()->addItem(itemSpacer);
     }
 }
 
 void ModifyWord::deletingWord(int i){
-    cout << "deleting word." << endl;
+    // cout << "deleting word." << endl;
+    clearLayout(listLayout.at(i));
+    listLayout.at(i)->deleteLater();
+    listHLine.at(i+1)->deleteLater();
+    ui->widget->layout()->removeWidget(listWidget.at(i));
+    listWidget.at(i)->deleteLater();
+    listIndToDelete.push_back(i);
 }
 
 void ModifyWord::changeStateWord(int i){
-    // cout << "changing state of a word" << endl;
     if(listIsKnown.at(i)){
         setRedCrossIcon(listButtonChangeState.at(i));
         listIsKnown.at(i) = false;
@@ -107,6 +116,22 @@ void ModifyWord::setRedCrossIcon(QPushButton* buttonWeWantToSetIcon){
     buttonWeWantToSetIcon->setIcon(QIcon(QPixmap(":/logoImg/redCross")));
 }
 
+void ModifyWord::clearLayout(QLayout* layout, bool deleteWidgets){
+
+    while(QLayoutItem* item = layout->takeAt(0)){
+        if(deleteWidgets){
+            if(QWidget* widget = item->widget()){
+                widget->deleteLater();
+            }
+        }
+        if(QLayout* childLayout = item->layout()){
+            clearLayout(childLayout, deleteWidgets);
+        }
+        delete item;
+    }
+
+}
+
 vector<string> ModifyWord::split(const std::string& s, char delimiter){
     vector<string> tokens;
     string token;
@@ -124,11 +149,25 @@ ModifyWord::~ModifyWord()
 
 void ModifyWord::on_buttonConfirmModify_clicked(){
     vector<vector<vector<string>>> listWord;
-    for(unsigned int i=0 ; i<listLineEditForWord.size(); i++){
+    vector<vector<vector<QLineEdit*>>> listCurrentLineEdit;
+    for(unsigned int i=0; i<listLineEditForWord.size(); i++){
+        if(!count(listIndToDelete.begin(), listIndToDelete.end(), i)){
+            listCurrentLineEdit.push_back(vector<vector<QLineEdit*>>());
+            for(unsigned int j=0; j<listLineEditForWord.at(i).size(); j++){
+                listCurrentLineEdit.at(listCurrentLineEdit.size()-1).push_back(vector<QLineEdit*>());
+                for(QLineEdit* lineEdit : listLineEditForWord.at(i).at(j)){
+                    cout << i << " " << j << endl;
+                    listCurrentLineEdit.at(listCurrentLineEdit.size()-1).at(j).push_back(lineEdit);
+                }
+            }
+        }
+    }
+
+    for(unsigned int i=0 ; i<listCurrentLineEdit.size(); i++){
         listWord.push_back(vector<vector<string>>());
-        for(unsigned int j=0; j<listLineEditForWord.at(i).size(); j++){
+        for(unsigned int j=0; j<listCurrentLineEdit.at(i).size(); j++){
             listWord.at(i).push_back(vector<string>());
-            for(QLineEdit* lineEdit : listLineEditForWord.at(i).at(j)){
+            for(QLineEdit* lineEdit : listCurrentLineEdit.at(i).at(j)){
                 listWord.at(i).at(j).push_back(lineEdit->text().toStdString());
             }
         }

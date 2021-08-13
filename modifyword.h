@@ -40,6 +40,7 @@ private:
     void setDeleteIcon(QPushButton*);
     void setGreenCheckIcon(QPushButton*);
     void setRedCrossIcon(QPushButton*);
+    void clearLayout(QLayout*, bool deleteWidgets = true);
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocab;
@@ -47,6 +48,10 @@ private:
     vector<bool> listIsKnown;
     vector<QPushButton*> listButtonChangeState;
     vector<vector<vector<QLineEdit*>>> listLineEditForWord;
+    vector<QHBoxLayout*> listLayout;
+    vector<QFrame*> listHLine;
+    vector<QWidget*> listWidget;
+    vector<int> listIndToDelete;
 
     Ui::ModifyWord *ui;
 };

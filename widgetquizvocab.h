@@ -24,7 +24,7 @@ class WidgetQuizVocab : public QWidget
     Q_OBJECT
 
 public:
-    enum QuizType {randomNWord, NRandomWordNotKnow, NRandomWordKnow};
+    enum QuizType {randomNWord, NRandomWordNotKnow, NRandomWordKnow, NFirstWordNotKnow, NFirstWordKnow};
     explicit WidgetQuizVocab(string, QuizType, QWidget *parent = nullptr);
     ~WidgetQuizVocab();
 
@@ -39,6 +39,7 @@ private:
     vector<vector<QLineEdit*>*> listLineEdit;
     int numberOfWord = 0;
     int actualWord=0;
+    bool firstWord = false;
 
     void saveVocabWord();
     void enableEvent();

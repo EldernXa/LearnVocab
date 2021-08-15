@@ -78,12 +78,17 @@ std::vector<std::string> MainWindow::split(const std::string& s, char delimiter)
 void MainWindow::enableEvent(){
     connect(ui->widget->getButtonSaveNewVocab(), SIGNAL(clicked()), this, SLOT(newVocab()));
     connect(ui->actionDisplayList, SIGNAL(triggered()), this, SLOT(displayVocab()));
-    connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
     connect(ui->actionAddWord, SIGNAL(triggered()), this, SLOT(addWordIntoVocab()));
     connect(ui->actionRemoveWord, SIGNAL(triggered()), this, SLOT(removeWordFromVocab()));
     connect(ui->actionModifyAWord, SIGNAL(triggered()), this, SLOT(modifyVocab()));
+
+    // ---------------- action for quiz -----------------
+    connect(ui->actionRandomNWord, SIGNAL(triggered()), this, SLOT(quizVocab()));
     connect(ui->actionRandomNWordKnow, SIGNAL(triggered()), this, SLOT(quizVocabNWordKnow()));
     connect(ui->actionRandomNWordNotKnow, SIGNAL(triggered()), this, SLOT(quizVocabNWordNotKnow()));
+    connect(ui->actionNFirstWordKnow, SIGNAL(triggered()), this, SLOT(quizVocabNFirstWordKnow()));
+    connect(ui->actionNFirstWordNotKnow, SIGNAL(triggered()), this, SLOT(quizVocabNFirstWordNotKnow()));
+
 }
 
 void MainWindow::addWordIntoVocab(){
@@ -140,6 +145,26 @@ void MainWindow::quizVocabNWordNotKnow(){
     clearLayout(ui->widget->layout());
 
     WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NRandomWordNotKnow);
+    ui->widget->layout()->addWidget(widgetQuizVocab);
+    disablingMenu();
+    listButtonForVocab.clear();
+    connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
+}
+
+void MainWindow::quizVocabNFirstWordKnow(){
+    clearLayout(ui->widget->layout());
+
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NFirstWordKnow);
+    ui->widget->layout()->addWidget(widgetQuizVocab);
+    disablingMenu();
+    listButtonForVocab.clear();
+    connect(widgetQuizVocab, SIGNAL(destroyed()), this, SLOT(restoreMainWidget()));
+}
+
+void MainWindow::quizVocabNFirstWordNotKnow(){
+    clearLayout(ui->widget->layout());
+
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NFirstWordNotKnow);
     ui->widget->layout()->addWidget(widgetQuizVocab);
     disablingMenu();
     listButtonForVocab.clear();

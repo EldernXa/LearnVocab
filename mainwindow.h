@@ -51,6 +51,8 @@ private slots :
     void quizVocab();
     void quizVocabNWordKnow();
     void quizVocabNWordNotKnow();
+    void quizVocabNFirstWordKnow();
+    void quizVocabNFirstWordNotKnow();
     void addWordIntoVocab();
     void modifyVocab();
     void removeWordFromVocab();

@@ -11,10 +11,14 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
     ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
     if(quizType == randomNWord){
         listWord = readerVocab->getListWord();
-    }else if(quizType == NRandomWordKnow){
+    }else if(quizType == NRandomWordKnow || quizType == NFirstWordKnow){
         listWord = readerVocab->getListWordKnow();
-    }else if(quizType == NRandomWordNotKnow){
+    }else if(quizType == NRandomWordNotKnow || quizType == NFirstWordNotKnow){
         listWord = readerVocab->getListWordNotKnow();
+    }
+
+    if(quizType == NFirstWordKnow || quizType == NFirstWordNotKnow){
+        firstWord = true;
     }
 
     ui->widget->getLblMaxWord()->setText(tr("(Le nombre maximale permis est %1)").arg(listWord.size()));
@@ -44,7 +48,7 @@ void WidgetQuizVocab::saveNumberOfWord(){
             numberOfWord = stoi(ui->widget->getLineEditForMaxWord()->text().toStdString());
             auto rd = random_device{};
             auto rng = default_random_engine{rd()};
-            shuffle(begin(listWord), end(listWord), rng);
+            shuffle(begin(listWord), begin(listWord)+numberOfWord, rng);
             //cout << listWord.at(0)->at(0)->at(0) << endl;
             startingQuiz();
         }

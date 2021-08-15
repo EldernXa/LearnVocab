@@ -16,7 +16,7 @@
 
 #include "widgetnewvocabsecondstep.h"
 #include "widgetnewvocablaststep.h"
-#include "writervocab.h"
+#include "ModifyVocab/writervocab.h"
 
 using namespace std;
 

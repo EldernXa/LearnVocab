@@ -11,7 +11,7 @@
 #include <QLineEdit>
 
 #include "widgetquizvocablaststep.h"
-#include "readervocab.h"
+#include "ModifyVocab/readervocab.h"
 
 using namespace std;
 

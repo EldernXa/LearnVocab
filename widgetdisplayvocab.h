@@ -13,7 +13,7 @@
 #include <QLabel>
 #include <QSpacerItem>
 
-#include "readervocab.h"
+#include "ModifyVocab/readervocab.h"
 
 using namespace std;
 

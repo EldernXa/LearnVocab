@@ -14,8 +14,8 @@
 #include <QSpacerItem>
 #include <QPushButton>
 
-#include "readervocab.h"
-#include "writervocab.h"
+#include "ModifyVocab/readervocab.h"
+#include "ModifyVocab/writervocab.h"
 
 namespace Ui {
 class ModifyWord;

@@ -8,8 +8,8 @@
 #include <QLabel>
 #include <QCheckBox>
 
-#include "readervocab.h"
-#include "writervocab.h"
+#include "ModifyVocab/readervocab.h"
+#include "ModifyVocab/writervocab.h"
 
 using namespace std;
 

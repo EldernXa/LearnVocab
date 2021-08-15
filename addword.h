@@ -9,8 +9,8 @@
 #include <QVBoxLayout>
 #include <QLineEdit>
 
-#include "readervocab.h"
-#include "writervocab.h"
+#include "ModifyVocab/readervocab.h"
+#include "ModifyVocab/writervocab.h"
 #include "widgetnewvocab.h"
 
 using namespace std;

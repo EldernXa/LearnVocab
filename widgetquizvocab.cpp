@@ -11,9 +11,9 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
     ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
     if(quizType == randomNWord){
         listWord = readerVocab->getListWord();
-    }else if(quizType == NFirstWordKnow){
+    }else if(quizType == NRandomWordKnow){
         listWord = readerVocab->getListWordKnow();
-    }else if(quizType == NFirstWordNotKnow){
+    }else if(quizType == NRandomWordNotKnow){
         listWord = readerVocab->getListWordNotKnow();
     }
 

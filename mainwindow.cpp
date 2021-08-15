@@ -129,7 +129,7 @@ void MainWindow::quizVocab(){
 void MainWindow::quizVocabNWordKnow(){
     clearLayout(ui->widget->layout());
 
-    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NFirstWordKnow);
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NRandomWordKnow);
     ui->widget->layout()->addWidget(widgetQuizVocab);
     disablingMenu();
     listButtonForVocab.clear();
@@ -139,7 +139,7 @@ void MainWindow::quizVocabNWordKnow(){
 void MainWindow::quizVocabNWordNotKnow(){
     clearLayout(ui->widget->layout());
 
-    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NFirstWordNotKnow);
+    WidgetQuizVocab *widgetQuizVocab = new WidgetQuizVocab(getNameVocab(), WidgetQuizVocab::NRandomWordNotKnow);
     ui->widget->layout()->addWidget(widgetQuizVocab);
     disablingMenu();
     listButtonForVocab.clear();

@@ -46,6 +46,8 @@
      <addaction name="actionRandomNWord"/>
      <addaction name="actionRandomNWordNotKnow"/>
      <addaction name="actionRandomNWordKnow"/>
+     <addaction name="actionNFirstWordNotKnow"/>
+     <addaction name="actionNFirstWordKnow"/>
     </widget>
     <addaction name="actionDisplayList"/>
     <addaction name="menuQuiz"/>
@@ -136,6 +138,16 @@
   <action name="actionRandomNWordKnow">
    <property name="text">
     <string>quiz aléatoire sur les mots connus</string>
+   </property>
+  </action>
+  <action name="actionNFirstWordNotKnow">
+   <property name="text">
+    <string>quiz sur les N premiers mots pas connus</string>
+   </property>
+  </action>
+  <action name="actionNFirstWordKnow">
+   <property name="text">
+    <string>quiz sur les N premiers mots connus</string>
    </property>
   </action>
  </widget>

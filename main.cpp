@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 
-#include "DAO/initdao.h"
-
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -21,7 +19,6 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    new InitDao();
     MainWindow w;
     w.show();
     return a.exec();

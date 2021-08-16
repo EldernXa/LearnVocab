@@ -1,18 +1,17 @@
 #include "initdao.h"
 
-using std::filesystem::exists;
-
 InitDao::InitDao()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("data/LearnVocab.db");
+    db.setDatabaseName(QString("%1/%2").arg(QString::fromStdString(nameDirectory), QString::fromStdString(nameDatabaseFile)));
 
-    if(!exists("data/LearnVocab.db")){
-        const char* path = "data";
-        std::filesystem::path dir(path);
-        std::filesystem::create_directory(dir);
+    QDir dir(QString("%1/%2").arg(QString::fromStdString(nameDirectory), QString::fromStdString(nameDatabaseFile)));
+
+    if(!dir.exists()){
+        QDir().mkdir(QString::fromStdString(nameDirectory));
         std::fstream fs;
-        fs.open("data/LearnVocab.db", std::ios::out);
+        fs.open(QString("%1/%2").arg(QString::fromStdString(nameDirectory), QString::fromStdString(nameDatabaseFile)).toStdString()
+                , std::ios::out);
         fs.close();
     }
 

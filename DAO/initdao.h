@@ -5,16 +5,20 @@
 #include <QDebug>
 #include <QSqlError>
 
-
-#include <filesystem>
+#include <QDir>
 #include <fstream>
 #include <ios>
 
+using namespace std;
 
 class InitDao
 {
 public:
     InitDao();
+
+private:
+    const string nameDirectory = "data";
+    const string nameDatabaseFile = "LearnVocab.db";
 };
 
 #endif // INITDAO_H

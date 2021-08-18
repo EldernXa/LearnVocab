@@ -7,6 +7,7 @@
 
 #include <QLineEdit>
 #include <QVector>
+#include <QDir>
 
 #include "readervocab.h"
 #include "CstFile/cststatic.h"

@@ -2,6 +2,10 @@
 
 WriterVocab::WriterVocab(string nameVocab, int numberOfColumns, vector<string> listNameColumn)
 {
+    QDir dir(QString::fromStdString(CstStatic::getPathToVocabFile()));
+    if(!dir.exists()){
+        QDir().mkdir(QString::fromStdString(CstStatic::getPathToVocabFile()));
+    }
     fileVocabToWrite.open(CstStatic::getPathToVocabFile()+nameVocab+".vocab", ios::out);
     writeNumberColumns(numberOfColumns);
     writeListNameColumn(listNameColumn);

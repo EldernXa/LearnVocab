@@ -79,11 +79,9 @@ void WidgetQuizVocab::startingQuiz(){
                 QLabel *lbl = new QLabel;
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
-                lbl->setFixedWidth(200);
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-                lineEdit->setFixedWidth(200);
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }

@@ -9,6 +9,7 @@
 
 #include <QWidget>
 #include <QLineEdit>
+#include <QScreen>
 
 #include "widgetquizvocablaststep.h"
 #include "ModifyVocab/readervocab.h"
@@ -40,11 +41,13 @@ private:
     int numberOfWord = 0;
     int actualWord=0;
     bool firstWord = false;
+    int const CST_LIMIT_SIZE = 25;
 
     void saveVocabWord();
     void enableEvent();
     void startingQuiz();
     void clearLayout(QLayout*, bool deleteWidgets = true);
+    int getNewSizeFont();
 
 private slots:
     void saveNumberOfWord();

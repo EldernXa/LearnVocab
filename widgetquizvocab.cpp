@@ -9,6 +9,7 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
     nameVocab = nameVocabToQuiz;
     //saveVocabWord();
     ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
+    numberOfColumn = readerVocab->getNumberOfColumns();
     if(quizType == randomNWord){
         listWord = readerVocab->getListWord();
     }else if(quizType == NRandomWordKnow || quizType == NFirstWordKnow){
@@ -49,7 +50,6 @@ void WidgetQuizVocab::saveNumberOfWord(){
             auto rd = random_device{};
             auto rng = default_random_engine{rd()};
             shuffle(begin(listWord), begin(listWord)+numberOfWord, rng);
-            //cout << listWord.at(0)->at(0)->at(0) << endl;
             startingQuiz();
         }
     }
@@ -77,11 +77,19 @@ void WidgetQuizVocab::startingQuiz(){
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
+                QFont font = lbl->font();
+                font.setPointSize(getNewSizeFont());
+                lbl->setFont(font);
+                lbl->setMinimumWidth(this->width()/numberOfColumn);
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
+                QFont font = lineEdit->font();
+                // init size 11.
+                font.setPointSize(getNewSizeFont());
+                lineEdit->setFont(font);
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
@@ -94,6 +102,11 @@ void WidgetQuizVocab::startingQuiz(){
 
     connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
     connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(nextVocab()));
+}
+
+int WidgetQuizVocab::getNewSizeFont(){
+    return max(CST_LIMIT_SIZE - (qApp->screens()[0]->size().width()*0.01 - this->width()*0.01),
+            CST_LIMIT_SIZE - (qApp->screens()[0]->size().height()*0.01 - this->height() * 0.01));
 }
 
 void WidgetQuizVocab::nextVocab(){
@@ -118,13 +131,20 @@ void WidgetQuizVocab::nextVocab(){
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
+                lbl->setMinimumWidth(this->width()/numberOfColumn);
+                QFont font = lbl->font();
+                font.setPointSize(getNewSizeFont());
+                lbl->setFont(font);
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
-                lbl->setFixedWidth(200);
+                //lbl->setFixedWidth(200);
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-                lineEdit->setFixedWidth(200);
+                QFont font = lineEdit->font();
+                font.setPointSize(getNewSizeFont());
+                lineEdit->setFont(font);
+                //lineEdit->setFixedWidth(200);
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
@@ -152,7 +172,10 @@ void WidgetQuizVocab::correctVocab(){
             QLabel *lbl = new QLabel;
             lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
             lbl->setAlignment(Qt::AlignCenter);
-            lbl->setFixedWidth(200);
+            //lbl->setFixedWidth(200);
+            QFont font = lbl->font();
+            font.setPointSize(getNewSizeFont());
+            lbl->setFont(font);
 
             if(randNum != i){
                 int num;

@@ -83,6 +83,7 @@ void WidgetQuizVocab::startingQuiz(){
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
+                listLbl.push_back(lbl);
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
@@ -104,6 +105,25 @@ void WidgetQuizVocab::startingQuiz(){
     connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(nextVocab()));
 }
 
+void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
+    for(unsigned int i = 0; i<listLineEdit.size(); i++){
+        for(unsigned int j=0; j<listLineEdit.at(i)->size(); j++){
+            QLineEdit *lineEdit = listLineEdit.at(i)->at(j);
+            QFont font = lineEdit->font();
+            font.setPointSize(getNewSizeFont());
+            lineEdit->setFont(font);
+        }
+    }
+
+    for(QLabel *lbl : listLbl){
+        QFont font = lbl->font();
+        font.setPointSize(getNewSizeFont());
+        lbl->setFont(font);
+        lbl->setMinimumWidth(this->width()/numberOfColumn);
+    }
+    QWidget::resizeEvent(resizeEvent);
+}
+
 int WidgetQuizVocab::getNewSizeFont(){
     return max(CST_LIMIT_SIZE - (qApp->screens()[0]->size().width()*0.01 - this->width()*0.01),
             CST_LIMIT_SIZE - (qApp->screens()[0]->size().height()*0.01 - this->height() * 0.01));
@@ -120,6 +140,7 @@ void WidgetQuizVocab::nextVocab(){
     widgetQuizLastStep->getConfirmButton()->setEnabled(true);
     widgetQuizLastStep->getNextWordBtn()->setEnabled(false);
     listLineEdit.clear(); // TODO delete all widget inside instead of clear it.
+    listLbl.clear(); // TODO delete all widget here to instead of just clear it.
     srand(time(NULL));
     randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
     QHBoxLayout* vBoxLayout = new QHBoxLayout;
@@ -139,6 +160,7 @@ void WidgetQuizVocab::nextVocab(){
                 lbl->setAlignment(Qt::AlignCenter);
                 //lbl->setFixedWidth(200);
                 layout->addWidget(lbl);
+                listLbl.push_back(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
                 QFont font = lineEdit->font();

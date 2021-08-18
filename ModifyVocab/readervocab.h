@@ -10,6 +10,7 @@
 
 #include <QVector>
 #include <QString>
+#include "CstFile/cststatic.h"
 
 using namespace std;
 

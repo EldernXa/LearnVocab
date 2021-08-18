@@ -18,6 +18,7 @@
 #include "addword.h"
 #include "removeword.h"
 #include "modifyword.h"
+#include "CstFile/cststatic.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

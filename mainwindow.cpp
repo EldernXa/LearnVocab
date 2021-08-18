@@ -33,7 +33,7 @@ void MainWindow::enablingMenu(){
 void MainWindow::getVocab(QScrollArea *scrollArea){
     DIR *dir;
     struct dirent *ent;
-    if((dir = opendir("./")) != NULL){
+    if((dir = opendir(CstStatic::getPathToVocabFile().c_str())) != NULL){
         while((ent = readdir(dir)) != NULL){
             std::vector<std::string> list = split(ent->d_name, '.');
             if(list.at(list.size()-1).compare("vocab") == 0){

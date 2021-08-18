@@ -57,6 +57,9 @@ void WidgetNewVocab::runFirstButton(){
 void WidgetNewVocab::valideNameColumn(){
 
     if(verifLineEdit()){
+        for(QLineEdit* lineEdit : listLineEdit){
+            listNameColumn.push_back(lineEdit->text().toStdString());
+        }
         writerVocab = new WriterVocab(nameVocab, numberOfColumn, listNameColumn);
 
         startLastStep();
@@ -69,7 +72,6 @@ void WidgetNewVocab::startLastStep(){
     clearLayout(ui->widget_2->layout());
 
     WidgetNewVocabLastStep *widgetLastStep = new WidgetNewVocabLastStep;
-
     for(unsigned int i=0; i<listNameColumn.size(); i++){
 
         QPushButton *buttonAddWord = new QPushButton;

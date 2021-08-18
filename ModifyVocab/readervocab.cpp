@@ -2,8 +2,8 @@
 
 ReaderVocab::ReaderVocab(string nameVocab)
 {
-    this->nameVocab = nameVocab;
-    fileVocab.open(nameVocab+".vocab", ios::in);
+    this->nameVocab = CstStatic::getPathToVocabFile()+nameVocab;
+    fileVocab.open(this->nameVocab+".vocab", ios::in);
     string value;
     getline(fileVocab, value);
     numberOfColumn = stoi(value);

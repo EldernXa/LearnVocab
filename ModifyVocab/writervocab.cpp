@@ -2,7 +2,7 @@
 
 WriterVocab::WriterVocab(string nameVocab, int numberOfColumns, vector<string> listNameColumn)
 {
-    fileVocabToWrite.open(nameVocab+".vocab", ios::out);
+    fileVocabToWrite.open(CstStatic::getPathToVocabFile()+nameVocab+".vocab", ios::out);
     writeNumberColumns(numberOfColumns);
     writeListNameColumn(listNameColumn);
 }

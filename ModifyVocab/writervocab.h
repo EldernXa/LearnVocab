@@ -9,6 +9,7 @@
 #include <QVector>
 
 #include "readervocab.h"
+#include "CstFile/cststatic.h"
 
 using namespace std;
 

@@ -21,7 +21,7 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
     if(quizType == NFirstWordKnow || quizType == NFirstWordNotKnow){
         firstWord = true;
     }
-
+    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->width(), this->height());
     ui->widget->getLblMaxWord()->setText(tr("(Le nombre maximale permis est %1)").arg(listWord.size()));
     enableEvent();
 }
@@ -77,9 +77,10 @@ void WidgetQuizVocab::startingQuiz(){
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
-                QFont font = lbl->font();
-                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-                lbl->setFont(font);
+//                QFont font = lbl->font();
+//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//                lbl->setFont(font);
+                GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
@@ -87,10 +88,10 @@ void WidgetQuizVocab::startingQuiz(){
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-                QFont font = lineEdit->font();
-                // init size 11.
-                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-                lineEdit->setFont(font);
+//                QFont font = lineEdit->font();
+//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//                lineEdit->setFont(font);
+                GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
@@ -109,16 +110,18 @@ void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
     for(unsigned int i = 0; i<listLineEdit.size(); i++){
         for(unsigned int j=0; j<listLineEdit.at(i)->size(); j++){
             QLineEdit *lineEdit = listLineEdit.at(i)->at(j);
-            QFont font = lineEdit->font();
-            font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-            lineEdit->setFont(font);
+//            QFont font = lineEdit->font();
+//            font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//            lineEdit->setFont(font);
+            GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
         }
     }
 
     for(QLabel *lbl : listLbl){
-        QFont font = lbl->font();
-        font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-        lbl->setFont(font);
+//        QFont font = lbl->font();
+//        font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//        lbl->setFont(font);
+        GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
         lbl->setMinimumWidth(this->width()/numberOfColumn);
     }
     QWidget::resizeEvent(resizeEvent);
@@ -153,9 +156,10 @@ void WidgetQuizVocab::nextVocab(){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
-                QFont font = lbl->font();
-                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-                lbl->setFont(font);
+//                QFont font = lbl->font();
+//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//                lbl->setFont(font);
+                GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
                 //lbl->setFixedWidth(200);
@@ -163,9 +167,10 @@ void WidgetQuizVocab::nextVocab(){
                 listLbl.push_back(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-                QFont font = lineEdit->font();
-                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-                lineEdit->setFont(font);
+//                QFont font = lineEdit->font();
+//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//                lineEdit->setFont(font);
+                GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
                 //lineEdit->setFixedWidth(200);
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
@@ -195,9 +200,10 @@ void WidgetQuizVocab::correctVocab(){
             lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
             lbl->setAlignment(Qt::AlignCenter);
             //lbl->setFixedWidth(200);
-            QFont font = lbl->font();
-            font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-            lbl->setFont(font);
+//            QFont font = lbl->font();
+//            font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
+//            lbl->setFont(font);
+            GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
 
             if(randNum != i){
                 int num;

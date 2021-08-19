@@ -3,14 +3,21 @@
 
 #include <QApplication>
 #include <QScreen>
+#include <QLabel>
+#include <QLineEdit>
 
 class GlobalFct
 {
 public:
     GlobalFct();
-    int static getNewSizeFont(int, int);
+    void static changeSizeFontOfLbl(QLabel*, int, int);
+    void static changeSizeFontOfLineEdit(QLineEdit*, int, int);
 
 private:
+    int static getNewSizeFont(int, int);
+
+
+
     int static const CST_LIMIT_SIZE = 25;
 };
 

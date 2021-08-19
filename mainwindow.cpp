@@ -98,10 +98,7 @@ void MainWindow::removeVocab(){
                                     QMessageBox::Yes, QMessageBox::No);
     if(rep == QMessageBox::Yes){
         // TODO change there.
-        cout << "coucou" << endl;
-        QDir dir(QString::fromStdString(CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile()));
-        cout << CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile() << endl;
-        cout << QDir().remove(QString::fromStdString(CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile())) << endl;
+        QDir().remove(QString::fromStdString(CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile()));
         disablingMenu();
         listButtonForVocab.clear();
         clearLayout(ui->widget->layout());

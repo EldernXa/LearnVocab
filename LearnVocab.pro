@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     CstFile/cststatic.cpp \
+    CstFile/globalfct.cpp \
     addword.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
     CstFile/cststatic.h \
+    CstFile/globalfct.h \
     addword.h \
     mainwindow.h \
     modifyword.h \

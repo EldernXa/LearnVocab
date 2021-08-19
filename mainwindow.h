@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QWidget>
+#include <QMessageBox>
 
 #include "widgetmainwindow.h"
 #include "widgetdisplayvocab.h"
@@ -57,6 +58,7 @@ private slots :
     void addWordIntoVocab();
     void modifyVocab();
     void removeWordFromVocab();
+    void removeVocab();
     void restoreMainWidget();
 };
 #endif // MAINWINDOW_H

@@ -3,6 +3,7 @@
 ReaderVocab::ReaderVocab(string nameVocab)
 {
     this->nameVocab = CstStatic::getPathToVocabFile()+nameVocab;
+    // TODO use the cst for the format.
     fileVocab.open(this->nameVocab+".vocab", ios::in);
     string value;
     getline(fileVocab, value);

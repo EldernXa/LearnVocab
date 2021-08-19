@@ -88,7 +88,25 @@ void MainWindow::enableEvent(){
     connect(ui->actionRandomNWordNotKnow, SIGNAL(triggered()), this, SLOT(quizVocabNWordNotKnow()));
     connect(ui->actionNFirstWordKnow, SIGNAL(triggered()), this, SLOT(quizVocabNFirstWordKnow()));
     connect(ui->actionNFirstWordNotKnow, SIGNAL(triggered()), this, SLOT(quizVocabNFirstWordNotKnow()));
+    connect(ui->actionRemoveVoc, SIGNAL(triggered()), this, SLOT(removeVocab()));
 
+}
+
+void MainWindow::removeVocab(){
+    int rep = QMessageBox::warning(this, tr("Supprimer le vocabulaire"),
+                                    tr("Voulez-vous vraiment supprimer le vocabulaire %1 ?").arg(QString::fromStdString(getNameVocab())),
+                                    QMessageBox::Yes, QMessageBox::No);
+    if(rep == QMessageBox::Yes){
+        // TODO change there.
+        cout << "coucou" << endl;
+        QDir dir(QString::fromStdString(CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile()));
+        cout << CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile() << endl;
+        cout << QDir().remove(QString::fromStdString(CstStatic::getPathToVocabFile()+getNameVocab()+CstStatic::getFormatVocabFile())) << endl;
+        disablingMenu();
+        listButtonForVocab.clear();
+        clearLayout(ui->widget->layout());
+        restoreMainWidget();
+    }
 }
 
 void MainWindow::addWordIntoVocab(){

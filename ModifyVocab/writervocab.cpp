@@ -1,5 +1,8 @@
 #include "writervocab.h"
 
+// TODO use the cst for the format for the different constructor.
+// TODO change the path for the other constructor.
+
 WriterVocab::WriterVocab(string nameVocab, int numberOfColumns, vector<string> listNameColumn)
 {
     QDir dir(QString::fromStdString(CstStatic::getPathToVocabFile()));

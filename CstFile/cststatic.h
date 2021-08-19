@@ -10,9 +10,11 @@ class CstStatic
 public:
     CstStatic();
     static string getPathToVocabFile();
+    static string getFormatVocabFile();
 
 private:
     static const string pathVocabFile;
+    static const string formatVocabFile;
 };
 
 #endif // CSTSTATIC_H

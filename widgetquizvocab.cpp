@@ -248,7 +248,9 @@ void WidgetQuizVocab::clearLayout(QLayout* layout, bool deleteWidgets){
 
 WidgetQuizVocab::~WidgetQuizVocab()
 {
-    delete widgetQuizLastStep;
+    if(widgetQuizLastStep != nullptr){
+        delete widgetQuizLastStep;
+    }
     delete ui;
 }
 

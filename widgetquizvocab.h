@@ -35,7 +35,7 @@ protected:
 
 private:
     Ui::WidgetQuizVocab *ui;
-    WidgetQuizVocabLastStep *widgetQuizLastStep;
+    WidgetQuizVocabLastStep *widgetQuizLastStep = nullptr;
     string nameVocab;
     int numberOfColumn;
     int randNum;

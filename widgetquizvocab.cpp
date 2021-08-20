@@ -50,6 +50,7 @@ void WidgetQuizVocab::saveNumberOfWord(){
 }
 
 void WidgetQuizVocab::startingQuiz(){
+    isFirstStep = false;
     clearLayout(ui->widget->layout());
     widgetQuizLastStep = new WidgetQuizVocabLastStep;
     srand(time(NULL));
@@ -101,6 +102,11 @@ void WidgetQuizVocab::startingQuiz(){
 }
 
 void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
+    if(isFirstStep){
+        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblTitle(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfPushButton(ui->widget->getValidButton(), this->width(), this->height());
+    }
     for(unsigned int i = 0; i<listLineEdit.size(); i++){
         for(unsigned int j=0; j<listLineEdit.at(i)->size(); j++){
             QLineEdit *lineEdit = listLineEdit.at(i)->at(j);

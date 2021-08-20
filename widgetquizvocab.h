@@ -46,6 +46,7 @@ private:
     int numberOfWord = 0;
     int actualWord=0;
     bool firstWord = false;
+    bool isFirstStep = true;
 
     void enableEvent();
     void startingQuiz();

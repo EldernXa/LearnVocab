@@ -10,6 +10,7 @@ WidgetNewVocab::WidgetNewVocab(QWidget *parent) :
 {
     ui->setupUi(this);
     enableEventForFirstStep();
+
 }
 
 void WidgetNewVocab::enableEventForFirstStep(){
@@ -36,6 +37,7 @@ void WidgetNewVocab::runFirstButton(){
                 numberOfColumn = ui->widget_2->getLineEditNumberOfColumn()->text().toInt();
                 clearLayout(ui->widget_2->layout());
                 WidgetNewVocabSecondStep *widgetSecondStep = new WidgetNewVocabSecondStep;
+                step = secondStep;
                 listLineEdit.push_back(widgetSecondStep->getFirstLineEdit());
                 listLineEdit.push_back(widgetSecondStep->getSecondLineEdit());
 
@@ -221,6 +223,18 @@ void WidgetNewVocab::clearLayout(QLayout *layout, bool deleteWidgets){
         delete item;
     }
 
+}
+
+void WidgetNewVocab::resizeEvent(QResizeEvent* event){
+    if(step == initStep){
+        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getLabelError(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLineEdit(ui->widget_2->getLineEditForName(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLineEdit(ui->widget_2->getLineEditNumberOfColumn(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfPushButton(ui->widget_2->getButton(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNameLabel(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNumberColumnLabel(), this->width(), this->height());
+    }
+    QWidget::resizeEvent(event);
 }
 
 WidgetNewVocab::~WidgetNewVocab()

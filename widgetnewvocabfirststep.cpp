@@ -28,6 +28,10 @@ QLabel* WidgetNewVocabFirstStep::getNameLabel(){
     return ui->labelForName;
 }
 
+QLabel* WidgetNewVocabFirstStep::getNumberColumnLabel(){
+    return ui->labelNumberColumn;
+}
+
 WidgetNewVocabFirstStep::~WidgetNewVocabFirstStep()
 {
     delete ui;

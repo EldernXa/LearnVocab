@@ -17,6 +17,7 @@
 #include "widgetnewvocabsecondstep.h"
 #include "widgetnewvocablaststep.h"
 #include "ModifyVocab/writervocab.h"
+#include "CstFile/globalfct.h"
 
 using namespace std;
 
@@ -34,7 +35,11 @@ public:
 
     static const unsigned int LIMIT_NUMBER_WORD = 5;
 
+protected:
+    void resizeEvent(QResizeEvent*);
+
 private:
+    enum StepNewVocab{initStep, secondStep, lastStep};
     void enableEventForFirstStep();
     void clearLayout(QLayout *layout, bool deleteWidgets = true);
     bool verifLineEdit();
@@ -61,6 +66,8 @@ private:
     //fstream fileToSaveVocab;
 
     QLabel *lblLastWord = nullptr;
+
+    StepNewVocab step = initStep;
 
     const int WIDTH_LINE_EDIT_WORD = 40;
     const int HEIGHT_LINE_EDIT_WORD = 40;

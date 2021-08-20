@@ -22,6 +22,7 @@ public:
     QLineEdit *getLineEditForName();
     QLineEdit *getLineEditNumberOfColumn();
     QLabel* getNameLabel();
+    QLabel* getNumberColumnLabel();
 
 private:
     Ui::WidgetNewVocabFirstStep *ui;

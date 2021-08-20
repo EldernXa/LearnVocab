@@ -14,8 +14,12 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
     QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumns);
     for(auto &nameColumn : readerVocab->getColumnName()){
         QLabel *lblNameColumn = new QLabel;
+
+        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->width(), this->height());
+
         lblNameColumn->setText(QString::fromStdString(nameColumn));
         lblNameColumn->setAlignment(Qt::AlignCenter);
+        listLblNameColumn.push_back(lblNameColumn);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
     QFrame *frameVLine = new QFrame;
@@ -28,19 +32,17 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         QWidget *widgetForNameWord = new QWidget;
         ui->widget->layout()->addWidget(widgetForNameWord);
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
-        unsigned int multiply_value = 1;
         for(unsigned int j = 0; j<valueToDisplay.size(); j++){
             vector<string> differentValueForAWord = readerVocab->getWordSplitedFromLineSplited(i, j);
-            if(differentValueForAWord.size()>1){
+            //if(differentValueForAWord.size()>1){
                 QWidget *widgetForAWord = new QWidget;
                 QVBoxLayout *layoutForAWord = new QVBoxLayout(widgetForAWord);
                 layoutForAWord->setSpacing(0);
-                if(differentValueForAWord.size()>multiply_value){
-                    multiply_value = differentValueForAWord.size();
-                }
 
                 for(auto& word : differentValueForAWord){
                     QLabel *lblNameWord = new QLabel;
+                    GlobalFct::changeSizeFontOfLbl(lblNameWord, this->width(), this->height());
+                    listLblWord.push_back(lblNameWord);
                     lblNameWord->setAlignment(Qt::AlignCenter);
                     lblNameWord->setText(QString::fromStdString(word));
                     if(verifIsKnown){
@@ -51,17 +53,17 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
                     layoutForAWord->addWidget(lblNameWord);
                 }
                 layoutForNameWord->addWidget(widgetForAWord);
-            }else{
-                QLabel *lblNameWord = new QLabel;
-                lblNameWord->setAlignment(Qt::AlignCenter);
-                lblNameWord->setText(QString::fromStdString(valueToDisplay.at(j)));
-                if(verifIsKnown){
-                    lblNameWord->setStyleSheet("QLabel {color:green;}");
-                }else{
-                    lblNameWord->setStyleSheet("QLabel {color:red;}");
-                }
-                layoutForNameWord->addWidget(lblNameWord);
-            }
+//            }else{
+//                QLabel *lblNameWord = new QLabel;
+//                lblNameWord->setAlignment(Qt::AlignCenter);
+//                lblNameWord->setText(QString::fromStdString(valueToDisplay.at(j)));
+//                if(verifIsKnown){
+//                    lblNameWord->setStyleSheet("QLabel {color:green;}");
+//                }else{
+//                    lblNameWord->setStyleSheet("QLabel {color:red;}");
+//                }
+//                layoutForNameWord->addWidget(lblNameWord);
+//            }
         }
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);
@@ -69,6 +71,16 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
         ui->widget->layout()->addItem(itemSpacer);
     }
+}
+
+void WidgetDisplayVocab::resizeEvent(QResizeEvent *event){
+    for(QLabel *lbl : listLblNameColumn){
+        GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+    }
+    for(QLabel *lbl : listLblWord){
+        GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+    }
+    QWidget::resizeEvent(event);
 }
 
 std::vector<std::string> WidgetDisplayVocab::split(const std::string& s, char delimiter){

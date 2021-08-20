@@ -14,6 +14,7 @@
 #include <QSpacerItem>
 
 #include "ModifyVocab/readervocab.h"
+#include "CstFile/globalfct.h"
 
 using namespace std;
 
@@ -36,12 +37,18 @@ public:
 private slots:
     void on_buttonBack_clicked();
 
+protected:
+    void resizeEvent(QResizeEvent *);
+
 private:
     vector<string> split(const string&, char delimiter);
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocabToDisplay;
     QScrollArea *scrollArea;
+
+    vector<QLabel*> listLblNameColumn;
+    vector<QLabel*> listLblWord;
 
     Ui::WidgetDisplayVocab *ui;
 };

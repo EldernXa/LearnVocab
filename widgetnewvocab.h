@@ -67,6 +67,8 @@ private:
 
     QLabel *lblLastWord = nullptr;
 
+    WidgetNewVocabSecondStep *widgetSecondStep = nullptr;
+
     StepNewVocab step = initStep;
 
     const int WIDTH_LINE_EDIT_WORD = 40;

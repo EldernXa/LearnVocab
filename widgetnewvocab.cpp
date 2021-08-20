@@ -36,18 +36,24 @@ void WidgetNewVocab::runFirstButton(){
                 nameVocab = ui->widget_2->getLineEditForName()->text().toStdString();
                 numberOfColumn = ui->widget_2->getLineEditNumberOfColumn()->text().toInt();
                 clearLayout(ui->widget_2->layout());
-                WidgetNewVocabSecondStep *widgetSecondStep = new WidgetNewVocabSecondStep;
+
+                widgetSecondStep = new WidgetNewVocabSecondStep;
                 step = secondStep;
                 listLineEdit.push_back(widgetSecondStep->getFirstLineEdit());
                 listLineEdit.push_back(widgetSecondStep->getSecondLineEdit());
+                GlobalFct::changeSizeFontOfLineEdit(widgetSecondStep->getFirstLineEdit(), this->width(), this->height());
+                GlobalFct::changeSizeFontOfLineEdit(widgetSecondStep->getSecondLineEdit(), this->width(), this->height());
 
 
                 for(int i=0; i<numberOfColumn-2;i++){
                     QLineEdit *qlineEdit = new QLineEdit;
+                    GlobalFct::changeSizeFontOfLineEdit(qlineEdit, this->width(), this->height());
                     listLineEdit.push_back(qlineEdit);
                     widgetSecondStep->addWidgetToLayout(qlineEdit);
                 }
                 errorLabelForNameColumn = widgetSecondStep->getErrorLabel();
+                GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->width(), this->height());
+                GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->width(), this->height());
                 connect(widgetSecondStep->getValidButton(), SIGNAL(clicked()), this, SLOT(valideNameColumn()));
 
                 ui->widget_2->layout()->addWidget(widgetSecondStep);
@@ -233,6 +239,12 @@ void WidgetNewVocab::resizeEvent(QResizeEvent* event){
         GlobalFct::changeSizeFontOfPushButton(ui->widget_2->getButton(), this->width(), this->height());
         GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNameLabel(), this->width(), this->height());
         GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNumberColumnLabel(), this->width(), this->height());
+    }else if(step == secondStep){
+        for(QLineEdit *lineEdit : listLineEdit){
+            GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
+        }
+        GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->width(), this->height());
+        GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->width(), this->height());
     }
     QWidget::resizeEvent(event);
 }

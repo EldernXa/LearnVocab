@@ -7,7 +7,6 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
 {
     ui->setupUi(this);
     nameVocab = nameVocabToQuiz;
-    //saveVocabWord();
     ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
     numberOfColumn = readerVocab->getNumberOfColumns();
     if(quizType == randomNWord){
@@ -28,11 +27,6 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
 
 void WidgetQuizVocab::enableEvent(){
     connect(ui->widget->getValidButton(), SIGNAL(clicked()), this, SLOT(saveNumberOfWord()));
-}
-
-void WidgetQuizVocab::saveVocabWord(){
-    ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
-    listWord = readerVocab->getListWord();
 }
 
 void WidgetQuizVocab::saveNumberOfWord(){

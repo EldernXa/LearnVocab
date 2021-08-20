@@ -47,7 +47,6 @@ private:
     int actualWord=0;
     bool firstWord = false;
 
-    void saveVocabWord();
     void enableEvent();
     void startingQuiz();
     void clearLayout(QLayout*, bool deleteWidgets = true);

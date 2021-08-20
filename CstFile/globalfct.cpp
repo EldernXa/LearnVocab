@@ -20,4 +20,10 @@ void GlobalFct::changeSizeFontOfLineEdit(QLineEdit *lineEdit, int width, int hei
     lineEdit->setFont(font);
 }
 
+void GlobalFct::changeSizeFontOfPushButton(QPushButton *btn, int width, int height){
+    QFont font = btn->font();
+    font.setPointSize(getNewSizeFont(width, height));
+    btn->setFont(font);
+}
+
 

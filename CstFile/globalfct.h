@@ -5,6 +5,7 @@
 #include <QScreen>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 
 class GlobalFct
 {
@@ -12,6 +13,7 @@ public:
     GlobalFct();
     void static changeSizeFontOfLbl(QLabel*, int, int);
     void static changeSizeFontOfLineEdit(QLineEdit*, int, int);
+    void static changeSizeFontOfPushButton(QPushButton*, int, int);
 
 private:
     int static getNewSizeFont(int, int);

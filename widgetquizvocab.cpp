@@ -72,9 +72,6 @@ void WidgetQuizVocab::startingQuiz(){
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
-//                QFont font = lbl->font();
-//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//                lbl->setFont(font);
                 GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
@@ -83,9 +80,6 @@ void WidgetQuizVocab::startingQuiz(){
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-//                QFont font = lineEdit->font();
-//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//                lineEdit->setFont(font);
                 GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
@@ -118,27 +112,16 @@ void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
     for(unsigned int i = 0; i<listLineEdit.size(); i++){
         for(unsigned int j=0; j<listLineEdit.at(i)->size(); j++){
             QLineEdit *lineEdit = listLineEdit.at(i)->at(j);
-//            QFont font = lineEdit->font();
-//            font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//            lineEdit->setFont(font);
             GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
         }
     }
 
     for(QLabel *lbl : listLbl){
-//        QFont font = lbl->font();
-//        font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//        lbl->setFont(font);
         GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
         lbl->setMinimumWidth(this->width()/numberOfColumn);
     }
     QWidget::resizeEvent(resizeEvent);
 }
-
-//int WidgetQuizVocab::getNewSizeFont(){
-//    return max(CST_LIMIT_SIZE - (qApp->screens()[0]->size().width()*0.01 - this->width()*0.01),
-//            CST_LIMIT_SIZE - (qApp->screens()[0]->size().height()*0.01 - this->height() * 0.01));
-//}
 
 void WidgetQuizVocab::nextVocab(){
     actualWord++;
@@ -164,22 +147,14 @@ void WidgetQuizVocab::nextVocab(){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
-//                QFont font = lbl->font();
-//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//                lbl->setFont(font);
                 GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
-                //lbl->setFixedWidth(200);
                 layout->addWidget(lbl);
                 listLbl.push_back(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-//                QFont font = lineEdit->font();
-//                font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//                lineEdit->setFont(font);
                 GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
-                //lineEdit->setFixedWidth(200);
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
@@ -207,10 +182,6 @@ void WidgetQuizVocab::correctVocab(){
             QLabel *lbl = new QLabel;
             lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
             lbl->setAlignment(Qt::AlignCenter);
-            //lbl->setFixedWidth(200);
-//            QFont font = lbl->font();
-//            font.setPointSize(GlobalFct::getNewSizeFont(this->width(), this->height()));
-//            lbl->setFont(font);
             GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
 
             if(randNum != i){

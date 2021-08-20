@@ -93,6 +93,9 @@ void WidgetQuizVocab::startingQuiz(){
         }
         vBoxLayout->addLayout(layout);
     }
+    GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->width(), this->height());
+    GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getConfirmButton(), this->width(), this->height());
+    GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getNextWordBtn(), this->width(), this->height());
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
     widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(numberOfWord));
     ui->widget->layout()->addWidget(widgetQuizLastStep);
@@ -107,6 +110,10 @@ void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
         GlobalFct::changeSizeFontOfLbl(ui->widget->getLblTitle(), this->width(), this->height());
         GlobalFct::changeSizeFontOfLbl(ui->widget->getLblError(), this->width(), this->height());
         GlobalFct::changeSizeFontOfPushButton(ui->widget->getValidButton(), this->width(), this->height());
+    }else if(widgetQuizLastStep != nullptr){
+        GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getConfirmButton(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getNextWordBtn(), this->width(), this->height());
     }
     for(unsigned int i = 0; i<listLineEdit.size(); i++){
         for(unsigned int j=0; j<listLineEdit.at(i)->size(); j++){

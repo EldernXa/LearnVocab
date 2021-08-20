@@ -34,7 +34,6 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
         QHBoxLayout *layoutForNameWord = new QHBoxLayout(widgetForNameWord);
         for(unsigned int j = 0; j<valueToDisplay.size(); j++){
             vector<string> differentValueForAWord = readerVocab->getWordSplitedFromLineSplited(i, j);
-            //if(differentValueForAWord.size()>1){
                 QWidget *widgetForAWord = new QWidget;
                 QVBoxLayout *layoutForAWord = new QVBoxLayout(widgetForAWord);
                 layoutForAWord->setSpacing(0);
@@ -53,17 +52,6 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
                     layoutForAWord->addWidget(lblNameWord);
                 }
                 layoutForNameWord->addWidget(widgetForAWord);
-//            }else{
-//                QLabel *lblNameWord = new QLabel;
-//                lblNameWord->setAlignment(Qt::AlignCenter);
-//                lblNameWord->setText(QString::fromStdString(valueToDisplay.at(j)));
-//                if(verifIsKnown){
-//                    lblNameWord->setStyleSheet("QLabel {color:green;}");
-//                }else{
-//                    lblNameWord->setStyleSheet("QLabel {color:red;}");
-//                }
-//                layoutForNameWord->addWidget(lblNameWord);
-//            }
         }
         QFrame *frameLine = new QFrame;
         ui->widget->layout()->addWidget(frameLine);

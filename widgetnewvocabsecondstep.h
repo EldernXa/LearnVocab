@@ -22,6 +22,7 @@ public:
     QLineEdit *getSecondLineEdit();
     QPushButton *getValidButton();
     QLabel *getErrorLabel();
+    QLabel *getLblNameColumn();
     void addWidgetToLayout(QWidget*);
 
 private:

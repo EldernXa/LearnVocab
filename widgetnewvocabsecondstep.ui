@@ -30,7 +30,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="labelNameColumn">
        <property name="maximumSize">
         <size>
          <width>16777215</width>

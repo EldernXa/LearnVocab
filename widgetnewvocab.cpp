@@ -54,6 +54,7 @@ void WidgetNewVocab::runFirstButton(){
                 errorLabelForNameColumn = widgetSecondStep->getErrorLabel();
                 GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->width(), this->height());
                 GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->width(), this->height());
+                GlobalFct::changeSizeFontOfLbl(widgetSecondStep->getLblNameColumn(), this->width(), this->height());
                 connect(widgetSecondStep->getValidButton(), SIGNAL(clicked()), this, SLOT(valideNameColumn()));
 
                 ui->widget_2->layout()->addWidget(widgetSecondStep);
@@ -245,6 +246,7 @@ void WidgetNewVocab::resizeEvent(QResizeEvent* event){
         }
         GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->width(), this->height());
         GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(widgetSecondStep->getLblNameColumn(), this->width(), this->height());
     }
     QWidget::resizeEvent(event);
 }

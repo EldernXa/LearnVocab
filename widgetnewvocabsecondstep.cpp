@@ -28,6 +28,10 @@ QLabel* WidgetNewVocabSecondStep::getErrorLabel(){
     return ui->errorLabelForNameColumn;
 }
 
+QLabel* WidgetNewVocabSecondStep::getLblNameColumn(){
+    return ui->labelNameColumn;
+}
+
 WidgetNewVocabSecondStep::~WidgetNewVocabSecondStep()
 {
     delete ui;

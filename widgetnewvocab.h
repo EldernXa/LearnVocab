@@ -70,6 +70,7 @@ private:
     WidgetNewVocabSecondStep *widgetSecondStep = nullptr;
 
     StepNewVocab step = initStep;
+    vector<QLabel*> listLblNameColumn;
 
     const int WIDTH_LINE_EDIT_WORD = 40;
     const int HEIGHT_LINE_EDIT_WORD = 40;

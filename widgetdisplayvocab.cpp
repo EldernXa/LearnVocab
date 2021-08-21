@@ -15,7 +15,7 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
     for(auto &nameColumn : readerVocab->getColumnName()){
         QLabel *lblNameColumn = new QLabel;
 
-        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
 
         lblNameColumn->setText(QString::fromStdString(nameColumn));
         lblNameColumn->setAlignment(Qt::AlignCenter);
@@ -40,7 +40,7 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
 
                 for(auto& word : differentValueForAWord){
                     QLabel *lblNameWord = new QLabel;
-                    GlobalFct::changeSizeFontOfLbl(lblNameWord, this->width(), this->height());
+                    GlobalFct::changeSizeFontOfLbl(lblNameWord, this->size());
                     listLblWord.push_back(lblNameWord);
                     lblNameWord->setAlignment(Qt::AlignCenter);
                     lblNameWord->setText(QString::fromStdString(word));
@@ -63,10 +63,10 @@ WidgetDisplayVocab::WidgetDisplayVocab(std::string nameVocab, QWidget *parent) :
 
 void WidgetDisplayVocab::resizeEvent(QResizeEvent *event){
     for(QLabel *lbl : listLblNameColumn){
-        GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
     }
     for(QLabel *lbl : listLblWord){
-        GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
     }
     QWidget::resizeEvent(event);
 }

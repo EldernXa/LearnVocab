@@ -11,9 +11,9 @@ class GlobalFct
 {
 public:
     GlobalFct();
-    void static changeSizeFontOfLbl(QLabel*, int, int);
-    void static changeSizeFontOfLineEdit(QLineEdit*, int, int);
-    void static changeSizeFontOfPushButton(QPushButton*, int, int);
+    void static changeSizeFontOfLbl(QLabel*, QSize);
+    void static changeSizeFontOfLineEdit(QLineEdit*, QSize);
+    void static changeSizeFontOfPushButton(QPushButton*, QSize);
 
 private:
     int static getNewSizeFont(int, int);

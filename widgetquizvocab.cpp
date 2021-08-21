@@ -20,7 +20,7 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
     if(quizType == NFirstWordKnow || quizType == NFirstWordNotKnow){
         firstWord = true;
     }
-    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->width(), this->height());
+    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->size());
     ui->widget->getLblMaxWord()->setText(tr("(Le nombre maximale permis est %1)").arg(listWord.size()));
     enableEvent();
 }
@@ -72,7 +72,7 @@ void WidgetQuizVocab::startingQuiz(){
         for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
-                GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+                GlobalFct::changeSizeFontOfLbl(lbl, this->size());
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
@@ -80,16 +80,16 @@ void WidgetQuizVocab::startingQuiz(){
                 layout->addWidget(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-                GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
+                GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->size());
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
         }
         vBoxLayout->addLayout(layout);
     }
-    GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->width(), this->height());
-    GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getConfirmButton(), this->width(), this->height());
-    GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getNextWordBtn(), this->width(), this->height());
+    GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->size());
+    GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getConfirmButton(), this->size());
+    GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getNextWordBtn(), this->size());
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
     widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(numberOfWord));
     ui->widget->layout()->addWidget(widgetQuizLastStep);
@@ -100,24 +100,24 @@ void WidgetQuizVocab::startingQuiz(){
 
 void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
     if(isFirstStep){
-        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblTitle(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblError(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfPushButton(ui->widget->getValidButton(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->size());
+        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblTitle(), this->size());
+        GlobalFct::changeSizeFontOfLbl(ui->widget->getLblError(), this->size());
+        GlobalFct::changeSizeFontOfPushButton(ui->widget->getValidButton(), this->size());
     }else if(widgetQuizLastStep != nullptr){
-        GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getConfirmButton(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getNextWordBtn(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->size());
+        GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getConfirmButton(), this->size());
+        GlobalFct::changeSizeFontOfPushButton(widgetQuizLastStep->getNextWordBtn(), this->size());
     }
     for(unsigned int i = 0; i<listLineEdit.size(); i++){
         for(unsigned int j=0; j<listLineEdit.at(i)->size(); j++){
             QLineEdit *lineEdit = listLineEdit.at(i)->at(j);
-            GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
+            GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->size());
         }
     }
 
     for(QLabel *lbl : listLbl){
-        GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
         lbl->setMinimumWidth(this->width()/numberOfColumn);
     }
     QWidget::resizeEvent(resizeEvent);
@@ -147,14 +147,14 @@ void WidgetQuizVocab::nextVocab(){
             if(i==randNum){
                 QLabel *lbl = new QLabel;
                 lbl->setMinimumWidth(this->width()/numberOfColumn);
-                GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+                GlobalFct::changeSizeFontOfLbl(lbl, this->size());
                 lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
                 lbl->setAlignment(Qt::AlignCenter);
                 layout->addWidget(lbl);
                 listLbl.push_back(lbl);
             }else{
                 QLineEdit* lineEdit = new QLineEdit;
-                GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
+                GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->size());
                 listLineEdit.at(listLineEdit.size()-1)->push_back(lineEdit);
                 layout->addWidget(lineEdit);
             }
@@ -182,7 +182,7 @@ void WidgetQuizVocab::correctVocab(){
             QLabel *lbl = new QLabel;
             lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
             lbl->setAlignment(Qt::AlignCenter);
-            GlobalFct::changeSizeFontOfLbl(lbl, this->width(), this->height());
+            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
 
             if(randNum != i){
                 int num;

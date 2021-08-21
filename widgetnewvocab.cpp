@@ -41,20 +41,20 @@ void WidgetNewVocab::runFirstButton(){
                 step = secondStep;
                 listLineEdit.push_back(widgetSecondStep->getFirstLineEdit());
                 listLineEdit.push_back(widgetSecondStep->getSecondLineEdit());
-                GlobalFct::changeSizeFontOfLineEdit(widgetSecondStep->getFirstLineEdit(), this->width(), this->height());
-                GlobalFct::changeSizeFontOfLineEdit(widgetSecondStep->getSecondLineEdit(), this->width(), this->height());
+                GlobalFct::changeSizeFontOfLineEdit(widgetSecondStep->getFirstLineEdit(), this->size());
+                GlobalFct::changeSizeFontOfLineEdit(widgetSecondStep->getSecondLineEdit(), this->size());
 
 
                 for(int i=0; i<numberOfColumn-2;i++){
                     QLineEdit *qlineEdit = new QLineEdit;
-                    GlobalFct::changeSizeFontOfLineEdit(qlineEdit, this->width(), this->height());
+                    GlobalFct::changeSizeFontOfLineEdit(qlineEdit, this->size());
                     listLineEdit.push_back(qlineEdit);
                     widgetSecondStep->addWidgetToLayout(qlineEdit);
                 }
                 errorLabelForNameColumn = widgetSecondStep->getErrorLabel();
-                GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->width(), this->height());
-                GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->width(), this->height());
-                GlobalFct::changeSizeFontOfLbl(widgetSecondStep->getLblNameColumn(), this->width(), this->height());
+                GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->size());
+                GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->size());
+                GlobalFct::changeSizeFontOfLbl(widgetSecondStep->getLblNameColumn(), this->size());
                 connect(widgetSecondStep->getValidButton(), SIGNAL(clicked()), this, SLOT(valideNameColumn()));
 
                 ui->widget_2->layout()->addWidget(widgetSecondStep);
@@ -81,20 +81,25 @@ void WidgetNewVocab::startLastStep(){
     clearLayout(ui->widget_2->layout());
 
     WidgetNewVocabLastStep *widgetLastStep = new WidgetNewVocabLastStep;
+    step = lastStep;
     for(unsigned int i=0; i<listNameColumn.size(); i++){
 
         QPushButton *buttonAddWord = new QPushButton;
         buttonAddWord->setText("+");
         widgetLastStep->getLayoutForAddingBtn()->addWidget(buttonAddWord);
+        GlobalFct::changeSizeFontOfPushButton(buttonAddWord, this->size());
         listQPushButtonAdd.push_back(buttonAddWord);
 
         QLabel *lblNameColumn = new QLabel;
+        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
+        listLblNameColumn.push_back(lblNameColumn);
         lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
         widgetLastStep->getLayoutForNameColumn()->addWidget(lblNameColumn);
 
         QVBoxLayout *hboxLayoutForListWord = new QVBoxLayout;
         listVBoxLayoutForListWord.push_back(hboxLayoutForListWord);
         QLineEdit *newLineEdit = new QLineEdit;
+        GlobalFct::changeSizeFontOfLineEdit(newLineEdit, this->size());
         hboxLayoutForListWord->addWidget(newLineEdit);
         listLineEditForWord.push_back(new vector<QLineEdit*>());
         listLineEditForWord.at(i)->push_back(newLineEdit);
@@ -102,6 +107,7 @@ void WidgetNewVocab::startLastStep(){
         widgetLastStep->getLayoutForQLineEdit()->addLayout(hboxLayoutForListWord);
 
         QPushButton *buttonRemoveWord = new QPushButton;
+        GlobalFct::changeSizeFontOfPushButton(buttonRemoveWord, this->size());
         buttonRemoveWord->setEnabled(false);
         buttonRemoveWord->setText("-");
         widgetLastStep->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
@@ -115,10 +121,14 @@ void WidgetNewVocab::startLastStep(){
     finishButton = widgetLastStep->getConfirmBtn();
     finishButton->setText(tr("Terminer le vocabulaire '%1'").arg(QString::fromStdString(nameVocab)));
     finishButton->setVisible(false);
+    GlobalFct::changeSizeFontOfPushButton(finishButton, this->size());
     connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
 
     lblLastWord = widgetLastStep->getLblLastWord();
     errorInsertingWord = widgetLastStep->getLblError();
+
+    GlobalFct::changeSizeFontOfLbl(lblLastWord, this->size());
+    GlobalFct::changeSizeFontOfLbl(errorInsertingWord, this->size());
 
 
     ui->widget_2->layout()->addWidget(widgetLastStep);
@@ -178,6 +188,7 @@ bool WidgetNewVocab::verifyInputWord(){
 
 void WidgetNewVocab::addingWord(int num){
     QLineEdit *newLineEdit = new QLineEdit;
+    GlobalFct::changeSizeFontOfLineEdit(newLineEdit, this->size());
     listVBoxLayoutForListWord.at(num)->addWidget(newLineEdit);
     listLineEditForWord.at(num)->push_back(newLineEdit);
 
@@ -234,19 +245,42 @@ void WidgetNewVocab::clearLayout(QLayout *layout, bool deleteWidgets){
 
 void WidgetNewVocab::resizeEvent(QResizeEvent* event){
     if(step == initStep){
-        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getLabelError(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLineEdit(ui->widget_2->getLineEditForName(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLineEdit(ui->widget_2->getLineEditNumberOfColumn(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfPushButton(ui->widget_2->getButton(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNameLabel(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNumberColumnLabel(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getLabelError(), this->size());
+        GlobalFct::changeSizeFontOfLineEdit(ui->widget_2->getLineEditForName(), this->size());
+        GlobalFct::changeSizeFontOfLineEdit(ui->widget_2->getLineEditNumberOfColumn(), this->size());
+        GlobalFct::changeSizeFontOfPushButton(ui->widget_2->getButton(), this->size());
+        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNameLabel(), this->size());
+        GlobalFct::changeSizeFontOfLbl(ui->widget_2->getNumberColumnLabel(), this->size());
     }else if(step == secondStep){
         for(QLineEdit *lineEdit : listLineEdit){
-            GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->width(), this->height());
+            GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->size());
         }
-        GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->width(), this->height());
-        GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->width(), this->height());
-        GlobalFct::changeSizeFontOfLbl(widgetSecondStep->getLblNameColumn(), this->width(), this->height());
+        GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->size());
+        GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->size());
+        GlobalFct::changeSizeFontOfLbl(widgetSecondStep->getLblNameColumn(), this->size());
+    }else if(step == lastStep){
+        for(QPushButton *button : listQPushButtonAdd){
+            GlobalFct::changeSizeFontOfPushButton(button, this->size());
+        }
+
+        for(QLabel* lbl : listLblNameColumn){
+            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+        }
+
+        for(unsigned int i = 0 ; i<listLineEditForWord.size() ; i++){
+            for(unsigned int j=0; j<listLineEditForWord.at(i)->size(); j++){
+                GlobalFct::changeSizeFontOfLineEdit(listLineEditForWord.at(i)->at(j), this->size());
+            }
+        }
+
+        for(QPushButton *btn : listQPushButtonRemove){
+            GlobalFct::changeSizeFontOfPushButton(btn, this->size());
+        }
+
+        GlobalFct::changeSizeFontOfPushButton(finishButton, this->size());
+        GlobalFct::changeSizeFontOfLbl(lblLastWord, this->size());
+        GlobalFct::changeSizeFontOfLbl(errorInsertingWord, this->size());
+
     }
     QWidget::resizeEvent(event);
 }

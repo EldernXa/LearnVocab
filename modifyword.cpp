@@ -14,6 +14,8 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
     QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumn);
     for(auto &nameColumn : readerVocab->getColumnName()){
         QLabel *lblNameColumn = new QLabel;
+        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
+        listLblNameColumn.push_back(lblNameColumn);
         lblNameColumn->setText(QString::fromStdString(nameColumn));
         lblNameColumn->setAlignment(Qt::AlignCenter);
         layoutForNameColumns->addWidget(lblNameColumn);
@@ -175,7 +177,34 @@ void ModifyWord::on_buttonConfirmModify_clicked(){
     new WriterVocab(nameVocab, readerVocab->getNumberOfColumns(), readerVocab->getColumnName(), listWord, listIsKnown);
 }
 
+void ModifyWord::resizeEvent(QResizeEvent *event){
+    for(QLabel *lbl: listLblNameColumn){
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+    }
+    QWidget::resizeEvent(event);
+}
+
+
 void ModifyWord::on_buttonBack_clicked(){
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->close();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

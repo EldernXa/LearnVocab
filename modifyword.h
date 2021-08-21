@@ -16,6 +16,7 @@
 
 #include "ModifyVocab/readervocab.h"
 #include "ModifyVocab/writervocab.h"
+#include "CstFile/globalfct.h"
 
 namespace Ui {
 class ModifyWord;
@@ -35,6 +36,9 @@ private slots:
     void deletingWord(int);
     void changeStateWord(int);
 
+protected:
+    void resizeEvent(QResizeEvent*);
+
 private:
     vector<string> split(const string&, char);
     void setDeleteIcon(QPushButton*);
@@ -52,6 +56,8 @@ private:
     vector<QFrame*> listHLine;
     vector<QWidget*> listWidget;
     vector<int> listIndToDelete;
+
+    vector<QLabel*> listLblNameColumn;
 
     Ui::ModifyWord *ui;
 };

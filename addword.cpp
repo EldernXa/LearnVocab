@@ -15,10 +15,14 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         buttonAddWord->setText("+");
         ui->widget->getLayoutForAddingBtn()->addWidget(buttonAddWord);
         listQPushButtonAdd.push_back(buttonAddWord);
+        GlobalFct::changeSizeFontOfPushButton(buttonAddWord, this->size());
 
         QLabel *lblNameColumn = new QLabel;
+        lblNameColumn->setAlignment(Qt::AlignCenter);
         lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
         ui->widget->getLayoutForNameColumn()->addWidget(lblNameColumn);
+        listLblNameColumn.push_back(lblNameColumn);
+        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
 
         QVBoxLayout *hboxLayoutForListWord = new QVBoxLayout;
         listVBoxLayoutForListWord.push_back(hboxLayoutForListWord);
@@ -128,6 +132,19 @@ AddWord::~AddWord()
     delete ui;
 }
 
+
+void AddWord::resizeEvent(QResizeEvent* event){
+
+    for(QPushButton *btn : listQPushButtonAdd){
+        GlobalFct::changeSizeFontOfPushButton(btn, this->size());
+    }
+
+    for(QLabel *lbl : listLblNameColumn){
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+    }
+
+    QWidget::resizeEvent(event);
+}
 
 
 

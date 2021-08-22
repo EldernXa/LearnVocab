@@ -43,6 +43,11 @@ private:
     QLabel* errorInsertingWord;
     WriterVocab *writerVocab = nullptr;
 
+    vector<QLabel*> listLblNameColumn;
+
+protected:
+    void resizeEvent(QResizeEvent*);
+
 private slots:
     void saveWord();
     void finishVocab();

@@ -66,6 +66,14 @@
     <addaction name="separator"/>
     <addaction name="actionRemoveVoc"/>
    </widget>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionExtractVocab"/>
+    <addaction name="actionImportVocab"/>
+   </widget>
+   <addaction name="menuFichier"/>
    <addaction name="menuVocab"/>
    <addaction name="menuModification"/>
   </widget>
@@ -148,6 +156,16 @@
   <action name="actionNFirstWordKnow">
    <property name="text">
     <string>quiz sur les N premiers mots connus</string>
+   </property>
+  </action>
+  <action name="actionExtractVocab">
+   <property name="text">
+    <string>Extraire les vocabulaires</string>
+   </property>
+  </action>
+  <action name="actionImportVocab">
+   <property name="text">
+    <string>Importer des vocabulaires</string>
    </property>
   </action>
  </widget>

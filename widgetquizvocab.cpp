@@ -192,10 +192,11 @@ void WidgetQuizVocab::correctVocab(){
                 else{
                     num = i-1;
                 }
-                if(listLineEdit.at(num)->at(j)->text().compare(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)))==0){
+
+                if(GlobalFct::compareString(listLineEdit.at(num)->at(j)->text().toStdString(), listWord.at(actualWord)->at(i)->at(j))){
                     lbl->setStyleSheet("QLabel {color:green;}");
                 }else{
-                    lbl->setStyleSheet("QLabel {color:red};");
+                    lbl->setStyleSheet("QLabel {color:red;}");
                 }
                 num++;
             }else{

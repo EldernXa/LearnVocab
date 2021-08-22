@@ -72,6 +72,8 @@ private:
     StepNewVocab step = initStep;
     vector<QLabel*> listLblNameColumn;
 
+    WidgetNewVocabLastStep *widgetLastStep = nullptr;
+
     const int WIDTH_LINE_EDIT_WORD = 40;
     const int HEIGHT_LINE_EDIT_WORD = 40;
     const int WIDTH_WIDGET = 250;

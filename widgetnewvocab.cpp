@@ -80,7 +80,7 @@ void WidgetNewVocab::valideNameColumn(){
 void WidgetNewVocab::startLastStep(){
     clearLayout(ui->widget_2->layout());
 
-    WidgetNewVocabLastStep *widgetLastStep = new WidgetNewVocabLastStep;
+    widgetLastStep = new WidgetNewVocabLastStep;
     step = lastStep;
     for(unsigned int i=0; i<listNameColumn.size(); i++){
 
@@ -117,6 +117,7 @@ void WidgetNewVocab::startLastStep(){
         connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
     }
     connect(widgetLastStep->getBtnAddWord(), SIGNAL(clicked()), this, SLOT(saveWord()));
+    GlobalFct::changeSizeFontOfPushButton(widgetLastStep->getBtnAddWord(), this->size());
 
     finishButton = widgetLastStep->getConfirmBtn();
     finishButton->setText(tr("Terminer le vocabulaire '%1'").arg(QString::fromStdString(nameVocab)));
@@ -280,6 +281,7 @@ void WidgetNewVocab::resizeEvent(QResizeEvent* event){
         GlobalFct::changeSizeFontOfPushButton(finishButton, this->size());
         GlobalFct::changeSizeFontOfLbl(lblLastWord, this->size());
         GlobalFct::changeSizeFontOfLbl(errorInsertingWord, this->size());
+        GlobalFct::changeSizeFontOfPushButton(widgetLastStep->getBtnAddWord(), this->size());
 
     }
     QWidget::resizeEvent(event);

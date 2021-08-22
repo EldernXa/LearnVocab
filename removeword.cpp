@@ -14,11 +14,16 @@ RemoveWord::RemoveWord(string nameVocab, QWidget *parent) :
     QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumns);
     for(auto &nameColumn : readerVocab->getColumnName()){
         QLabel *lblNameColumn = new QLabel;
+        listLblNameColumn.push_back(lblNameColumn);
+        GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
         lblNameColumn->setText(QString::fromStdString(nameColumn));
         lblNameColumn->setAlignment(Qt::AlignCenter);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
-    layoutForNameColumns->addWidget(new QLabel);
+    QLabel *newlbl = new QLabel;
+    layoutForNameColumns->addWidget(newlbl);
+    GlobalFct::changeSizeFontOfLbl(newlbl, this->size());
+    listLblNameColumn.push_back(newlbl);
 
     QFrame *frameVLine = new QFrame;
     ui->widget->layout()->addWidget(frameVLine);
@@ -45,6 +50,8 @@ RemoveWord::RemoveWord(string nameVocab, QWidget *parent) :
                     lblNameWord->setAlignment(Qt::AlignCenter);
                     lblNameWord->setText(QString::fromStdString(word));
                     layoutForAWord->addWidget(lblNameWord);
+                    listLblWord.push_back(lblNameWord);
+                    GlobalFct::changeSizeFontOfLbl(lblNameWord, this->size());
                 }
                 layoutForNameWord->addWidget(widgetForAWord);
             }else{
@@ -52,6 +59,8 @@ RemoveWord::RemoveWord(string nameVocab, QWidget *parent) :
                 lblNameWord->setAlignment(Qt::AlignCenter);
                 lblNameWord->setText(QString::fromStdString(valueToDisplay.at(j)));
                 layoutForNameWord->addWidget(lblNameWord);
+                listLblWord.push_back(lblNameWord);
+                GlobalFct::changeSizeFontOfLbl(lblNameWord, this->size());
             }
         }
 
@@ -174,6 +183,22 @@ void RemoveWord::clearLayout(QLayout* layout, bool deleteWidgets)
             clearLayout(childLayout, deleteWidgets);
         delete item;
     }
+}
+
+void RemoveWord::resizeEvent(QResizeEvent *event){
+
+    for(QLabel *lbl : listLblNameColumn){
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+    }
+
+    for(QLabel *lbl : listLblWord){
+        GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+    }
+
+    GlobalFct::changeSizeFontOfPushButton(ui->validRemoveButton, this->size());
+    GlobalFct::changeSizeFontOfPushButton(ui->pushButton, this->size());
+
+    QWidget::resizeEvent(event);
 }
 
 

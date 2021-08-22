@@ -10,6 +10,7 @@
 
 #include "ModifyVocab/readervocab.h"
 #include "ModifyVocab/writervocab.h"
+#include "CstFile/globalfct.h"
 
 using namespace std;
 
@@ -30,9 +31,14 @@ private slots:
 
     void on_validRemoveButton_clicked();
 
+protected:
+    void resizeEvent(QResizeEvent*);
+
 private:
     vector<string> split(const string&, char delimiter);
     void clearLayout(QLayout*, bool = true);
+    vector<QLabel*> listLblNameColumn;
+    vector<QLabel*> listLblWord;
 
     ReaderVocab *readerVocab = nullptr;
     string nameVocab;

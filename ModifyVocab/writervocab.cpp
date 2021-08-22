@@ -1,7 +1,6 @@
 #include "writervocab.h"
 
 // TODO use the cst for the format for the different constructor.
-// TODO change the path for the other constructor.
 
 WriterVocab::WriterVocab(string nameVocab, int numberOfColumns, vector<string> listNameColumn)
 {
@@ -15,12 +14,12 @@ WriterVocab::WriterVocab(string nameVocab, int numberOfColumns, vector<string> l
 }
 
 WriterVocab::WriterVocab(string nameVocab){
-    fileVocabToWrite.open(nameVocab+".vocab", ios::app);
+    fileVocabToWrite.open(CstStatic::getPathToVocabFile()+nameVocab+".vocab", ios::app);
 }
 
 WriterVocab::WriterVocab(string nameVocab, vector<int> listIndToRemove){
     ReaderVocab *readerVocab = new ReaderVocab(nameVocab);
-    fileVocabToWrite.open(nameVocab+".vocab", ios::out);
+    fileVocabToWrite.open(CstStatic::getPathToVocabFile()+nameVocab+".vocab", ios::out);
     writeNumberColumns(readerVocab->getNumberOfColumns());
     writeListNameColumn(readerVocab->getColumnName());
     QVector<QVector<QVector<string>*>*> listVoc = readerVocab->getListWord();
@@ -32,7 +31,7 @@ WriterVocab::WriterVocab(string nameVocab, vector<int> listIndToRemove){
 }
 
 WriterVocab::WriterVocab(string nameVocab, int numberOfColumn, vector<string> listColumn, vector<vector<vector<string>>> listWord, vector<bool> listWordIsKnow){
-    fileVocabToWrite.open(nameVocab+".vocab", ios::out);
+    fileVocabToWrite.open(CstStatic::getPathToVocabFile()+nameVocab+".vocab", ios::out);
     writeNumberColumns(numberOfColumn);
     writeListNameColumn(listColumn);
     //QVector<QVector<QVector<string>*>*> listVoc = readerVocab->getListWord();

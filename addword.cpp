@@ -39,6 +39,7 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         buttonRemoveWord->setText("-");
         ui->widget->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
         listQPushButtonRemove.push_back(buttonRemoveWord);
+        GlobalFct::changeSizeFontOfPushButton(buttonRemoveWord, this->size());
 
         connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
         connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
@@ -148,6 +149,10 @@ void AddWord::resizeEvent(QResizeEvent* event){
         for(unsigned int j=0; j<listLineEditForWord.at(i)->size(); j++){
             GlobalFct::changeSizeFontOfLineEdit(listLineEditForWord.at(i)->at(j), this->size());
         }
+    }
+
+    for(QPushButton *btn : listQPushButtonRemove){
+        GlobalFct::changeSizeFontOfPushButton(btn, this->size());
     }
 
     QWidget::resizeEvent(event);

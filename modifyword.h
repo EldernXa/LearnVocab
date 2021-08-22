@@ -58,6 +58,7 @@ private:
     vector<int> listIndToDelete;
 
     vector<QLabel*> listLblNameColumn;
+    vector<QPushButton*> listButtonForWord;
 
     Ui::ModifyWord *ui;
 };

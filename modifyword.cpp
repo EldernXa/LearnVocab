@@ -14,13 +14,15 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
     QHBoxLayout *layoutForNameColumns = new QHBoxLayout(widgetForNameColumn);
     for(auto &nameColumn : readerVocab->getColumnName()){
         QLabel *lblNameColumn = new QLabel;
+
         GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
+
         listLblNameColumn.push_back(lblNameColumn);
         lblNameColumn->setText(QString::fromStdString(nameColumn));
-        lblNameColumn->setAlignment(Qt::AlignCenter);
+        //lblNameColumn->setAlignment(Qt::AlignCenter);
         layoutForNameColumns->addWidget(lblNameColumn);
     }
-    layoutForNameColumns->addWidget(new QLabel);
+    //layoutForNameColumns->addWidget(new QLabel);
     QFrame *frameVLine = new QFrame;
     ui->widget->layout()->addWidget(frameVLine);
     frameVLine->setFrameShape(QFrame::HLine);
@@ -49,6 +51,9 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
 
                 for(auto &word : differentValueForAWord){
                     QLineEdit *lineEdit = new QLineEdit;
+
+                    GlobalFct::changeSizeFontOfLineEdit(lineEdit, this->size());
+
                     lineEdit->setText(QString::fromStdString(word));
                     layoutForAWord->addWidget(lineEdit);
                     listLineEditForWord.at(i).at(j).push_back(lineEdit);
@@ -64,9 +69,17 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         QWidget *widgetForButton = new QWidget;
         QVBoxLayout *layoutButton = new QVBoxLayout(widgetForButton);
         QPushButton *buttonDelete = new QPushButton;
+        listButtonForWord.push_back(buttonDelete);
+
+        GlobalFct::changeSizeFontOfPushButton(buttonDelete, this->size());
+
         setDeleteIcon(buttonDelete);
         layoutButton->addWidget(buttonDelete);
         QPushButton *buttonChange = new QPushButton;
+        listButtonForWord.push_back(buttonChange);
+
+        GlobalFct::changeSizeFontOfPushButton(buttonChange, this->size());
+
         if(verifIsKnown){
             setGreenCheckIcon(buttonChange);
         }else{
@@ -83,6 +96,9 @@ ModifyWord::ModifyWord(string nameVocab, QWidget *parent) :
         listHLine.push_back(frameLine);
         QSpacerItem *itemSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
         ui->widget->layout()->addItem(itemSpacer);
+
+        GlobalFct::changeSizeFontOfPushButton(ui->buttonBack, this->size());
+        GlobalFct::changeSizeFontOfPushButton(ui->buttonConfirmModify, this->size());
     }
 }
 
@@ -181,6 +197,22 @@ void ModifyWord::resizeEvent(QResizeEvent *event){
     for(QLabel *lbl: listLblNameColumn){
         GlobalFct::changeSizeFontOfLbl(lbl, this->size());
     }
+
+    for(unsigned int i=0; i<listLineEditForWord.size();i++){
+        for(unsigned int j=0; j<listLineEditForWord.at(i).size() ; j++){
+            for(unsigned int k=0 ; k<listLineEditForWord.at(i).at(j).size(); k++){
+                GlobalFct::changeSizeFontOfLineEdit(listLineEditForWord.at(i).at(j).at(k), this->size());
+            }
+        }
+    }
+
+    for(QPushButton *btn : listButtonForWord){
+        GlobalFct::changeSizeFontOfPushButton(btn, this->size());
+    }
+
+    GlobalFct::changeSizeFontOfPushButton(ui->buttonBack, this->size());
+    GlobalFct::changeSizeFontOfPushButton(ui->buttonConfirmModify, this->size());
+
     QWidget::resizeEvent(event);
 }
 

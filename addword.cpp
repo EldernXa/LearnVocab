@@ -30,6 +30,7 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         hboxLayoutForListWord->addWidget(newLineEdit);
         listLineEditForWord.push_back(new vector<QLineEdit*>());
         listLineEditForWord.at(i)->push_back(newLineEdit);
+        GlobalFct::changeSizeFontOfLineEdit(newLineEdit, this->size());
 
         ui->widget->getLayoutForQLineEdit()->addLayout(hboxLayoutForListWord);
 
@@ -141,6 +142,12 @@ void AddWord::resizeEvent(QResizeEvent* event){
 
     for(QLabel *lbl : listLblNameColumn){
         GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+    }
+
+    for(unsigned int i=0; i<listLineEditForWord.size(); i++){
+        for(unsigned int j=0; j<listLineEditForWord.at(i)->size(); j++){
+            GlobalFct::changeSizeFontOfLineEdit(listLineEditForWord.at(i)->at(j), this->size());
+        }
     }
 
     QWidget::resizeEvent(event);

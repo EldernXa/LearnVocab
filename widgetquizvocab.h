@@ -12,6 +12,7 @@
 #include <QScreen>
 #include <QKeyEvent>
 #include <QEvent>
+#include <QTimer>
 
 #include "widgetquizvocablaststep.h"
 #include "ModifyVocab/readervocab.h"

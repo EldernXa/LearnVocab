@@ -94,6 +94,7 @@ void WidgetQuizVocab::startingQuiz(){
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
     widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(numberOfWord));
     ui->widget->layout()->addWidget(widgetQuizLastStep);
+    listLineEdit.at(0)->at(0)->setFocus();
 
     connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
     connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(nextVocab()));
@@ -188,6 +189,7 @@ void WidgetQuizVocab::nextVocab(){
         }
         vBoxLayout->addLayout(layout);
     }
+    QTimer::singleShot(0, listLineEdit.at(0)->at(0), SLOT(setFocus()));
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
     widgetQuizLastStep->getNumberWordMissing()->setText(QString::number(actualWord+1) + " / " + QString::number(numberOfWord));
 }

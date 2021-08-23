@@ -53,6 +53,7 @@ void WidgetQuizVocab::startingQuiz(){
     isFirstStep = false;
     clearLayout(ui->widget->layout());
     widgetQuizLastStep = new WidgetQuizVocabLastStep;
+    qApp->installEventFilter(this);
     srand(time(NULL));
     randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
     for(unsigned int i = 0; i< nameColumn.size();i++){
@@ -121,6 +122,32 @@ void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
         lbl->setMinimumWidth(this->width()/numberOfColumn);
     }
     QWidget::resizeEvent(resizeEvent);
+}
+
+bool WidgetQuizVocab::eventFilter(QObject *obj, QEvent *event){
+
+    if(event->type() == QEvent::KeyPress){
+        QKeyEvent *key = static_cast<QKeyEvent *>(event);
+        if(widgetQuizLastStep != nullptr){
+            if(!enterIsPressed){
+                if(key->key() == Qt::Key_Enter || key->key() == Qt::Key_Return){
+                    if(widgetQuizLastStep->getConfirmButton()->isEnabled()){
+                        widgetQuizLastStep->getConfirmButton()->animateClick();
+                    }else{
+                        widgetQuizLastStep->getNextWordBtn()->animateClick();
+                    }
+                    enterIsPressed = true;
+                }
+            }
+        }
+    }
+    if(event->type() == QEvent::KeyRelease){
+        if(enterIsPressed){
+            enterIsPressed = false;
+        }
+    }
+
+    return QObject::eventFilter(obj, event);
 }
 
 void WidgetQuizVocab::nextVocab(){
@@ -230,6 +257,7 @@ WidgetQuizVocab::~WidgetQuizVocab()
 {
     if(widgetQuizLastStep != nullptr){
         delete widgetQuizLastStep;
+        qApp->removeEventFilter(this);
     }
     delete ui;
 }

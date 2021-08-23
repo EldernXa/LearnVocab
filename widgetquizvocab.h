@@ -10,6 +10,9 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QScreen>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QMainWindow>
 
 #include "widgetquizvocablaststep.h"
 #include "ModifyVocab/readervocab.h"
@@ -32,6 +35,7 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent*);
+    bool eventFilter(QObject *, QEvent *);
 
 private:
     Ui::WidgetQuizVocab *ui;
@@ -47,6 +51,7 @@ private:
     int actualWord=0;
     bool firstWord = false;
     bool isFirstStep = true;
+    bool enterIsPressed = false;
 
     void enableEvent();
     void startingQuiz();

@@ -105,6 +105,7 @@ void WidgetQuizVocab::resizeEvent(QResizeEvent *resizeEvent){
         GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->size());
         GlobalFct::changeSizeFontOfLbl(ui->widget->getLblTitle(), this->size());
         GlobalFct::changeSizeFontOfLbl(ui->widget->getLblError(), this->size());
+        GlobalFct::changeSizeFontOfLineEdit(ui->widget->getLineEditForMaxWord(), this->size());
         GlobalFct::changeSizeFontOfPushButton(ui->widget->getValidButton(), this->size());
     }else if(widgetQuizLastStep != nullptr){
         GlobalFct::changeSizeFontOfLbl(widgetQuizLastStep->getNumberWordMissing(), this->size());

@@ -20,8 +20,10 @@ WidgetQuizVocab::WidgetQuizVocab(string nameVocabToQuiz, QuizType quizType, QWid
     if(quizType == NFirstWordKnow || quizType == NFirstWordNotKnow){
         firstWord = true;
     }
+    qApp->installEventFilter(this);
     GlobalFct::changeSizeFontOfLbl(ui->widget->getLblMaxWord(), this->size());
     ui->widget->getLblMaxWord()->setText(tr("(Le nombre maximale permis est %1)").arg(listWord.size()));
+    QTimer::singleShot(0, ui->widget->getLineEditForMaxWord(), SLOT(setFocus()));
     enableEvent();
 }
 
@@ -53,7 +55,6 @@ void WidgetQuizVocab::startingQuiz(){
     isFirstStep = false;
     clearLayout(ui->widget->layout());
     widgetQuizLastStep = new WidgetQuizVocabLastStep;
-    qApp->installEventFilter(this);
     srand(time(NULL));
     randNum = rand()%(listWord.at(actualWord)->size()-1-0 + 1) + 0;
     for(unsigned int i = 0; i< nameColumn.size();i++){
@@ -130,15 +131,23 @@ bool WidgetQuizVocab::eventFilter(QObject *obj, QEvent *event){
 
     if(event->type() == QEvent::KeyPress){
         QKeyEvent *key = static_cast<QKeyEvent *>(event);
-        if(widgetQuizLastStep != nullptr){
+        if(isFirstStep){
             if(!enterIsPressed){
                 if(key->key() == Qt::Key_Enter || key->key() == Qt::Key_Return){
-                    if(widgetQuizLastStep->getConfirmButton()->isEnabled()){
-                        widgetQuizLastStep->getConfirmButton()->animateClick();
-                    }else{
-                        widgetQuizLastStep->getNextWordBtn()->animateClick();
+                    ui->widget->getValidButton()->animateClick();
+                }
+            }
+        }else{
+            if(widgetQuizLastStep != nullptr){
+                if(!enterIsPressed){
+                    if(key->key() == Qt::Key_Enter || key->key() == Qt::Key_Return){
+                        if(widgetQuizLastStep->getConfirmButton()->isEnabled()){
+                            widgetQuizLastStep->getConfirmButton()->animateClick();
+                        }else{
+                            widgetQuizLastStep->getNextWordBtn()->animateClick();
+                        }
+                        enterIsPressed = true;
                     }
-                    enterIsPressed = true;
                 }
             }
         }

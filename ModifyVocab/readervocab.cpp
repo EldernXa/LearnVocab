@@ -38,7 +38,7 @@ ReaderVocab::ReaderVocab(string nameVocab)
 void ReaderVocab::fillList(QVector<QVector<QVector<string>*>*> listToFill, vector<string> listStr){
     listToFill.at(listToFill.size()-1)->append(new QVector<string>());
     for(auto &s:listStr){
-        listToFill.at(listToFill.size()-1)->at(listToFill.at(listToFill.size()-1)->size()-1)->push_back(s);
+        listToFill.at(listToFill.size()-1)->at(listToFill.at(listToFill.size()-1)->size()-1)->push_back(split(s, ':').at(0));
     }
 }
 

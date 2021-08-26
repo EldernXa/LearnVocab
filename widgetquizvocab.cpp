@@ -99,7 +99,7 @@ void WidgetQuizVocab::startingQuiz(){
 
     connect(widgetQuizLastStep->getConfirmButton(), SIGNAL(clicked()), this, SLOT(correctVocab()));
 
-    if(actualWord+1 == 1){
+    if(numberOfWord == 1){
         widgetQuizLastStep->getNextWordBtn()->setText("Terminer");
         connect(widgetQuizLastStep->getNextWordBtn(), SIGNAL(clicked()), this, SLOT(finishQuiz()));
     }else{
@@ -220,41 +220,89 @@ void WidgetQuizVocab::correctVocab(){
     widgetQuizLastStep->getConfirmButton()->setEnabled(false);
     widgetQuizLastStep->getNextWordBtn()->setEnabled(true);
     QHBoxLayout* vBoxLayout = new QHBoxLayout;
-    bool verifRand = false;
+    verifRand = false;
     for(int i = 0; i<listWord.at(actualWord)->size(); i++){
-        QVBoxLayout *layout = new QVBoxLayout;
-        for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
-            QLabel *lbl = new QLabel;
-            lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
-            lbl->setAlignment(Qt::AlignCenter);
-            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+//        QVBoxLayout *layout = new QVBoxLayout;
+//        bool verifRand = false;
+//        for(int j=0; j<listWord.at(actualWord)->at(i)->size();j++){
+//            QLabel *lbl = new QLabel;
+//            lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(i)->at(j)));
+//            lbl->setAlignment(Qt::AlignCenter);
+//            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+//            if(randNum != i){
+//                int num;
+//                if(!verifRand){
+//                    num = i;
+//                }
+//                else{
+//                    num = i-1;
+//                }
 
-            if(randNum != i){
-                int num;
-                if(!verifRand){
-                    num = i;
-                }
-                else{
-                    num = i-1;
-                }
+//                if(GlobalFct::compareString(listLineEdit.at(num)->at(j)->text().toStdString(), listWord.at(actualWord)->at(i)->at(j))){
+//                    lbl->setStyleSheet("QLabel {color:green;}");
+//                }else{
+//                    lbl->setStyleSheet("QLabel {color:red;}");
+//                }
+//                num++;
+//            }else{
+//                verifRand = true;
+//            }
 
-                if(GlobalFct::compareString(listLineEdit.at(num)->at(j)->text().toStdString(), listWord.at(actualWord)->at(i)->at(j))){
-                    lbl->setStyleSheet("QLabel {color:green;}");
-                }else{
-                    lbl->setStyleSheet("QLabel {color:red;}");
-                }
-                num++;
-            }else{
-                verifRand = true;
-            }
-
-            layout->addWidget(lbl);
-        }
-        vBoxLayout->addLayout(layout);
+//            layout->addWidget(lbl);
+//        }
+        //vBoxLayout->addLayout(layout);
+        vBoxLayout->addLayout(getLayoutForCorrectVocab(i));
 
     }
     widgetQuizLastStep->getLayoutForQLineEdit()->addLayout(vBoxLayout);
 
+}
+
+QVBoxLayout * WidgetQuizVocab::getLayoutForCorrectVocab(int ind){
+    QVBoxLayout *layout = new QVBoxLayout;
+
+    if(randNum != ind){
+        int num;
+        if(!verifRand){
+            num = ind;
+        }else{
+            num = ind-1;
+        }
+        vector<string> listWordTemp;
+        for(int i=0 ; i<listWord.at(actualWord)->at(ind)->size() ; i++){
+            listWordTemp.push_back(listWord.at(actualWord)->at(ind)->at(i));
+        }
+
+        for(unsigned int i = 0; i<listLineEdit.at(num)->size() ; i++){
+            unsigned int j = 0;
+            QLabel *lbl = new QLabel;
+            lbl->setText(listLineEdit.at(num)->at(i)->text());
+            lbl->setAlignment(Qt::AlignCenter);
+
+            while(j<listWordTemp.size() &&
+                  !GlobalFct::compareString(listLineEdit.at(num)->at(i)->text().toStdString(), listWordTemp.at(j))){
+
+                j++;
+            }
+            if(j>= listWordTemp.size()){
+                lbl->setStyleSheet("QLabel {color:red;}");
+            }else{
+                lbl->setStyleSheet("QLabel {color:green;}");
+                listWordTemp.erase(listWordTemp.begin()+j);
+            }
+            layout->addWidget(lbl);
+        }
+    }else{
+        verifRand = true;
+        for(int i=0; i<listWord.at(actualWord)->at(ind)->size(); i++){
+            QLabel *lbl = new QLabel;
+            lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(ind)->at(i)));
+            lbl->setAlignment(Qt::AlignCenter);
+            layout->addWidget(lbl);
+        }
+    }
+
+    return layout;
 }
 
 void WidgetQuizVocab::clearLayout(QLayout* layout, bool deleteWidgets){

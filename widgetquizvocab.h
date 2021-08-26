@@ -52,10 +52,12 @@ private:
     bool firstWord = false;
     bool isFirstStep = true;
     bool enterIsPressed = false;
+    bool verifRand;
 
     void enableEvent();
     void startingQuiz();
     void clearLayout(QLayout*, bool deleteWidgets = true);
+    QVBoxLayout* getLayoutForCorrectVocab(int);
     //int getNewSizeFont();
 
 private slots:

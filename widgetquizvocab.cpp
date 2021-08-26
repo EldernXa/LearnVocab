@@ -278,6 +278,7 @@ QVBoxLayout * WidgetQuizVocab::getLayoutForCorrectVocab(int ind){
             QLabel *lbl = new QLabel;
             lbl->setText(listLineEdit.at(num)->at(i)->text());
             lbl->setAlignment(Qt::AlignCenter);
+            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
 
             while(j<listWordTemp.size() &&
                   !GlobalFct::compareString(listLineEdit.at(num)->at(i)->text().toStdString(), listWordTemp.at(j))){
@@ -288,8 +289,17 @@ QVBoxLayout * WidgetQuizVocab::getLayoutForCorrectVocab(int ind){
                 lbl->setStyleSheet("QLabel {color:red;}");
             }else{
                 lbl->setStyleSheet("QLabel {color:green;}");
+                layout->addWidget(lbl);
                 listWordTemp.erase(listWordTemp.begin()+j);
             }
+
+        }
+        for(string str : listWordTemp){
+            QLabel *lbl = new QLabel;
+            lbl->setText(QString::fromStdString(str));
+            lbl->setAlignment(Qt::AlignCenter);
+            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
+            lbl->setStyleSheet("QLabel {color:red;}");
             layout->addWidget(lbl);
         }
     }else{
@@ -298,6 +308,7 @@ QVBoxLayout * WidgetQuizVocab::getLayoutForCorrectVocab(int ind){
             QLabel *lbl = new QLabel;
             lbl->setText(QString::fromStdString(listWord.at(actualWord)->at(ind)->at(i)));
             lbl->setAlignment(Qt::AlignCenter);
+            GlobalFct::changeSizeFontOfLbl(lbl, this->size());
             layout->addWidget(lbl);
         }
     }

@@ -10,6 +10,7 @@ WidgetNewVocab::WidgetNewVocab(QWidget *parent) :
 {
     ui->setupUi(this);
     enableEventForFirstStep();
+    QTimer::singleShot(0, ui->widget_2->getLineEditForName(), SLOT(setFocus()));
 
 }
 

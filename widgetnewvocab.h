@@ -13,6 +13,7 @@
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QLabel>
+#include <QTimer>
 
 #include "widgetnewvocabsecondstep.h"
 #include "widgetnewvocablaststep.h"

@@ -152,6 +152,9 @@ void WidgetNewVocab::startLastStep(){
     connect(widgetLastStep->getBtnAddWord(), SIGNAL(clicked()), this, SLOT(saveWord()));
     GlobalFct::changeSizeFontOfPushButton(widgetLastStep->getBtnAddWord(), this->size());
 
+    widgetLastStep->getBtnAddWord()->setFocusPolicy(Qt::NoFocus);
+    widgetLastStep->getConfirmBtn()->setFocusPolicy(Qt::NoFocus);
+
     finishButton = widgetLastStep->getConfirmBtn();
     finishButton->setText(tr("Terminer le vocabulaire '%1'").arg(QString::fromStdString(nameVocab)));
     finishButton->setVisible(false);

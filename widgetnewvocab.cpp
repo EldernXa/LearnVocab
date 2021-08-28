@@ -80,6 +80,7 @@ void WidgetNewVocab::runFirstButton(){
                     widgetSecondStep->addWidgetToLayout(qlineEdit);
                 }
                 errorLabelForNameColumn = widgetSecondStep->getErrorLabel();
+                widgetSecondStep->getValidButton()->setFocusPolicy(Qt::NoFocus);
                 QTimer::singleShot(0, listLineEdit.at(0), SLOT(setFocus()));
                 GlobalFct::changeSizeFontOfLbl(errorLabelForNameColumn, this->size());
                 GlobalFct::changeSizeFontOfPushButton(widgetSecondStep->getValidButton(), this->size());

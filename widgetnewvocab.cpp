@@ -11,7 +11,31 @@ WidgetNewVocab::WidgetNewVocab(QWidget *parent) :
     ui->setupUi(this);
     enableEventForFirstStep();
     QTimer::singleShot(0, ui->widget_2->getLineEditForName(), SLOT(setFocus()));
+    qApp->installEventFilter(this);
 
+}
+
+bool WidgetNewVocab::eventFilter(QObject *obj, QEvent *event){
+
+    if(event->type() == QEvent::KeyPress){
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+        if(!keyEntered){
+            if(keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return){
+                if(step == initStep){
+                    ui->widget_2->getButton()->animateClick();
+                }
+                keyEntered = true;
+            }
+        }
+    }
+
+    if(event->type() == QEvent::KeyRelease){
+        if(keyEntered){
+            keyEntered = false;
+        }
+    }
+
+    return QObject::eventFilter(obj, event);
 }
 
 void WidgetNewVocab::enableEventForFirstStep(){
@@ -292,6 +316,7 @@ void WidgetNewVocab::resizeEvent(QResizeEvent* event){
 
 WidgetNewVocab::~WidgetNewVocab()
 {
+    qApp->removeEventFilter(this);
     finishVocab();
     delete ui;
 }

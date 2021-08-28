@@ -141,6 +141,7 @@ bool WidgetQuizVocab::eventFilter(QObject *obj, QEvent *event){
             if(!enterIsPressed){
                 if(key->key() == Qt::Key_Enter || key->key() == Qt::Key_Return){
                     ui->widget->getValidButton()->animateClick();
+                    enterIsPressed = true;
                 }
             }
         }else{

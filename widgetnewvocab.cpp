@@ -86,6 +86,7 @@ void WidgetNewVocab::startLastStep(){
 
         QPushButton *buttonAddWord = new QPushButton;
         buttonAddWord->setText("+");
+        buttonAddWord->setFocusPolicy(Qt::NoFocus);
         widgetLastStep->getLayoutForAddingBtn()->addWidget(buttonAddWord);
         GlobalFct::changeSizeFontOfPushButton(buttonAddWord, this->size());
         listQPushButtonAdd.push_back(buttonAddWord);
@@ -110,6 +111,7 @@ void WidgetNewVocab::startLastStep(){
         GlobalFct::changeSizeFontOfPushButton(buttonRemoveWord, this->size());
         buttonRemoveWord->setEnabled(false);
         buttonRemoveWord->setText("-");
+        buttonRemoveWord->setFocusPolicy(Qt::NoFocus);
         widgetLastStep->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
         listQPushButtonRemove.push_back(buttonRemoveWord);
 

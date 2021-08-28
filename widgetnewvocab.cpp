@@ -24,6 +24,9 @@ bool WidgetNewVocab::eventFilter(QObject *obj, QEvent *event){
                 if(step == initStep){
                     ui->widget_2->getButton()->animateClick();
                 }
+                if(step == secondStep){
+                    widgetSecondStep->getValidButton()->animateClick();
+                }
                 keyEntered = true;
             }
         }

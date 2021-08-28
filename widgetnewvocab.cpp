@@ -27,6 +27,11 @@ bool WidgetNewVocab::eventFilter(QObject *obj, QEvent *event){
                 if(step == secondStep){
                     widgetSecondStep->getValidButton()->animateClick();
                 }
+
+                if(step == lastStep){
+                    widgetLastStep->getBtnAddWord()->animateClick();
+                    // TODO verify if the lineEdit are clear and if it is use the finish button instead.
+                }
                 keyEntered = true;
             }
         }

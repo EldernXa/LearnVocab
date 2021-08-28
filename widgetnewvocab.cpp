@@ -148,6 +148,7 @@ void WidgetNewVocab::startLastStep(){
         connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
         connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
     }
+    QTimer::singleShot(0, listLineEditForWord.at(0)->at(0), SLOT(setFocus()));
     connect(widgetLastStep->getBtnAddWord(), SIGNAL(clicked()), this, SLOT(saveWord()));
     GlobalFct::changeSizeFontOfPushButton(widgetLastStep->getBtnAddWord(), this->size());
 
@@ -200,6 +201,7 @@ void WidgetNewVocab::saveWord(){
             }
             listLineEditForWord.at(indexForVect)->at(0)->clear();
         }
+        QTimer::singleShot(0, listLineEditForWord.at(0)->at(0), SLOT(setFocus()));
 
         finishButton->setVisible(true);
         errorInsertingWord->setText("");

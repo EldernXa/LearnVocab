@@ -177,19 +177,16 @@ void AddWord::resizeEvent(QResizeEvent* event){
 bool AddWord::eventFilter(QObject* obj, QEvent *evt){
     if(evt->type() == QEvent::KeyPress){
         QKeyEvent *keyEvent = static_cast<QKeyEvent*>(evt);
-        if(keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return){
-            if(!keyIsAlreadyClicked){
+        if(!keyIsAlreadyClicked){
+            if(keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return){
                 ui->btnAddWord->animateClick();
-                keyIsAlreadyClicked = true;
             }
-        }
-        else if(keyEvent->key() == Qt::Key_Escape){
-            if(!keyIsAlreadyClicked){
+            else if(keyEvent->key() == Qt::Key_Escape){
                 if(ui->validBtn->isVisible()){
                     ui->validBtn->animateClick();
                 }
-                keyIsAlreadyClicked = true;
             }
+            keyIsAlreadyClicked = true;
         }
 
     }

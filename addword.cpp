@@ -96,7 +96,7 @@ void AddWord::saveWord(){
             }
             listLineEditForWord.at(indexForVect)->at(0)->clear();
         }
-
+        QTimer::singleShot(0, listLineEditForWord.at(0)->at(0), SLOT(setFocus()));
         finishButton->setVisible(true);
         errorInsertingWord->setText("");
     }else{

@@ -13,6 +13,7 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
     for(unsigned int i = 0; i<listNameColumn.size(); i++){
         QPushButton *buttonAddWord = new QPushButton;
         buttonAddWord->setText("+");
+        buttonAddWord->setFocusPolicy(Qt::NoFocus);
         ui->layoutAddingBtn->addWidget(buttonAddWord);
         listQPushButtonAdd.push_back(buttonAddWord);
         GlobalFct::changeSizeFontOfPushButton(buttonAddWord, this->size());
@@ -37,6 +38,7 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         QPushButton *buttonRemoveWord = new QPushButton;
         buttonRemoveWord->setEnabled(false);
         buttonRemoveWord->setText("-");
+        buttonRemoveWord->setFocusPolicy(Qt::NoFocus);
         ui->layoutRemovingBtn->addWidget(buttonRemoveWord);
         listQPushButtonRemove.push_back(buttonRemoveWord);
         GlobalFct::changeSizeFontOfPushButton(buttonRemoveWord, this->size());

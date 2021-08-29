@@ -13,14 +13,16 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
     for(unsigned int i = 0; i<listNameColumn.size(); i++){
         QPushButton *buttonAddWord = new QPushButton;
         buttonAddWord->setText("+");
-        ui->widget->getLayoutForAddingBtn()->addWidget(buttonAddWord);
+        //ui->widget->getLayoutForAddingBtn()->addWidget(buttonAddWord);
+        ui->layoutAddingBtn->addWidget(buttonAddWord);
         listQPushButtonAdd.push_back(buttonAddWord);
         GlobalFct::changeSizeFontOfPushButton(buttonAddWord, this->size());
 
         QLabel *lblNameColumn = new QLabel;
         lblNameColumn->setAlignment(Qt::AlignCenter);
         lblNameColumn->setText(QString::fromStdString(listNameColumn.at(i)));
-        ui->widget->getLayoutForNameColumn()->addWidget(lblNameColumn);
+        //ui->widget->getLayoutForNameColumn()->addWidget(lblNameColumn);
+        ui->layoutLblName->addWidget(lblNameColumn);
         listLblNameColumn.push_back(lblNameColumn);
         GlobalFct::changeSizeFontOfLbl(lblNameColumn, this->size());
 
@@ -32,12 +34,14 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         listLineEditForWord.at(i)->push_back(newLineEdit);
         GlobalFct::changeSizeFontOfLineEdit(newLineEdit, this->size());
 
-        ui->widget->getLayoutForQLineEdit()->addLayout(hboxLayoutForListWord);
+        //ui->widget->getLayoutForQLineEdit()->addLayout(hboxLayoutForListWord);
+        ui->layoutForQLineEdit->addLayout(hboxLayoutForListWord);
 
         QPushButton *buttonRemoveWord = new QPushButton;
         buttonRemoveWord->setEnabled(false);
         buttonRemoveWord->setText("-");
-        ui->widget->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
+        //ui->widget->getLayoutForRemovingBtn()->addWidget(buttonRemoveWord);
+        ui->layoutRemovingBtn->addWidget(buttonRemoveWord);
         listQPushButtonRemove.push_back(buttonRemoveWord);
         GlobalFct::changeSizeFontOfPushButton(buttonRemoveWord, this->size());
 
@@ -45,17 +49,22 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
     }
 
-    connect(ui->widget->getBtnAddWord(), SIGNAL(clicked()), this, SLOT(saveWord()));
-    GlobalFct::changeSizeFontOfPushButton(ui->widget->getBtnAddWord(), this->size());
+    //connect(ui->widget->getBtnAddWord(), SIGNAL(clicked()), this, SLOT(saveWord()));
+    connect(ui->btnAddWord, SIGNAL(clicked()), this, SLOT(saveWord()));
+    //GlobalFct::changeSizeFontOfPushButton(ui->widget->getBtnAddWord(), this->size());
+    GlobalFct::changeSizeFontOfPushButton(ui->btnAddWord, this->size());
 
-    finishButton = ui->widget->getConfirmBtn();
+    //finishButton = ui->widget->getConfirmBtn();
+    finishButton = ui->validBtn;
     finishButton->setText(tr("Terminer la modification du vocabulaire '%1'").arg(QString::fromStdString(nameVocab)));
     finishButton->setVisible(false);
     GlobalFct::changeSizeFontOfPushButton(finishButton, this->size());
     connect(finishButton, SIGNAL(clicked()), this, SLOT(finishVocab()));
 
-    lblLastWord = ui->widget->getLblLastWord();
-    errorInsertingWord = ui->widget->getLblError();
+    //lblLastWord = ui->widget->getLblLastWord();
+    lblLastWord = ui->lblLastWord;
+    //errorInsertingWord = ui->widget->getLblError();
+    errorInsertingWord = ui->lblError;
     GlobalFct::changeSizeFontOfLbl(lblLastWord, this->size());
     GlobalFct::changeSizeFontOfLbl(errorInsertingWord, this->size());
 }
@@ -160,10 +169,15 @@ void AddWord::resizeEvent(QResizeEvent* event){
         GlobalFct::changeSizeFontOfPushButton(btn, this->size());
     }
 
-    GlobalFct::changeSizeFontOfPushButton(ui->widget->getBtnAddWord(), this->size());
-    GlobalFct::changeSizeFontOfPushButton(ui->widget->getConfirmBtn(), this->size());
-    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblLastWord(), this->size());
-    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblError(), this->size());
+//    GlobalFct::changeSizeFontOfPushButton(ui->widget->getBtnAddWord(), this->size());
+//    GlobalFct::changeSizeFontOfPushButton(ui->widget->getConfirmBtn(), this->size());
+//    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblLastWord(), this->size());
+//    GlobalFct::changeSizeFontOfLbl(ui->widget->getLblError(), this->size());
+
+    GlobalFct::changeSizeFontOfPushButton(ui->btnAddWord, this->size());
+    GlobalFct::changeSizeFontOfPushButton(ui->validBtn, this->size());
+    GlobalFct::changeSizeFontOfLbl(ui->lblLastWord, this->size());
+    GlobalFct::changeSizeFontOfLbl(ui->lblError, this->size());
 
     QWidget::resizeEvent(event);
 }

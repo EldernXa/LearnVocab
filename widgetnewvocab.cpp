@@ -236,7 +236,7 @@ void WidgetNewVocab::addingWord(int num){
     listLineEditForWord.at(num)->push_back(newLineEdit);
 
     listQPushButtonRemove.at(num)->setEnabled(true);
-    if(listLineEditForWord.at(num)->size()==LIMIT_NUMBER_WORD){
+    if(listLineEditForWord.at(num)->size()==CstStatic::LIMIT_NUMBER_WORD){
         listQPushButtonAdd.at(num)->setEnabled(false);
     }
 }

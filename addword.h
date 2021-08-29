@@ -8,10 +8,13 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QLineEdit>
+#include <QKeyEvent>
+#include <QTimer>
 
 #include "ModifyVocab/readervocab.h"
 #include "ModifyVocab/writervocab.h"
-#include "widgetnewvocab.h"
+#include "CstFile/globalfct.h"
+#include "CstFile/cststatic.h"
 
 using namespace std;
 
@@ -45,8 +48,11 @@ private:
 
     vector<QLabel*> listLblNameColumn;
 
+    bool keyIsAlreadyClicked = false;
+
 protected:
     void resizeEvent(QResizeEvent*);
+    bool eventFilter(QObject*, QEvent*);
 
 private slots:
     void saveWord();

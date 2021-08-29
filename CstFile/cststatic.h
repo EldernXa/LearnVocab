@@ -11,6 +11,7 @@ public:
     CstStatic();
     static string getPathToVocabFile();
     static string getFormatVocabFile();
+    static const unsigned int LIMIT_NUMBER_WORD = 5;
 
 private:
     static const string pathVocabFile;

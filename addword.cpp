@@ -43,6 +43,8 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         listQPushButtonRemove.push_back(buttonRemoveWord);
         GlobalFct::changeSizeFontOfPushButton(buttonRemoveWord, this->size());
 
+        qApp->installEventFilter(this);
+
         connect(buttonAddWord, &QPushButton::clicked, this, [this, i]{addingWord(i);});
         connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
     }
@@ -122,7 +124,7 @@ void AddWord::addingWord(int num){
     listLineEditForWord.at(num)->push_back(newLineEdit);
 
     listQPushButtonRemove.at(num)->setEnabled(true);
-    if(listLineEditForWord.at(num)->size() == WidgetNewVocab::LIMIT_NUMBER_WORD){
+    if(listLineEditForWord.at(num)->size() == CstStatic::LIMIT_NUMBER_WORD){
         listQPushButtonAdd.at(num)->setEnabled(false);
     }
 }
@@ -170,6 +172,35 @@ void AddWord::resizeEvent(QResizeEvent* event){
     GlobalFct::changeSizeFontOfLbl(ui->lblError, this->size());
 
     QWidget::resizeEvent(event);
+}
+
+bool AddWord::eventFilter(QObject* obj, QEvent *evt){
+    if(evt->type() == QEvent::KeyPress){
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(evt);
+        if(keyEvent->key() == Qt::Key_Enter || keyEvent->key() == Qt::Key_Return){
+            if(!keyIsAlreadyClicked){
+                ui->btnAddWord->animateClick();
+                keyIsAlreadyClicked = true;
+            }
+        }
+        else if(keyEvent->key() == Qt::Key_Escape){
+            if(!keyIsAlreadyClicked){
+                if(ui->validBtn->isVisible()){
+                    ui->validBtn->animateClick();
+                }
+                keyIsAlreadyClicked = true;
+            }
+        }
+
+    }
+
+    if(evt->type() == QEvent::KeyRelease){
+        if(keyIsAlreadyClicked){
+            keyIsAlreadyClicked = false;
+        }
+    }
+
+    return QObject::eventFilter(obj, evt);
 }
 
 

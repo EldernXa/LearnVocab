@@ -20,6 +20,7 @@
 #include "widgetnewvocablaststep.h"
 #include "ModifyVocab/writervocab.h"
 #include "CstFile/globalfct.h"
+#include "CstFile/cststatic.h"
 
 using namespace std;
 
@@ -34,8 +35,6 @@ class WidgetNewVocab : public QWidget
 public:
     explicit WidgetNewVocab(QWidget *parent = nullptr);
     ~WidgetNewVocab();
-
-    static const unsigned int LIMIT_NUMBER_WORD = 5;
 
 protected:
     void resizeEvent(QResizeEvent*);

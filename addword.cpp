@@ -47,6 +47,8 @@ AddWord::AddWord(string nameVocab, QWidget *parent) :
         connect(buttonRemoveWord, &QPushButton::clicked, this, [this, i]{removeWord(i);});
     }
 
+    QTimer::singleShot(0, listLineEditForWord.at(0)->at(0), SLOT(setFocus()));
+
     connect(ui->btnAddWord, SIGNAL(clicked()), this, SLOT(saveWord()));
     GlobalFct::changeSizeFontOfPushButton(ui->btnAddWord, this->size());
 

@@ -47,6 +47,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="btnAddWord">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Ajouter le mot</string>
        </property>
@@ -54,6 +57,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="validBtn">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Valider</string>
        </property>
